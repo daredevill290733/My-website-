@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rajniti Rewrite | প্রগতির নতুন বয়ান</title>
+    <title>Rajniti Rewrite | প্রগতির নতুন বয়ান</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -39,7 +39,6 @@
         body {
             font-family: 'Hind Siliguri', 'Inter', sans-serif;
         }
-        /* Custom Ticker Animation */
         @keyframes ticker {
             0% { transform: translate3d(0, 0, 0); }
             100% { transform: translate3d(-100%, 0, 0); }
@@ -52,19 +51,6 @@
         .animate-ticker:hover {
             animation-play-state: paused;
         }
-        /* Glassmorphism */
-        .glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .glass-light {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 0, 0, 0.08);
-        }
-        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -87,9 +73,9 @@
         </span>
         <div class="overflow-hidden w-full relative">
             <div class="animate-ticker flex items-center space-x-8">
-                <span class="inline-block cursor-pointer hover:underline" onclick="openNewsModal('breaking-1')">🔥 রাষ্ট্র সংস্কার নীতিতে তরুণদের ৫ দফা সুনির্দিষ্ট প্রস্তাব উপস্থাপন করেছে নতুন ইয়ুথ ফোরাম।</span>
-                <span class="inline-block cursor-pointer hover:underline" onclick="openNewsModal('breaking-2')">📊 জাতীয় বাজেটে শিক্ষা ও উদ্ভাবন খাতে বরাদ্দ ৩০% বাড়ানোর দাবিতে শিক্ষার্থীদের স্মারকলিপি।</span>
-                <span class="inline-block cursor-pointer hover:underline" onclick="openNewsModal('breaking-3')">🌐 'Rajniti Rewrite' এর বিশেষ পোল: তরুণ প্রজন্মের ৮০%ই রাজনীতিতে তরুণ নেতৃত্বের সরাসরি অংশগ্রহণ চায়।</span>
+                <span class="inline-block cursor-pointer hover:underline" onclick="openNewsModal('breaking-1')">🔥 রাষ্ট্র সংস্কার নীতিতে তরুণদের ৫ দফা সুনির্দিষ্ট প্রস্তাব উপস্থাপন করেছে নতুন ইয়ুথ ফোরাম।</span>
+                <span class="inline-block cursor-pointer hover:underline" onclick="openNewsModal('breaking-2')">📊 জাতীয় বাজেটে শিক্ষা ও উদ্ভাবন খাতে বরাদ্দ ৩০% বাড়ানোর দাবিতে শিক্ষার্থীদের স্মারকলিপি।</span>
+                <span class="inline-block cursor-pointer hover:underline" onclick="openNewsModal('breaking-3')">🌐 'Rajniti Rewrite' এর বিশেষ পোল: তরুণ প্রজন্মের ৮০%ই রাজনীতিতে তরুণ নেতৃত্বের সরাসরি অংশগ্রহণ চায়।</span>
             </div>
         </div>
     </div>
@@ -112,32 +98,29 @@
                                 RAJNITI <span class="text-brand-teal">REWRITE</span>
                             </h1>
                         </div>
-                        <p class="text-xs text-brand-red dark:text-brand-teal font-semibold tracking-wider">রাজনীতি রিরাইট • প্রগতির নতুন বয়ান</p>
+                        <p class="text-xs text-brand-red dark:text-brand-teal font-semibold tracking-wider">রাজনীতি রিরাইট • প্রগতির নতুন বয়ান</p>
                     </div>
                 </div>
 
                 <!-- DESKTOP SEARCH BAR -->
                 <div class="hidden md:flex flex-1 max-w-md mx-8 relative">
-                    <input type="text" id="searchInput" onkeyup="handleSearch()" placeholder="সংবাদ, মতামত বা বিষয় অনুসন্ধান করুন..." 
+                    <input type="text" id="searchInput" onkeyup="handleSearch()" placeholder="সংবাদ, মতামত বা বিষয় অনুসন্ধান করুন..." 
                         class="w-full bg-slate-100 dark:bg-slate-800/80 text-sm text-slate-900 dark:text-slate-100 rounded-full pl-10 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-teal border border-slate-200 dark:border-slate-700 transition">
                     <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
                 </div>
 
-                <!-- RIGHT CONTROLS (THEME, BOOKMARKS, MOBILE MENU TOGGLE) -->
+                <!-- RIGHT CONTROLS -->
                 <div class="flex items-center space-x-3">
-                    <!-- BOOKMARK BUTTON -->
                     <button onclick="toggleSavedArticlesModal()" class="relative p-2.5 text-slate-600 dark:text-slate-300 hover:text-brand-teal dark:hover:text-brand-teal rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition">
                         <i class="fa-regular fa-bookmark text-lg"></i>
                         <span id="bookmarkBadge" class="hidden absolute top-1 right-1 bg-brand-red text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
                     </button>
 
-                    <!-- THEME TOGGLE -->
                     <button id="themeToggle" onclick="toggleTheme()" class="p-2.5 text-slate-600 dark:text-slate-300 hover:text-amber-500 dark:hover:text-amber-400 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition" title="থিম পরিবর্তন">
                         <i class="fa-solid fa-moon text-lg dark:hidden"></i>
                         <i class="fa-solid fa-sun text-lg hidden dark:block"></i>
                     </button>
 
-                    <!-- MOBILE MENU BTN -->
                     <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-600 dark:text-slate-300 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
                         <i class="fa-solid fa-bars text-xl"></i>
                     </button>
@@ -146,7 +129,7 @@
 
             <!-- NAVIGATION CATEGORIES -->
             <nav class="hidden md:flex items-center space-x-1 border-t border-slate-200/60 dark:border-slate-800/60 py-2 overflow-x-auto no-scrollbar text-sm font-medium">
-                <button onclick="filterCategory('all')" class="nav-btn active px-4 py-1.5 rounded-full text-slate-700 dark:text-slate-200 hover:bg-brand-teal/10 hover:text-brand-teal transition active-nav" data-cat="all">সব খবর</button>
+                <button onclick="filterCategory('all')" class="nav-btn active px-4 py-1.5 rounded-full text-slate-700 dark:text-slate-200 hover:bg-brand-teal/10 hover:text-brand-teal transition" data-cat="all">সব খবর</button>
                 <button onclick="filterCategory('politics')" class="nav-btn px-4 py-1.5 rounded-full text-slate-700 dark:text-slate-200 hover:bg-brand-teal/10 hover:text-brand-teal transition" data-cat="politics">রাজনীতি</button>
                 <button onclick="filterCategory('youth')" class="nav-btn px-4 py-1.5 rounded-full text-slate-700 dark:text-slate-200 hover:bg-brand-teal/10 hover:text-brand-teal transition" data-cat="youth">তরুণদের মত</button>
                 <button onclick="filterCategory('election')" class="nav-btn px-4 py-1.5 rounded-full text-slate-700 dark:text-slate-200 hover:bg-brand-teal/10 hover:text-brand-teal transition" data-cat="election">নির্বাচন ও নীতি</button>
@@ -175,7 +158,7 @@
     <!-- MAIN CONTENT BODY -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
         
-        <!-- HERO SECTION: FEATURED TOP STORIES -->
+        <!-- HERO SECTION -->
         <section class="mb-12" id="heroSection">
             <div class="flex items-center justify-between mb-6">
                 <h2 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
@@ -189,7 +172,7 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 <!-- HERO BIG CARD -->
-                <div class="lg:col-span-8 group relative rounded-3xl overflow-hidden shadow-2xl bg-slate-900 cursor-pointer transform transition-all duration-300 hover:shadow-brand-teal/20 border border-slate-800" onclick="openNewsModal('hero-1')">
+                <div class="lg:col-span-8 group relative rounded-3xl overflow-hidden shadow-2xl bg-slate-900 cursor-pointer transform transition-all duration-300 hover:shadow-brand-teal/20 border border-slate-800">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent z-10"></div>
                     <img src="https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?auto=format&fit=crop&w=1200&q=80" alt="Youth political leadership" class="w-full h-[380px] sm:h-[460px] object-cover group-hover:scale-105 transition-transform duration-500">
                     
@@ -205,43 +188,43 @@
                             <span class="text-amber-400 font-bold"><i class="fa-solid fa-fire mr-1"></i> ট্রেন্ডিং #১</span>
                         </div>
                         <h3 class="text-2xl sm:text-3xl font-extrabold text-white group-hover:text-brand-teal transition-colors leading-tight mb-3">
-                            রাজনীতিতে জেন-জি প্রভাবে নতুন মোড়: গদবাধা বক্তব্য ছেড়ে উপাত্ত ও নীতির প্রতিযোগিতায় বাংলাদেশ
+                            রাজনীতিতে জেন-জি প্রভাবে নতুন মোড়: গদবাধা বক্তব্য ছেড়ে উপাত্ত ও নীতির প্রতিযোগিতায় বাংলাদেশ
                         </h3>
                         <p class="text-slate-300 text-sm line-clamp-2 hidden sm:block">
-                            প্রথাগত দলীয় কাদা ছোড়াছুড়ির জায়গায় এখন তরুণ সমাজ তুলে ধরছে জলবায়ু অর্থায়ন, ডিজিটাল গভর্ন্যান্স ও শিক্ষা ব্যবস্থার আমূল পরিবর্তনের সুনির্দিষ্ট পরিকল্পনা।
+                            প্রথাগত দলীয় কাদা ছোড়াছুড়ির জায়গায় এখন তরুণ সমাজ তুলে ধরছে জলবায়ু অর্থায়ন, ডিজিটাল গভর্ন্যান্স ও শিক্ষা ব্যবস্থার আমূল পরিবর্তনের সুনির্দিষ্ট পরিকল্পনা।
                         </p>
                     </div>
                 </div>
 
-                <!-- HERO SIDE CARDS (2 ITEMS) -->
+                <!-- HERO SIDE CARDS -->
                 <div class="lg:col-span-4 flex flex-col space-y-6">
-                    <div class="bg-white dark:bg-brand-cardDark rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-brand-teal transition cursor-pointer group flex flex-col justify-between" onclick="openNewsModal('hero-side-1')">
+                    <div class="bg-white dark:bg-brand-cardDark rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-brand-teal transition cursor-pointer group flex flex-col justify-between">
                         <div>
                             <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 mb-2">
                                 <span class="text-brand-red font-semibold">নির্বাচন ও নীতি</span>
                                 <span>১০ মিনিট আগে</span>
                             </div>
                             <h4 class="font-bold text-slate-900 dark:text-white text-base group-hover:text-brand-teal transition line-clamp-2">
-                                ডিজিটাল ভোটিং ও ভোটারদের সচেতনতায় মোবাইল অ্যাপের নতুন বিপ্লব
+                                ডিজিটাল ভোটিং ও ভোটারদের সচেতনতায় মোবাইল অ্যাপের নতুন বিপ্লব
                             </h4>
                             <p class="text-xs text-slate-600 dark:text-slate-400 mt-2 line-clamp-2">
-                                তরুণেরা এবার ভোট প্রদানে প্রার্থীর শিক্ষাগত যোগ্যতা ও নির্বাচনী ইশতেহার যাচাই করছে এআইভিত্তিক অ্যাপস দিয়ে।
+                                তরুণেরা এবার ভোট প্রদানে প্রার্থীর শিক্ষাগত যোগ্যতা ও নির্বাচনী ইশতেহার যাচাই করছে এআইভিত্তিক অ্যাপস দিয়ে।
                             </p>
                         </div>
                         <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500">
                             <span><i class="fa-regular fa-eye mr-1"></i> ২.৪ কে পঠিত</span>
-                            <span class="text-brand-teal font-medium group-hover:translate-x-1 transition-transform">আরও পড়ুন →</span>
+                            <span class="text-brand-teal font-medium group-hover:translate-x-1 transition-transform">আরও পড়ুন →</span>
                         </div>
                     </div>
 
-                    <div class="bg-white dark:bg-brand-cardDark rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-brand-teal transition cursor-pointer group flex flex-col justify-between" onclick="openNewsModal('hero-side-2')">
+                    <div class="bg-white dark:bg-brand-cardDark rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-brand-teal transition cursor-pointer group flex flex-col justify-between">
                         <div>
                             <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 mb-2">
                                 <span class="text-brand-teal font-semibold">গ্লোবাল ডিপলোমেসি</span>
                                 <span>১ ঘণ্টা আগে</span>
                             </div>
                             <h4 class="font-bold text-slate-900 dark:text-white text-base group-hover:text-brand-teal transition line-clamp-2">
-                                দক্ষিণ এশিয়ার ভূ-রাজনীতিতে তরুণ নেতৃত্বের নতুন অবস্থান
+                                দক্ষিণ এশিয়ার ভূ-রাজনীতিতে তরুণ নেতৃত্বের নতুন অবস্থান
                             </h4>
                             <p class="text-xs text-slate-600 dark:text-slate-400 mt-2 line-clamp-2">
                                 বাণিজ্য ও তথ্যপ্রযুক্তি খাতে আঞ্চলিক অংশীদারিত্বে নতুন রূপরেখা প্রস্তাব তরুণ নীতিনির্ধারকদের।
@@ -249,121 +232,49 @@
                         </div>
                         <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500">
                             <span><i class="fa-regular fa-eye mr-1"></i> ১.৮ কে পঠিত</span>
-                            <span class="text-brand-teal font-medium group-hover:translate-x-1 transition-transform">আরও পড়ুন →</span>
+                            <span class="text-brand-teal font-medium group-hover:translate-x-1 transition-transform">আরও পড়ুন →</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- REWRITE PERSPECTIVE: FACT CHECK / TRADITIONAL VS MODERN SECTION -->
-        <section class="mb-12 bg-gradient-to-r from-slate-900 via-brand-navy to-slate-900 rounded-3xl p-6 sm:p-8 text-white border border-slate-800 shadow-xl relative overflow-hidden">
-            <div class="absolute -right-10 -bottom-10 w-60 h-60 bg-brand-teal/10 rounded-full blur-3xl pointer-events-none"></div>
+        <!-- 🌐 WORLD AUTOMATIC GLOBAL NEWS SECTION -->
+        <section class="mb-12 bg-[#111827] rounded-3xl p-6 sm:p-8 text-white border border-slate-800 shadow-xl">
+            <div class="flex justify-between items-center border-b border-blue-600 pb-4 mb-6 flex-wrap gap-3">
+                <h3 class="text-2xl font-black text-[#60a5fa] flex items-center gap-2">
+                    🌐 বিশ্ব সংবাদ কভারেজ (Global Live News)
+                </h3>
+                <span class="text-xs bg-[#1e3a8a] text-[#93c5fd] px-3 py-1 rounded-full border border-blue-500">
+                    ● অটো-আপডেট সিস্টেম চালিত
+                </span>
+            </div>
             
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
-                <div>
-                    <span class="text-brand-teal font-bold text-xs uppercase tracking-widest bg-brand-teal/10 px-3 py-1 rounded-full border border-brand-teal/20">
-                        ⚡ রিরাইট পসপেক্টিভ
-                    </span>
-                    <h3 class="text-2xl font-black mt-2">গতানুগতিক রাজনীতি vs তরুণদের বয়ান</h3>
-                </div>
-                <p class="text-xs text-slate-400 max-w-sm">
-                    পুরোনো ধারার স্লোগানভিত্তিক রাজনীতি বনাম সমাধানভিত্তিক আধুনিক রাজনৈতিক চিন্তার তুলনামূলক চিত্র।
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- TRADITIONAL -->
-                <div class="bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur-sm">
-                    <div class="flex items-center space-x-2 text-rose-400 font-bold mb-3 text-sm">
-                        <i class="fa-solid fa-circle-xmark"></i>
-                        <span>প্রথাগত রাজনৈতিক ধারা</span>
-                    </div>
-                    <ul class="space-y-2.5 text-xs sm:text-sm text-slate-300">
-                        <li class="flex items-start gap-2">
-                            <span class="text-rose-400">•</span>
-                            ব্যক্তি কেন্দ্রিক আনুগত্য ও গঠনমূলক সমালোচনার অভাব।
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-rose-400">•</span>
-                            ইশতেহারে অস্পষ্ট প্রতিশ্রুতি ও বাস্তবায়নের রূপরেখার অনুপস্থিতি।
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-rose-400">•</span>
-                            সামাজিক যোগাযোগমাধ্যমে গুজবের মাধ্যমে বিভ্রান্তি তৈরি।
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- MODERN REWRITE -->
-                <div class="bg-brand-teal/10 border border-brand-teal/30 rounded-2xl p-5 backdrop-blur-sm relative">
-                    <span class="absolute top-3 right-3 text-brand-teal text-xs font-bold px-2 py-0.5 rounded bg-brand-teal/20">NEW AGE</span>
-                    <div class="flex items-center space-x-2 text-brand-teal font-bold mb-3 text-sm">
-                        <i class="fa-solid fa-circle-check"></i>
-                        <span>রিরাইট ভিশন (Gen Z approach)</span>
-                    </div>
-                    <ul class="space-y-2.5 text-xs sm:text-sm text-slate-200">
-                        <li class="flex items-start gap-2">
-                            <span class="text-brand-teal">•</span>
-                            উপাত্তভিত্তিক যুক্তি, নীতিনির্ধারণ ও নাগরিক অধিকার প্রাধান্য।
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-brand-teal">•</span>
-                            বাজেট বণ্টন ও উন্নয়নের রিয়েল-টাইম ডিজিটাল জবাবদিহিতা।
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-brand-teal">•</span>
-                            ফ্যাক্ট-চেক ও ওপেন-সোর্স এনালিটিক্স ব্যবহার করে স্বচ্ছতা নিশ্চিত করা।
-                        </li>
-                    </ul>
+            <div id="global-news-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="col-span-full text-center py-10 text-slate-400">
+                    ⏳ বিশ্বজুড়ে লাইভ খবর লোড হচ্ছে... অনুগ্রহ করে একটু অপেক্ষা করুন।
                 </div>
             </div>
         </section>
 
-        <!-- MAIN NEWS GRID WITH CATEGORY FILTER -->
-        <section class="mb-12">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
-                <h2 id="sectionTitle" class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
-                    <span class="w-3 h-8 bg-brand-teal rounded-full inline-block"></span>
-                    সর্বশেষ সংবাদসমূহ
-                </h2>
-                
-                <!-- SORT CONTROLS -->
-                <div class="flex items-center space-x-2 text-xs">
-                    <span class="text-slate-500">সাজান:</span>
-                    <select id="sortOption" onchange="renderNews()" class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded-lg px-3 py-1.5 focus:outline-none">
-                        <option value="latest">সর্বশেষ পোস্ট</option>
-                        <option value="popular">জনপ্রিয় সংবাদ</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- NEWS GRID CONTAINER -->
-            <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Dynamically rendered via JS -->
-            </div>
-        </section>
-
-        <!-- LIVE INTERACTIVE POLL SECTION ('তরুণদের রায়') -->
+        <!-- LIVE INTERACTIVE POLL SECTION -->
         <section class="mb-12 bg-white dark:bg-brand-cardDark rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-lg">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 <div class="lg:col-span-5">
                     <span class="bg-brand-red/10 text-brand-red dark:bg-brand-red/20 font-bold text-xs px-3 py-1 rounded-full border border-brand-red/30">
                         🗳️ সরাসরি মতামত
                     </span>
-                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-3 mb-2">তরুণদের রায় (Live Poll)</h3>
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-3 mb-2">তরুণদের রায় (Live Poll)</h3>
                     <p class="text-slate-600 dark:text-slate-300 text-sm mb-4">
-                        আপনি কি মনে করেন রাজনীতিতে এআই (AI) ও ডাটা অ্যানালিটিক্স ব্যবহার দুর্নীতি কমাতে সহায়ক ভূমিকা রাখবে?
+                        আপনি কি মনে করেন রাজনীতিতে এআই (AI) ও ডাটা অ্যানালিটিক্স ব্যবহার দুর্নীতি কমাতে সহায়ক ভূমিকা রাখবে?
                     </p>
                     <div class="text-xs text-slate-400 flex items-center gap-4">
                         <span><i class="fa-solid fa-users mr-1 text-brand-teal"></i> মোট ভোট: <strong id="totalVotes">৩,৮৪০</strong></span>
-                        <span><i class="fa-solid fa-clock mr-1"></i> শেষ হবে: ২৪ ঘণ্টা পর</span>
                     </div>
                 </div>
 
                 <div class="lg:col-span-7 bg-slate-50 dark:bg-slate-900/60 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800">
                     <div id="pollOptions" class="space-y-3">
-                        <!-- Option 1 -->
                         <button onclick="castVote('yes')" class="w-full text-left p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-brand-teal bg-white dark:bg-slate-800 transition relative overflow-hidden group">
                             <div id="bar-yes" class="absolute left-0 top-0 bottom-0 bg-brand-teal/20 transition-all duration-500" style="width: 78%;"></div>
                             <div class="relative flex justify-between items-center text-sm font-semibold text-slate-800 dark:text-slate-200">
@@ -372,7 +283,6 @@
                             </div>
                         </button>
 
-                        <!-- Option 2 -->
                         <button onclick="castVote('no')" class="w-full text-left p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-brand-teal bg-white dark:bg-slate-800 transition relative overflow-hidden group">
                             <div id="bar-no" class="absolute left-0 top-0 bottom-0 bg-brand-red/20 transition-all duration-500" style="width: 15%;"></div>
                             <div class="relative flex justify-between items-center text-sm font-semibold text-slate-800 dark:text-slate-200">
@@ -380,41 +290,14 @@
                                 <span id="percent-no" class="text-brand-red">১৫%</span>
                             </div>
                         </button>
-
-                        <!-- Option 3 -->
-                        <button onclick="castVote('neutral')" class="w-full text-left p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-brand-teal bg-white dark:bg-slate-800 transition relative overflow-hidden group">
-                            <div id="bar-neutral" class="absolute left-0 top-0 bottom-0 bg-slate-400/20 transition-all duration-500" style="width: 7%;"></div>
-                            <div class="relative flex justify-between items-center text-sm font-semibold text-slate-800 dark:text-slate-200">
-                                <span>নিশ্চিত নই / আরও গবেষণা প্রয়োজন</span>
-                                <span id="percent-neutral" class="text-slate-400">৭%</span>
-                            </div>
-                        </button>
                     </div>
-                    <p id="voteMessage" class="text-xs text-brand-teal font-medium mt-3 text-center hidden">
-                        ✓ আপনার মতামত সফলভাবে রেকর্ড করা হয়েছে!
-                    </p>
                 </div>
             </div>
         </section>
 
-        <!-- NEWSLETTER SIGNUP -->
-        <section class="bg-gradient-to-r from-brand-red via-red-600 to-amber-600 rounded-3xl p-8 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="max-w-xl">
-                <span class="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">সাপ্তাহিক নিউজলেটার</span>
-                <h3 class="text-2xl sm:text-3xl font-extrabold mt-2">রাজনীতির গভীর বিশ্লেষণ সরাসরি আপনার ইনবক্সে</h3>
-                <p class="text-white/80 text-sm mt-1">গুজবমুক্ত, তথ্যভিত্তিক ও তরুণদের দৃষ্টিভঙ্গিতে রাজনৈতিক হালচাল জানতে সাবস্ক্রাইব করুন।</p>
-            </div>
-            <form onsubmit="handleNewsletter(event)" class="w-full md:w-auto flex flex-col sm:flex-row gap-2">
-                <input type="email" required placeholder="আপনার ইমেইল অ্যাড্রেস লিখুন..." class="px-4 py-3 rounded-xl text-slate-900 bg-white text-sm focus:outline-none w-full sm:w-72 shadow">
-                <button type="submit" class="bg-slate-900 hover:bg-slate-800 text-white font-bold px-6 py-3 rounded-xl text-sm transition shadow-lg shrink-0">
-                    সাবস্ক্রাইব
-                </button>
-            </form>
-        </section>
-
     </main>
 
-    <!-- FOOTER -->
+    <!-- FOOTER WITH YOUR FACEBOOK PAGE LINK -->
     <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 mt-12 transition-colors">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
@@ -426,17 +309,17 @@
                         <span class="text-lg font-bold dark:text-white">Rajniti Rewrite</span>
                     </div>
                     <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                        প্রগতির নতুন বয়ান—তরুণদের সুচিন্তিত মতামত, উন্মুক্ত আলোচনা এবং তথাকথিত রাজনীতির বাইরে একটি বস্তুনিষ্ঠ সংবাদ মাধ্যম।
+                        প্রগতির নতুন বয়ান—তরুণদের সুচিন্তিত মতামত, উন্মুক্ত আলোচনা এবং তথাকথিত রাজনীতির বাইরে একটি বস্তুনিষ্ঠ সংবাদ মাধ্যম।
                     </p>
                 </div>
 
                 <div>
                     <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-3">ক্যাটাগরি</h4>
                     <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
-                        <li><a href="#" onclick="filterCategory('politics')" class="hover:text-brand-teal">রাজনীতি</a></li>
-                        <li><a href="#" onclick="filterCategory('youth')" class="hover:text-brand-teal">তরুণদের মত</a></li>
-                        <li><a href="#" onclick="filterCategory('election')" class="hover:text-brand-teal">নির্বাচন ও নীতি</a></li>
-                        <li><a href="#" onclick="filterCategory('data')" class="hover:text-brand-teal">ডাটা ও বিশ্লেষণ</a></li>
+                        <li><a href="#" class="hover:text-brand-teal">রাজনীতি</a></li>
+                        <li><a href="#" class="hover:text-brand-teal">তরুণদের মত</a></li>
+                        <li><a href="#" class="hover:text-brand-teal">নির্বাচন ও নীতি</a></li>
+                        <li><a href="#" class="hover:text-brand-teal">ডাটা ও বিশ্লেষণ</a></li>
                     </ul>
                 </div>
 
@@ -444,463 +327,89 @@
                     <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-3">নীতিমালা</h4>
                     <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-400">
                         <li><a href="#" class="hover:text-brand-teal">ফ্যাক্ট-চেক পলিসি</a></li>
-                        <li><a href="#" class="hover:text-brand-teal">গোপনীয়তা নীতি</a></li>
+                        <li><a href="#" class="hover:text-brand-teal">গোপনীয়তা নীতি</a></li>
                         <li><a href="#" class="hover:text-brand-teal">সম্পাদনা পর্ষদ</a></li>
                         <li><a href="#" class="hover:text-brand-teal">যোগাযোগ</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-3">সোশ্যাল মিডিয়া</h4>
+                    <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-3">সোশ্যাল মিডিয়া</h4>
+                    <!-- Your Facebook Page Link Added Here -->
                     <div class="flex space-x-3">
-                        <a href="#" class="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center justify-center hover:bg-brand-teal hover:text-slate-900 transition"><i class="fa-brands fa-facebook-f text-sm"></i></a>
+                        <a href="https://www.facebook.com/share/19vxXVParB/" target="_blank" title="আমাদের ফেসবুক পেজ ভিজিট করুন" class="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center justify-center hover:bg-brand-teal hover:text-slate-900 transition"><i class="fa-brands fa-facebook-f text-sm"></i></a>
                         <a href="#" class="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center justify-center hover:bg-brand-teal hover:text-slate-900 transition"><i class="fa-brands fa-x-twitter text-sm"></i></a>
-                        <a href="#" class="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center justify-center hover:bg-brand-teal hover:text-slate-900 transition"><i class="fa-brands fa-youtube text-sm"></i></a>
                         <a href="#" class="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center justify-center hover:bg-brand-teal hover:text-slate-900 transition"><i class="fa-brands fa-instagram text-sm"></i></a>
                     </div>
                 </div>
             </div>
-
-            <div class="border-t border-slate-200 dark:border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
-                <p>© ২০২৬ Rajniti Rewrite (রাজনীতি রিরাইট). সর্বস্বত্ব সংরক্ষিত।</p>
-                <p class="mt-2 sm:mt-0"> design by Ibrahim Ali </p>
+            
+            <div class="border-t border-slate-200 dark:border-slate-800 pt-6 text-center text-xs text-slate-500">
+                © ২০২৬ Rajniti Rewrite (রাজনীতি রিরাইট). সর্বস্বত্ব সংরক্ষিত। design by Ibrahim Ali
             </div>
         </div>
     </footer>
 
-    <!-- MODAL 1: FULL NEWS ARTICLE READER -->
-    <div id="newsModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative animate-fadeIn p-6 sm:p-8">
-            <!-- CLOSE BUTTON -->
-            <button onclick="closeNewsModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center justify-center hover:bg-brand-red hover:text-white transition">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-
-            <div id="modalContent">
-                <!-- Dynamically Populated -->
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL 2: SAVED BOOKMARKS -->
-    <div id="savedModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 sm:p-6">
-        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-lg w-full max-h-[80vh] overflow-y-auto shadow-2xl p-6 relative">
-            <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800 mb-4">
-                <h3 class="text-xl font-bold dark:text-white flex items-center gap-2">
-                    <i class="fa-solid fa-bookmark text-brand-teal"></i> বুকমার্ক করা খবরসমূহ
-                </h3>
-                <button onclick="toggleSavedArticlesModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
-            </div>
-            <div id="savedList" class="space-y-3">
-                <!-- Dynamically filled -->
-            </div>
-        </div>
-    </div>
-
-    <!-- JAVASCRIPT LOGIC -->
+    <!-- JAVASCRIPT FOR GLOBAL AUTO NEWS FETCHING -->
     <script>
-        // Sample News Data Array
-        const articles = [
-            {
-                id: 'news-1',
-                category: 'politics',
-                categoryLabel: 'রাজনীতি',
-                title: 'ডিজিটাল ইশতেহার ও তরুণদের অংশগ্রহণ: নির্বাচনী রোডম্যাপে নতুন চিন্তা',
-                summary: 'তরুণ ভোটারদের আকৃষ্ট করতে সকল প্রধান রাজনৈতিক দল এখন সোশ্যাল মিডিয়া ইশতেহার প্রকাশ করছে।',
-                content: `রাজনীতিতে পরিবর্তনের হাওয়া এখন স্পষ্টভাবে দৃশ্যমান। আগামী নির্বাচনে তরুণদের চাহিদাকে সর্বোচ্চ প্রাধান্য দিয়ে প্রস্তুত করা হচ্ছে নতুন পলিসি রূপরেখা। গবেষণায় দেখা গেছে, ১৮-২৮ বছর বয়সী ভোটারদের প্রধান চাহিদা মানসম্মত শিক্ষা, ডিজিটাল উদ্ভাবনে সরকারি পৃষ্ঠপোষকতা এবং বৈষম্যহীন কর্মসংস্থান। প্রথাগত পথসভার চেয়ে ভার্চুয়াল টাউনহল মিটিং ও ইন্টারেক্টিভ প্রশ্নোত্তর পর্বে অংশ নেওয়ার ঝোঁক বাড়ছে তরুণ প্রজন্মের।`,
-                image: 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=800&q=80',
-                date: '২২ অক্টোবর, ২০২৬',
-                readTime: '৩ মিনিট পাঠ',
-                views: '৩.২ কে',
-                author: 'ফারহান আহমেদ'
-            },
-            {
-                id: 'news-2',
-                category: 'youth',
-                categoryLabel: 'তরুণদের মত',
-                title: 'শিক্ষা বাজেট বাড়াতে সংসদীয় আলোচনায় তরুণ প্রতিনিধিদের অংশগ্রহণ',
-                summary: 'বাজেটের অন্তত ১৫ শতাংশ শিক্ষা ও আইসিটি খাতে বরাদ্দের পক্ষে যৌক্তিক উপস্থাপনা।',
-                content: `ডিজিটাল অর্থনীতিতে বাংলাদেশের অবস্থান দৃঢ় করতে শিক্ষা ব্যবস্থার আধুনিকীকরণ এখন সময়ের দাবি। তরুণ গবেষক ও নীতিনির্ধারকেরা জানিয়েছেন, শুধু সনদমুখী শিক্ষা নয়, বরং এআই, ডাটা সায়েন্স ও উদ্যোক্তা হওয়ার ব্যবহারিক প্রশিক্ষণ এখন জাতীয় পাঠ্যক্রমে যুক্ত করা আবশ্যক।`,
-                image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80',
-                date: '২১ অক্টোবর, ২০২৬',
-                readTime: '৫ মিনিট পাঠ',
-                views: '৪.১ কে',
-                author: 'সারাহ তাসনিম'
-            },
-            {
-                id: 'news-3',
-                category: 'election',
-                categoryLabel: 'নির্বাচন ও নীতি',
-                title: 'ইলেকশন ওয়াচ: এআই প্রযুক্তির মাধ্যমে নির্বাচনী তথ্য যাচাইয়ের ব্যবস্থা',
-                summary: 'ভুয়া খবর বা ফেক নিউজ ঠেকাতে ফ্যাক্ট-চেকিং ল্যাব চালু করছে নাগরিক সমাজ।',
-                content: `নির্বাচন সামনে রেখে সামাজিক মাধ্যমে অপপ্রচার রোধে কার্যকর পদক্ষেপ নেওয়া হয়েছে। উন্মুক্ত ডাটাবেজ এবং মেশিন লার্নিং প্রযুক্তি ব্যবহার করে মুহূর্তেই যেকোনো ছবির সত্যতা ও সংবাদের মূল উৎস যাচাই করার প্ল্যাটফর্ম গড়ে তুলেছে একদল তরুণ ডেভেলপার।`,
-                image: 'https://images.unsplash.com/photo-1555848962-6e77208352f7?auto=format&fit=crop&w=800&q=80',
-                date: '২০ অক্টোবর, ২০২৬',
-                readTime: '৪ মিনিট পাঠ',
-                views: '২.৯ কে',
-                author: 'তানভীর হাসান'
-            },
-            {
-                id: 'news-4',
-                category: 'data',
-                categoryLabel: 'ডাটা ও বিশ্লেষণ',
-                title: 'ইনফোগ্রাফিক: বিগত ৫ বছরে বাংলাদেশের আইসিটি রফতানি ও তরুণ কর্মসংস্থান',
-                summary: 'পরিসংখ্যান বলছে ফ্রিল্যান্সিং ও সফটওয়্যার রফতানিতে জেন-জিদের অবদান ৬৭%।',
-                content: `জাতীয় অর্থনীতিতে প্রথাগত খাতের পাশাপাশি আইসিটি শিল্প এখন অন্যতম চালিকাশক্তি। এই প্রবৃদ্ধির পেছনে সিংহভাগ ভূমিকা রাখছে তরুণ ফ্রিল্যান্সার ও স্টার্টআপগুলো। সরকারি ও বেসরকারি সমন্বিত সহায়তা পেলে এই আয় দ্বিগুণ করা সম্ভব বলে মত বিশেষজ্ঞদের।`,
-                image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
-                date: '১৯ অক্টোবর, ২০২৬',
-                readTime: '২ মিনিট পাঠ',
-                views: '৫.৫ কে',
-                author: 'ডাটা ডেস্ক'
-            },
-            {
-                id: 'news-5',
-                category: 'global',
-                categoryLabel: 'গ্লোবাল ডিপলোমেসি',
-                title: 'জলবায়ু সম্মেলনে বাংলাদেশের তরুণ প্রতিনিধি দলের ঐতিহাসিক ভাষণ',
-                summary: 'ক্ষতিপূরণ ও সবুজ অর্থায়নের দাবীতে আন্তর্জাতিক মঞ্চে সরব বাংলাদেশি তরুণেরা।',
-                content: `বিশ্ব জলবায়ু সম্মেলনে উপকূলীয় অঞ্চলের ক্ষয়ক্ষতি ও তরুণদের ভূমিকার ওপর গুরুত্বপূর্ণ বক্তব্য রেখেছেন বাংলাদেশি তরুণ প্রতিনিধিরা। প্রযুক্তি স্থানান্তর এবং অভিযোজন তহবিলের দ্রুত ছাড় নিশ্চিত করতে বৈশ্বিক নেতাদের প্রতি আহ্বান জানানো হয়েছে।`,
-                image: 'https://images.unsplash.com/photo-1569163139599-0f4517e36f31?auto=format&fit=crop&w=800&q=80',
-                date: '১৮ অক্টোবর, ২০২৬',
-                readTime: '৪ মিনিট পাঠ',
-                views: '১.৯ কে',
-                author: 'গ্লোবাল ডেস্ক'
-            },
-            {
-                id: 'news-6',
-                category: 'politics',
-                categoryLabel: 'রাজনীতি',
-                title: 'পলিক্যাল ক্যাফে: চায়ের কাপে রাজনৈতিক আড্ডা নাকি নীতি নির্ধারণের বিতর্ক?',
-                summary: 'বিশ্ববিদ্যালয় ক্যাম্পাসগুলোতে বাড়ছে নীতিভিত্তিক যুক্তিতর্কের চর্চা।',
-                content: `বিশ্ববিদ্যালয়ের চত্বরগুলোতে এখন আর শুধু স্লোগান নয়, বরং জাতীয় সমস্যাগুলোর সুনির্দিষ্ট আইনি ও অর্থনৈতিক সমাধান নিয়ে সুস্থ বিতর্ক গড়ে উঠছে। 'পলিটিক্যাল ক্যাফে' নামের বিশেষ ইভেন্টগুলোতে বিভিন্ন ভাবধারার তরুণদের সহাবস্থান প্রশংসিত হচ্ছে।`,
-                image: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80',
-                date: '১৭ অক্টোবর, ২০২৬',
-                readTime: '৩ মিনিট পাঠ',
-                views: '৩.৮ কে',
-                author: 'রাকিব মোস্তফা'
-            }
-        ];
+        function fetchGlobalWorldNews() {
+            const globalApiUrl = "https://api.allorigins.win/get?url=" + encodeURIComponent("https://feeds.bbci.co.uk/news/world/rss.xml");
 
-        // Saved Bookmarks state
-        let savedArticleIds = JSON.parse(localStorage.getItem('rr_bookmarks') || '[]');
-        let currentCategory = 'all';
+            fetch(globalApiUrl)
+                .then(response => {
+                    if (response.ok) return response.json();
+                    throw new Error("Network error");
+                })
+                .then(data => {
+                    const parser = new DOMParser();
+                    const xml = parser.parseFromString(data.contents, "text/xml");
+                    const items = xml.querySelectorAll("item");
+                    
+                    let newsCardsHTML = "";
+                    
+                    Array.from(items).slice(0, 9).forEach(item => {
+                        const title = item.querySelector("title") ? item.querySelector("title").textContent : "World News";
+                        const link = item.querySelector("link") ? item.querySelector("link").textContent : "#";
+                        const pubDate = item.querySelector("pubDate") ? new Date(item.querySelector("pubDate").textContent).toLocaleString() : "এখনই";
 
-        // Initialize App
-        window.addEventListener('DOMContentLoaded', () => {
-            renderNews();
-            updateBookmarkBadge();
-        });
-
-        // Theme Toggle Function
-        function toggleTheme() {
-            const html = document.documentElement;
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            } else {
-                html.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            }
-        }
-
-        // Apply persisted theme on load
-        if (localStorage.getItem('theme') === 'light') {
-            document.documentElement.classList.remove('dark');
-        }
-
-        // Filter Categories
-        function filterCategory(cat) {
-            currentCategory = cat;
-            
-            // Update Active Nav Style
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                if(btn.dataset.cat === cat) {
-                    btn.classList.add('bg-brand-teal', 'text-slate-900', 'font-bold');
-                    btn.classList.remove('text-slate-700', 'dark:text-slate-200');
-                } else {
-                    btn.classList.remove('bg-brand-teal', 'text-slate-900', 'font-bold');
-                    btn.classList.add('text-slate-700', 'dark:text-slate-200');
-                }
-            });
-
-            const titles = {
-                'all': 'সর্বশেষ সংবাদসমূহ',
-                'politics': 'রাজনীতি বিষয়ক সংবাদ',
-                'youth': 'তরুণদের মতামত ও চিন্তাধারা',
-                'election': 'নির্বাচন ও নীতি সংক্রান্ত আপডেট',
-                'data': 'ডাটা বিশ্লেষণ ও ভিজ্যুয়ালাইজেশন',
-                'global': 'গ্লোবাল ডিপলোমেসি ও আন্তর্জাতিক'
-            };
-
-            document.getElementById('sectionTitle').innerHTML = `<span class="w-3 h-8 bg-brand-teal rounded-full inline-block"></span> ${titles[cat] || 'সংবাদ'}`;
-            renderNews();
-        }
-
-        // Render News Grid
-        function renderNews() {
-            const container = document.getElementById('newsGrid');
-            const sortBy = document.getElementById('sortOption').value;
-            const searchVal = document.getElementById('searchInput').value.toLowerCase();
-
-            let filtered = articles.filter(item => {
-                const matchCat = currentCategory === 'all' || item.category === currentCategory;
-                const matchSearch = item.title.toLowerCase().includes(searchVal) || item.summary.toLowerCase().includes(searchVal);
-                return matchCat && matchSearch;
-            });
-
-            if (sortBy === 'popular') {
-                filtered.sort((a, b) => parseFloat(b.views) - parseFloat(a.views));
-            }
-
-            if (filtered.length === 0) {
-                container.innerHTML = `
-                    <div class="col-span-full py-12 text-center text-slate-400">
-                        <i class="fa-solid fa-newspaper text-4xl mb-3 block text-slate-600"></i>
-                        কোনো সংবাদ পাওয়া যায়নি।
-                    </div>
-                `;
-                return;
-            }
-
-            container.innerHTML = filtered.map(item => {
-                const isSaved = savedArticleIds.includes(item.id);
-                return `
-                    <article class="bg-white dark:bg-brand-cardDark rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition duration-300 flex flex-col justify-between group">
-                        <div>
-                            <div class="relative overflow-hidden h-48 cursor-pointer" onclick="openNewsModal('${item.id}')">
-                                <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                                <span class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-brand-teal text-xs font-semibold px-2.5 py-1 rounded-full border border-brand-teal/20">
-                                    ${item.categoryLabel}
-                                </span>
-                            </div>
-
-                            <div class="p-5">
-                                <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
-                                    <span><i class="fa-regular fa-calendar mr-1"></i> ${item.date}</span>
-                                    <span><i class="fa-regular fa-clock mr-1"></i> ${item.readTime}</span>
+                        newsCardsHTML += `
+                            <div style="background: #1f2937; border: 1px solid #374151; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between;">
+                                <div>
+                                    <span style="font-size: 10px; color: #f59e0b; background: rgba(245, 158, 11, 0.1); padding: 2px 6px; border-radius: 4px;">বিশ্ব সংবাদ</span>
+                                    <h3 style="font-size: 15px; margin: 10px 0 8px 0; line-height: 1.4;">
+                                        <a href="${link}" target="_blank" style="text-decoration: none; color: #f3f4f6;">${title}</a>
+                                    </h3>
                                 </div>
-                                <h3 class="font-bold text-slate-900 dark:text-white text-lg group-hover:text-brand-teal transition cursor-pointer leading-snug mb-2" onclick="openNewsModal('${item.id}')">
-                                    ${item.title}
-                                </h3>
-                                <p class="text-slate-600 dark:text-slate-400 text-xs line-clamp-2 leading-relaxed">
-                                    ${item.summary}
-                                </p>
+                                <div>
+                                    <div style="font-size: 11px; color: #6b7280; margin-bottom: 10px;">🕒 ${pubDate}</div>
+                                    <a href="${link}" target="_blank" style="display: block; padding: 8px 12px; background: #2563eb; color: #ffffff; text-decoration: none; border-radius: 6px; font-size: 12px; text-align: center;">সরাসরি পড়ুন ➔</a>
+                                </div>
                             </div>
+                        `;
+                    });
+                    
+                    document.getElementById("global-news-grid").innerHTML = newsCardsHTML;
+                })
+                .catch(err => {
+                    document.getElementById("global-news-grid").innerHTML = `
+                        <div style="grid-column: 1 / -1; text-align: center; color: #ef4444; padding: 20px;">
+                            ⚠️ নিউজ লোড করতে সমস্যা হচ্ছে। পেজটি রিফ্রেশ দিন।
                         </div>
-
-                        <div class="p-5 pt-0 border-t border-slate-100 dark:border-slate-800/60 mt-2 flex items-center justify-between text-xs">
-                            <span class="text-slate-500 font-medium">লেখক: ${item.author}</span>
-                            <div class="flex items-center space-x-2">
-                                <button onclick="toggleSaveArticle('${item.id}', event)" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 ${isSaved ? 'text-brand-red' : 'text-slate-400'} transition" title="বুকমার্ক">
-                                    <i class="${isSaved ? 'fa-solid' : 'fa-regular'} fa-bookmark"></i>
-                                </button>
-                                <button onclick="shareArticle('${item.title}', event)" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-brand-teal transition" title="শেয়ার">
-                                    <i class="fa-solid fa-share-nodes"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </article>
-                `;
-            }).join('');
+                    `;
+                });
         }
 
-        // Open News Modal (Article Reader View)
-        function openNewsModal(id) {
-            let article = articles.find(a => a.id === id);
+        // Load news on page open & auto refresh every 2 minutes
+        fetchGlobalWorldNews();
+        setInterval(fetchGlobalWorldNews, 120000);
 
-            // Mock fallback for hero dynamic clicks
-            if (!article) {
-                article = {
-                    id: id,
-                    categoryLabel: 'বিশেষ ফিচার',
-                    title: 'রাজনীতিতে জেন-জি প্রভাবে নতুন মোড়: গদবাধা বক্তব্য ছেড়ে উপাত্ত ও নীতির প্রতিযোগিতায় বাংলাদেশ',
-                    content: `বাংলাদেশিসহ বিশ্বজুড়ে তরুণ প্রজন্ম এখন রাজনীতির মূলধারায় ইতিবাচক প্রভাব ফেলছে। তারা কেবল রাজনৈতিক আলোচনার দর্শক নয়, বরং সোশ্যাল মিডিয়া প্ল্যাটফর্ম ও উন্মুক্ত ফোরাম ব্যবহার করে নীতি নির্ধারণে সরাসরি মতামত দিচ্ছে। পরিবেশ, শিক্ষা এবং কর্মসংস্থানের মতো বাস্তবমুখী ইস্যুতে তরুণদের সচেতনতা নতুন এক বাংলাদেশ গঠনের ইঙ্গিত দেয়।`,
-                    image: 'https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?auto=format&fit=crop&w=1200&q=80',
-                    date: '২২ অক্টোবর, ২০২৬',
-                    readTime: '৪ মিনিট পাঠ',
-                    author: 'সম্পাদকীয় পর্ষদ'
-                };
-            }
-
-            const modalContent = document.getElementById('modalContent');
-            modalContent.innerHTML = `
-                <div class="mb-4">
-                    <span class="bg-brand-teal/10 text-brand-teal text-xs font-bold px-3 py-1 rounded-full border border-brand-teal/30">
-                        ${article.categoryLabel}
-                    </span>
-                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mt-3 leading-tight">
-                        ${article.title}
-                    </h2>
-                    <div class="flex items-center space-x-4 text-xs text-slate-400 mt-3 pb-4 border-b border-slate-200 dark:border-slate-800">
-                        <span><i class="fa-solid fa-user text-brand-teal mr-1"></i> ${article.author}</span>
-                        <span><i class="fa-regular fa-calendar mr-1"></i> ${article.date}</span>
-                        <span><i class="fa-regular fa-clock mr-1"></i> ${article.readTime}</span>
-                    </div>
-                </div>
-
-                <div class="rounded-2xl overflow-hidden mb-6 h-64 sm:h-80">
-                    <img src="${article.image}" alt="${article.title}" class="w-full h-full object-cover">
-                </div>
-
-                <div class="prose dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed space-y-4">
-                    <p class="font-semibold text-slate-900 dark:text-slate-100">${article.summary || article.content.substring(0, 100) + '...'}</p>
-                    <p>${article.content}</p>
-                </div>
-
-                <!-- GEN Z REACTION BUTTONS -->
-                <div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800">
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">রিঅ্যাকশন দিন</h4>
-                    <div class="flex flex-wrap gap-3">
-                        <button onclick="addReaction(this)" class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-brand-teal/20 hover:text-brand-teal text-sm font-semibold transition flex items-center gap-1.5">
-                            🔥 আগুন <span>(২৪)</span>
-                        </button>
-                        <button onclick="addReaction(this)" class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-brand-teal/20 hover:text-brand-teal text-sm font-semibold transition flex items-center gap-1.5">
-                            💡 অসাধারণ পয়েন্ট <span>(৪২)</span>
-                        </button>
-                        <button onclick="addReaction(this)" class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-brand-teal/20 hover:text-brand-teal text-sm font-semibold transition flex items-center gap-1.5">
-                            🎯 একদম সত্যি <span>(১৮)</span>
-                        </button>
-                    </div>
-                </div>
-            `;
-
-            document.getElementById('newsModal').classList.remove('hidden');
+        // Simple theme toggle function placeholder
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
         }
-
-        function closeNewsModal() {
-            document.getElementById('newsModal').classList.add('hidden');
-        }
-
-        // Bookmark Toggle
-        function toggleSaveArticle(id, event) {
-            if(event) event.stopPropagation();
-            if (savedArticleIds.includes(id)) {
-                savedArticleIds = savedArticleIds.filter(i => i !== id);
-            } else {
-                savedArticleIds.push(id);
-            }
-            localStorage.setItem('rr_bookmarks', JSON.stringify(savedArticleIds));
-            updateBookmarkBadge();
-            renderNews();
-        }
-
-        function updateBookmarkBadge() {
-            const badge = document.getElementById('bookmarkBadge');
-            if (savedArticleIds.length > 0) {
-                badge.innerText = savedArticleIds.length;
-                badge.classList.remove('hidden');
-            } else {
-                badge.classList.add('hidden');
-            }
-        }
-
-        function toggleSavedArticlesModal() {
-            const modal = document.getElementById('savedModal');
-            const list = document.getElementById('savedList');
-
-            if (modal.classList.contains('hidden')) {
-                const savedItems = articles.filter(a => savedArticleIds.includes(a.id));
-                if (savedItems.length === 0) {
-                    list.innerHTML = `<p class="text-xs text-slate-400 text-center py-6">কোনো বুকমার্ক করা খবর নেই।</p>`;
-                } else {
-                    list.innerHTML = savedItems.map(item => `
-                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
-                            <div class="cursor-pointer" onclick="toggleSavedArticlesModal(); openNewsModal('${item.id}');">
-                                <h4 class="text-xs font-bold text-slate-900 dark:text-white line-clamp-1">${item.title}</h4>
-                                <span class="text-[10px] text-slate-400">${item.date}</span>
-                            </div>
-                            <button onclick="toggleSaveArticle('${item.id}'); toggleSavedArticlesModal();" class="text-brand-red text-xs p-1">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
-                    `).join('');
-                }
-                modal.classList.remove('hidden');
-            } else {
-                modal.classList.add('hidden');
-            }
-        }
-
-        // Share Article Simulation
-        function shareArticle(title, event) {
-            if(event) event.stopPropagation();
-            if (navigator.share) {
-                navigator.share({
-                    title: title,
-                    url: window.location.href
-                }).catch(() => {});
-            } else {
-                alert('সংবাদের লিঙ্কটি আপনার ক্লিপবোর্ডে কপি করা হয়েছে!');
-            }
-        }
-
-        // Poll voting simulation
         function castVote(type) {
-            document.getElementById('voteMessage').classList.remove('hidden');
-            const totalEl = document.getElementById('totalVotes');
-            let votes = 3840 + 1;
-            totalEl.innerText = votes.toLocaleString('bn-BD');
-        }
-
-        // Reaction Counter Incrementor
-        function addReaction(btn) {
-            const span = btn.querySelector('span');
-            let count = parseInt(span.innerText.replace(/[()]/g, '')) || 0;
-            span.innerText = `(${count + 1})`;
-            btn.classList.add('border', 'border-brand-teal', 'text-brand-teal');
-        }
-
-        // Search Handlers
-        function handleSearch() {
-            renderNews();
-        }
-
-        function handleSearchMobile(e) {
-            document.getElementById('searchInput').value = e.target.value;
-            renderNews();
-        }
-
-        // Newsletter Form Handler
-        function handleNewsletter(e) {
-            e.preventDefault();
-            alert('Rajniti Rewrite নিউজলেটারে সাবস্ক্রাইব করার জন্য ধন্যবাদ!');
-            e.target.reset();
-        }
-
-        // Mobile Menu Toggle
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
+            document.getElementById('totalVotes').innerText = '৩,৮৪১';
         }
     </script>
-    <!-- Automatic News Container -->
-<div id="news-container" style="max-width: 800px; margin: 20px auto; padding: 15px; font-family: Arial, sans-serif;">
-  <h2>সর্বশেষ খবর (Auto Updates)</h2>
-  <div id="news-list">খবর লোড হচ্ছে...</div>
-</div>
-
-<script>
-  // RSS Feed to JSON API (Prothom Alo or General News RSS)
-  const rssUrl = 'https://rss.app/feeds/v1.1/_rss_feed_url_here.xml'; // অথবা Free RSS API
-  const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=https://www.dhakatribune.com/rss/bangladesh`;
-
-  fetch(apiUrl)
-    .then(response => response.json())
-    .then(data => {
-      let newsHTML = '';
-      data.items.slice(0, 10).forEach(item => { // ১০টি খবর দেখাবে
-        newsHTML += `
-          <div style="border-bottom: 1px solid #ccc; padding: 10px 0;">
-            <h3 style="margin: 0 0 5px 0;"><a href="${item.link}" target="_blank" style="text-decoration: none; color: #0066cc;">${item.title}</a></h3>
-            <p style="font-size: 14px; color: #555; margin: 0;">${item.pubDate}</p>
-          </div>
-        `;
-      });
-      document.getElementById('news-list').innerHTML = newsHTML;
-    })
-    .catch(error => {
-      document.getElementById('news-list').innerHTML = 'খবর লোড করতে সমস্যা হচ্ছে।';
-    });
-</script>
 </body>
 </html>
