@@ -873,5 +873,34 @@
             menu.classList.toggle('hidden');
         }
     </script>
+    <!-- Automatic News Container -->
+<div id="news-container" style="max-width: 800px; margin: 20px auto; padding: 15px; font-family: Arial, sans-serif;">
+  <h2>সর্বশেষ খবর (Auto Updates)</h2>
+  <div id="news-list">খবর লোড হচ্ছে...</div>
+</div>
+
+<script>
+  // RSS Feed to JSON API (Prothom Alo or General News RSS)
+  const rssUrl = 'https://rss.app/feeds/v1.1/_rss_feed_url_here.xml'; // অথবা Free RSS API
+  const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=https://www.dhakatribune.com/rss/bangladesh`;
+
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+      let newsHTML = '';
+      data.items.slice(0, 10).forEach(item => { // ১০টি খবর দেখাবে
+        newsHTML += `
+          <div style="border-bottom: 1px solid #ccc; padding: 10px 0;">
+            <h3 style="margin: 0 0 5px 0;"><a href="${item.link}" target="_blank" style="text-decoration: none; color: #0066cc;">${item.title}</a></h3>
+            <p style="font-size: 14px; color: #555; margin: 0;">${item.pubDate}</p>
+          </div>
+        `;
+      });
+      document.getElementById('news-list').innerHTML = newsHTML;
+    })
+    .catch(error => {
+      document.getElementById('news-list').innerHTML = 'খবর লোড করতে সমস্যা হচ্ছে।';
+    });
+</script>
 </body>
 </html>
