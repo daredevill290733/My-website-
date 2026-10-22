@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bn" class="dark">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,16 +8,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        brand: {
+                        site: {
                             red: '#e63946',
-                            teal: '#00b4d8',
-                            navy: '#0d1b2a',
+                            darkRed: '#b71c1c',
                             darkBg: '#0f172a',
-                            cardDark: '#1e293b',
+                            cardBg: '#1e293b',
                             accent: '#38bdf8'
                         }
                     },
@@ -28,16 +26,18 @@
             }
         }
     </script>
-    <!-- Google Fonts for Bengali & English -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         body {
             font-family: 'Hind Siliguri', 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
         }
         @keyframes ticker {
             0% { transform: translate3d(0, 0, 0); }
@@ -46,255 +46,214 @@
         .animate-ticker {
             display: inline-block;
             white-space: nowrap;
-            animation: ticker 30s linear infinite;
+            animation: ticker 35s linear infinite;
         }
         .animate-ticker:hover {
             animation-play-state: paused;
         }
         ::-webkit-scrollbar {
             width: 6px;
-            height: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.1);
+            background: #0f172a;
         }
         ::-webkit-scrollbar-thumb {
-            background: #00b4d8;
+            background: #e63946;
             border-radius: 3px;
         }
     </style>
 </head>
-<body class="bg-slate-50 dark:bg-brand-darkBg text-slate-800 dark:text-slate-100 min-h-screen transition-colors duration-300 flex flex-col justify-between">
+<body class="min-h-screen flex flex-col justify-between">
 
-    <!-- TOP ANNOUNCEMENT / BREAKING NEWS TICKER -->
-    <div class="bg-brand-red text-white text-xs sm:text-sm font-medium py-2 px-4 flex items-center shadow-md relative z-50">
-        <span class="bg-white text-brand-red font-bold px-2 py-0.5 rounded text-xs uppercase tracking-wider flex items-center shrink-0 mr-3 animate-pulse">
-            <i class="fa-solid font-bold fa-bolt mr-1"></i> ব্রেকিং
+    <!-- HEADER & BRANDING (Rajniti Rewrite) -->
+    <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-site-red to-blue-600 flex items-center justify-center text-white font-black text-xl shadow-lg">
+                    R
+                </div>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-black tracking-tight text-white font-['Inter']">
+                        RAJNITI <span class="text-sky-400">REWRITE</span>
+                    </h1>
+                    <p class="text-[10px] text-site-red font-bold tracking-wider">রাজনীতি রিরাইট • প্রগতির নতুন বয়ান</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <a href="https://www.facebook.com/share/19vxXVParB/" target="_blank" class="text-xs bg-site-red hover:bg-site-darkRed text-white px-3.5 py-2 rounded-lg font-semibold transition flex items-center gap-1.5 shadow">
+                    <i class="fa-brands fa-facebook-f"></i> ফেসবুক পেজ
+                </a>
+            </div>
+        </div>
+
+        <!-- Navigation Bar -->
+        <nav class="bg-slate-950 border-t border-slate-800 text-sm font-semibold overflow-x-auto no-scrollbar">
+            <div class="max-w-7xl mx-auto px-4 flex space-x-6 py-2.5 whitespace-nowrap text-slate-300">
+                <a href="#" class="text-sky-400 border-b-2 border-sky-400 pb-1">প্রচ্ছদ</a>
+                <a href="#" class="hover:text-white transition">বিশ্ব সংবাদ</a>
+                <a href="#" class="hover:text-white transition">রাজনীতি</a>
+                <a href="#" class="hover:text-white transition">বাণিজ্য</a>
+                <a href="#" class="hover:text-white transition">প্রযুক্তি</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- BREAKING NEWS TICKER -->
+    <div class="bg-site-red text-white text-xs sm:text-sm font-bold py-2 px-4 flex items-center shadow-md">
+        <span class="bg-black text-white px-2 py-0.5 text-xs uppercase tracking-wider shrink-0 mr-3 animate-pulse rounded">
+            🔴 ব্রেকিং
         </span>
         <div class="overflow-hidden w-full relative">
             <div class="animate-ticker flex items-center space-x-8">
-                <span class="inline-block cursor-pointer hover:underline">🔥 রাষ্ট্র সংস্কার নীতিতে তরুণদের ৫ দফা সুনির্দিষ্ট প্রস্তাব উপস্থাপন করেছে নতুন ইয়ুথ ফোরাম।</span>
-                <span class="inline-block cursor-pointer hover:underline">📊 জাতীয় বাজেটে শিক্ষা ও উদ্ভাবন খাতে বরাদ্দ ৩০% বাড়ানোর দাবিতে শিক্ষার্থীদের স্মারকলিপি।</span>
-                <span class="inline-block cursor-pointer hover:underline">🌐 'Rajniti Rewrite' এর বিশেষ পোল: তরুণ প্রজন্মের ৮০%ই রাজনীতিতে তরুণ নেতৃত্বের সরাসরি অংশগ্রহণ চায়।</span>
+                <span>🔥 'Rajniti Rewrite' পোর্টালে আপনাকে স্বাগতম! সারা বিশ্বের লেটেস্ট খবর এখন রিয়েল-টাইমে।</span>
+                <span>📊 রাজনীতি, অর্থনীতি ও আন্তর্জাতিক সংবাদের বিশ্বস্ত অটো-আপডেট সিস্টেম।</span>
             </div>
         </div>
     </div>
 
-    <!-- MAIN HEADER -->
-    <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                
-                <!-- BRANDING / LOGO -->
-                <div class="flex items-center space-x-3 cursor-pointer">
-                    <div class="relative flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-red via-brand-teal to-blue-600 p-0.5 shadow-lg shadow-brand-teal/20 hover:scale-105 transition-transform duration-200">
-                        <div class="w-full h-full bg-slate-900 rounded-[14px] flex items-center justify-center">
-                            <i class="fa-solid font-bold fa-feather-pointed text-brand-teal text-xl transform -rotate-12"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex items-center space-x-2">
-                            <h1 class="text-2xl font-black tracking-tight text-slate-900 dark:text-white flex items-center gap-1 font-['Inter']">
-                                RAJNITI <span class="text-brand-teal">REWRITE</span>
-                            </h1>
-                        </div>
-                        <p class="text-xs text-brand-red dark:text-brand-teal font-semibold tracking-wider">রাজনীতি রিরাইট • প্রগতির নতুন বয়ান</p>
-                    </div>
-                </div>
+    <!-- MAIN BODY CONTENT -->
+    <main class="max-w-7xl mx-auto px-4 py-8 w-full flex-1">
+        
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-8">
+            <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                <span class="w-3 h-7 bg-site-red rounded-full inline-block"></span>
+                আন্তর্জাতিক ও বিশ্ব সংবাদ (Rajniti Rewrite Feed)
+            </h2>
+            <span class="text-xs text-slate-400 font-medium hidden sm:inline-block">
+                ⚡ অটো-আপডেট ও জ্যাম-মুক্ত সিস্টেম
+            </span>
+        </div>
 
-                <!-- DESKTOP SEARCH BAR -->
-                <div class="hidden md:flex flex-1 max-w-md mx-8 relative">
-                    <input type="text" id="searchInput" placeholder="সংবাদ, মতামত বা বিষয় অনুসন্ধান করুন..." 
-                        class="w-full bg-slate-100 dark:bg-slate-800/80 text-sm text-slate-900 dark:text-slate-100 rounded-full pl-10 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-teal border border-slate-200 dark:border-slate-700 transition">
-                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
-                </div>
-
-                <!-- RIGHT CONTROLS -->
-                <div class="flex items-center space-x-3">
-                    <button id="themeToggle" onclick="toggleTheme()" class="p-2.5 text-slate-600 dark:text-slate-300 hover:text-amber-500 dark:hover:text-amber-400 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition" title="থিম পরিবর্তন">
-                        <i class="fa-solid fa-moon text-lg dark:hidden"></i>
-                        <i class="fa-solid fa-sun text-lg hidden dark:block"></i>
-                    </button>
-                </div>
+        <!-- AUTOMATIC NEWS GRID CONTAINER -->
+        <div id="news-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="col-span-full text-center py-16 text-slate-400 font-medium">
+                ⏳ Rajniti Rewrite লাইভ নিউজ লোড করা হচ্ছে...
             </div>
         </div>
-    </header>
-
-    <!-- MAIN CONTENT BODY -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
-        
-        <!-- HERO SECTION -->
-        <section class="mb-12" id="heroSection">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
-                    <span class="w-3 h-8 bg-brand-red rounded-full inline-block"></span>
-                    শীর্ষ সংবাদ ও ট্রেন্ডিং
-                </h2>
-                <span class="text-xs text-slate-500 dark:text-slate-400 font-medium flex items-center gap-1">
-                    <i class="fa-regular fa-clock"></i> লাইভ আপডেট
-                </span>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <!-- HERO BIG CARD -->
-                <div class="lg:col-span-8 group relative rounded-3xl overflow-hidden shadow-2xl bg-slate-900 cursor-pointer border border-slate-800">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent z-10"></div>
-                    <img src="https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?auto=format&fit=crop&w=1200&q=80" alt="Youth political leadership" class="w-full h-[380px] sm:h-[460px] object-cover group-hover:scale-105 transition-transform duration-500">
-                    
-                    <div class="absolute top-4 left-4 z-20 flex gap-2">
-                        <span class="bg-brand-red text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow">বিশেষ রিপোর্ট</span>
-                        <span class="bg-slate-900/80 backdrop-blur-md text-brand-teal text-xs font-semibold px-3 py-1 rounded-full border border-brand-teal/30">তরুণদের মত</span>
-                    </div>
-
-                    <div class="absolute bottom-0 p-6 sm:p-8 z-20 w-full">
-                        <div class="flex items-center space-x-4 text-xs text-slate-300 mb-2">
-                            <span><i class="fa-regular fa-calendar-days text-brand-teal mr-1"></i> ২৩ অক্টোবর, ২০২৬</span>
-                            <span><i class="fa-regular fa-clock text-brand-teal mr-1"></i> ৪ মিনিট পাঠ</span>
-                            <span class="text-amber-400 font-bold"><i class="fa-solid fa-fire mr-1"></i> ট্রেন্ডিং #১</span>
-                        </div>
-                        <h3 class="text-2xl sm:text-3xl font-extrabold text-white group-hover:text-brand-teal transition-colors leading-tight mb-3">
-                            রাজনীতিতে জেন-জি প্রভাবে নতুন মোড়: গদবাধা বক্তব্য ছেড়ে উপাত্ত ও নীতির প্রতিযোগিতায় বাংলাদেশ
-                        </h3>
-                    </div>
-                </div>
-
-                <!-- HERO SIDE CARDS -->
-                <div class="lg:col-span-4 flex flex-col space-y-6">
-                    <div class="bg-white dark:bg-brand-cardDark rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 mb-2">
-                                <span class="text-brand-red font-semibold">নির্বাচন ও নীতি</span>
-                                <span>১০ মিনিট আগে</span>
-                            </div>
-                            <h4 class="font-bold text-slate-900 dark:text-white text-base line-clamp-2">
-                                ডিজিটাল ভোটিং ও ভোটারদের সচেতনতায় মোবাইল অ্যাপের নতুন বিপ্লব
-                            </h4>
-                        </div>
-                    </div>
-
-                    <div class="bg-white dark:bg-brand-cardDark rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 mb-2">
-                                <span class="text-brand-teal font-semibold">গ্লোবাল ডিপলোমেসি</span>
-                                <span>১ ঘণ্টা আগে</span>
-                            </div>
-                            <h4 class="font-bold text-slate-900 dark:text-white text-base line-clamp-2">
-                                দক্ষিণ এশিয়ার ভূ-রাজনীতিতে তরুণ নেতৃত্বের নতুন অবস্থান
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 🌐 100% WORKING CLICKABLE WORLD NEWS SECTION -->
-        <section class="mb-12 bg-[#111827] rounded-3xl p-6 sm:p-8 text-white border border-slate-800 shadow-xl">
-            <div class="flex justify-between items-center border-b border-blue-600 pb-4 mb-6 flex-wrap gap-3">
-                <h3 class="text-2xl font-black text-[#60a5fa] flex items-center gap-2">
-                    🌐 বিশ্ব সংবাদ কভারেজ (Global Live News)
-                </h3>
-                <span class="text-xs bg-[#1e3a8a] text-[#93c5fd] px-3 py-1 rounded-full border border-blue-500">
-                    ● লাইভ লিঙ্ক যুক্ত
-                </span>
-            </div>
-            
-            <div id="global-news-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="col-span-full text-center py-10 text-slate-400">
-                    ⏳ সংবাদ এবং আন্তর্জাতিক লিংক লোড করা হচ্ছে...
-                </div>
-            </div>
-        </section>
 
     </main>
 
-    <!-- FOOTER WITH YOUR FACEBOOK PAGE LINK -->
-    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 mt-12 transition-colors">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+    <!-- FOOTER SECTION -->
+    <footer class="bg-slate-900 border-t border-slate-800 mt-12 py-10">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 border-b border-slate-800 pb-8">
                 <div>
-                    <div class="flex items-center space-x-2 mb-3">
-                        <div class="w-8 h-8 rounded-lg bg-brand-teal flex items-center justify-center text-slate-900 font-bold">
-                            <i class="fa-solid fa-feather-pointed"></i>
-                        </div>
-                        <span class="text-lg font-bold dark:text-white">Rajniti Rewrite</span>
-                    </div>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                        প্রগতির নতুন বয়ান—তরুণদের সুচিন্তিত মতামত, উন্মুক্ত আলোচনা এবং তথাকথিত রাজনীতির বাইরে একটি বস্তুনিষ্ঠ সংবাদ মাধ্যম।
-                    </p>
+                    <h3 class="text-lg font-bold text-white">Rajniti Rewrite</h3>
+                    <p class="text-xs text-slate-400 mt-1">প্রগতির নতুন বয়ান—একটি বস্তুনিষ্ঠ অনলাইন সংবাদ মাধ্যম।</p>
                 </div>
-
-                <div>
-                    <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-3">সোশ্যাল মিডিয়া</h4>
-                    <div class="flex space-x-3">
-                        <a href="https://www.facebook.com/share/19vxXVParB/" target="_blank" title="আমাদের ফেসবুক পেজ" class="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center justify-center hover:bg-brand-teal hover:text-slate-900 transition"><i class="fa-brands fa-facebook-f text-sm"></i></a>
-                    </div>
+                
+                <div class="flex items-center space-x-4">
+                    <span class="text-xs text-slate-400">অফিশিয়াল পেজ:</span>
+                    <a href="https://www.facebook.com/share/19vxXVParB/" target="_blank" class="w-9 h-9 bg-slate-800 hover:bg-site-red text-white rounded-full flex items-center justify-center transition shadow">
+                        <i class="fa-brands fa-facebook-f text-sm"></i>
+                    </a>
                 </div>
             </div>
-            
-            <div class="border-t border-slate-200 dark:border-slate-800 pt-6 text-center text-xs text-slate-500">
-                © ২০২৬ Rajniti Rewrite (রাজনীতি রিরাইট). সর্বস্বত্ব সংরক্ষিত। design by Ibrahim Ali
+
+            <div class="pt-6 text-center text-xs text-slate-500">
+                © ২০২৬ Rajniti Rewrite. সর্বস্বত্ব সংরক্ষিত। design by Ibrahim Ali
             </div>
         </div>
     </footer>
 
-    <!-- CLICKABLE LIVE NEWS JAVASCRIPT -->
+    <!-- ROBUST FAILOVER JAVASCRIPT FOR ZERO LOADING ISSUE -->
     <script>
-        function loadClickableWorldNews() {
-            // Live BBC Feed API with Direct Working Links
-            const targetApi = "https://api.rss2json.com/v1/api.json?rss_url=https://feeds.bbci.co.uk/news/world/rss.xml";
+        const rssFeedUrl = "https://feeds.bbci.co.uk/news/world/rss.xml";
+        const primaryApi = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(rssFeedUrl);
+        const backupApi = "https://api.allorigins.win/get?url=" + encodeURIComponent(rssFeedUrl);
 
-            fetch(targetApi)
+        function renderArticles(items) {
+            let newsCardsHTML = "";
+            items.slice(0, 9).forEach((item, index) => {
+                const title = item.title;
+                const link = item.link;
+                const pubDate = item.pubDate ? new Date(item.pubDate).toLocaleString('bn-BD') : "সাম্প্রতিক খবর";
+                const rawDesc = item.description || item.content || "";
+                const description = rawDesc.replace(/<[^>]*>?/gm, '').slice(0, 110) + "...";
+
+                if (index === 0) {
+                    newsCardsHTML += `
+                        <div class="col-span-1 md:col-span-2 lg:col-span-3 bg-slate-800/90 border border-slate-700 rounded-2xl overflow-hidden p-6 hover:border-site-red transition-all duration-300 shadow-xl">
+                            <div class="flex items-center space-x-2 text-xs text-site-red font-bold mb-2">
+                                <span>🔥 রাজিনিতি রিরাইট • শীর্ষ সংবাদ</span>
+                                <span class="text-slate-500">•</span>
+                                <span class="text-slate-400">🕒 ${pubDate}</span>
+                            </div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-white mb-3 hover:text-sky-400 transition-colors">
+                                <a href="${link}" target="_blank" rel="noopener noreferrer">${title}</a>
+                            </h3>
+                            <p class="text-sm text-slate-300 mb-4">${description}</p>
+                            <a href="${link}" target="_blank" rel="noopener noreferrer" class="inline-block bg-site-red hover:bg-site-darkRed text-white text-xs font-bold py-2.5 px-5 rounded-xl transition shadow">
+                                সম্পূর্ণ সংবাদ পড়ুন ➔
+                            </a>
+                        </div>
+                    `;
+                } else {
+                    newsCardsHTML += `
+                        <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-5 flex flex-col justify-between hover:border-sky-400 transition-all duration-200 shadow-md">
+                            <div>
+                                <div class="flex justify-between items-center text-xs text-slate-400 mb-2">
+                                    <span class="text-sky-400 font-bold">Rajniti Rewrite স্পেশাল</span>
+                                    <span>🕒 ${pubDate}</span>
+                                </div>
+                                <h4 class="text-base font-bold text-white mb-2 line-clamp-2 hover:text-sky-400 transition-colors">
+                                    <a href="${link}" target="_blank" rel="noopener noreferrer">${title}</a>
+                                </h4>
+                                <p class="text-xs text-slate-300 line-clamp-3 mb-4">${description}</p>
+                            </div>
+                            <a href="${link}" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-slate-700 hover:bg-site-red text-white text-xs font-semibold py-2 rounded-xl transition">
+                                বিস্তারিত পড়ুন ➔
+                            </a>
+                        </div>
+                    `;
+                }
+            });
+            document.getElementById("news-container").innerHTML = newsCardsHTML;
+        }
+
+        function loadNewsWithFallback() {
+            // Primary API fetch
+            fetch(primaryApi)
                 .then(res => res.json())
                 .then(data => {
-                    if (data.status === 'ok' && data.items.length > 0) {
-                        let htmlContent = "";
-                        
-                        data.items.slice(0, 9).forEach(item => {
-                            const newsTitle = item.title;
-                            const newsLink = item.link;
-                            const newsDate = new Date(item.pubDate).toLocaleDateString('bn-BD');
-
-                            htmlContent += `
-                                <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 flex flex-col justify-between hover:border-blue-500 transition-all duration-200">
-                                    <div>
-                                        <div class="flex justify-between items-center mb-3">
-                                            <span class="text-[10px] text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded font-bold uppercase">বিশ্ব বার্তা</span>
-                                            <span class="text-xs text-slate-400">📅 ${newsDate}</span>
-                                        </div>
-                                        <h4 class="text-base font-bold text-white mb-3 line-clamp-3 hover:text-blue-400 transition-colors">
-                                            <a href="${newsLink}" target="_blank" rel="noopener noreferrer">${newsTitle}</a>
-                                        </h4>
-                                    </div>
-                                    <div class="mt-4 pt-3 border-t border-slate-700/60">
-                                        <a href="${newsLink}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-medium transition-colors">
-                                            সম্পূর্ণ খবর পড়তে ক্লিক করুন <i class="fa-solid fa-arrow-up-right-from-square ml-2"></i>
-                                        </a>
-                                    </div>
+                    if (data.status === 'ok' && data.items && data.items.length > 0) {
+                        renderArticles(data.items);
+                    } else {
+                        throw new Error("Primary failed");
+                    }
+                })
+                .catch(() => {
+                    // Backup API fetch if primary fails
+                    fetch(backupApi)
+                        .then(res => res.json())
+                        .then(data => {
+                            const parser = new DOMParser();
+                            const xml = parser.parseFromString(data.contents, "text/xml");
+                            const xmlItems = Array.from(xml.querySelectorAll("item")).map(node => ({
+                                title: node.querySelector("title")?.textContent || "সংবাদ শিরোনাম",
+                                link: node.querySelector("link")?.textContent || "#",
+                                pubDate: node.querySelector("pubDate")?.textContent || "",
+                                description: node.querySelector("description")?.textContent || ""
+                            }));
+                            if(xmlItems.length > 0) {
+                                renderArticles(xmlItems);
+                            } else {
+                                throw new Error("Backup failed");
+                            }
+                        })
+                        .catch(() => {
+                            document.getElementById("news-container").innerHTML = `
+                                <div class="col-span-full text-center py-10 text-red-400 font-medium">
+                                    ⚠️ সংবাদ ডাটা লোড করতে সমস্যা হয়েছে। পেজটি পুনরায় রিফ্রেশ করুন।
                                 </div>
                             `;
                         });
-                        document.getElementById("global-news-grid").innerHTML = htmlContent;
-                    } else {
-                        showFallbackError();
-                    }
-                })
-                .catch(() => showFallbackError());
+                });
         }
 
-        function showFallbackError() {
-            document.getElementById("global-news-grid").innerHTML = `
-                <div class="col-span-full text-center py-6 text-red-400">
-                    ⚠️ বর্তমানে আন্তর্জাতিক ফিড আপডেটে সমস্যা হচ্ছে। পেজটি রিফ্রেশ করুন।
-                </div>
-            `;
-        }
-
-        // Run immediately
-        loadClickableWorldNews();
-
-        function toggleTheme() {
-            document.documentElement.classList.toggle('dark');
-        }
+        // Execute function immediately
+        loadNewsWithFallback();
     </script>
 </body>
 </html>
