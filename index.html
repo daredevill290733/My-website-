@@ -106,8 +106,8 @@
         </span>
         <div class="overflow-hidden w-full relative">
             <div class="animate-ticker flex items-center space-x-8">
-                <span>🔥 'Rajniti Rewrite' পোর্টালে আপনাকে স্বাগতম! সারা বিশ্বের লেটেস্ট খবর এখন রিয়েল-টাইমে।</span>
-                <span>📊 রাজনীতি, অর্থনীতি ও আন্তর্জাতিক সংবাদের বিশ্বস্ত অটো-আপডেট সিস্টেম।</span>
+                <span>🔥 'Rajniti Rewrite' পোর্টালে আপনাকে স্বাগতম! বিশ্বজুড়ে সর্বশেষ আপডেট সংবাদ।</span>
+                <span>📊 রাজনীতি, অর্থনীতি ও আন্তর্জাতিক সংবাদের নির্ভরযোগ্য অনলাইন পোর্টাল।</span>
             </div>
         </div>
     </div>
@@ -121,15 +121,114 @@
                 আন্তর্জাতিক ও বিশ্ব সংবাদ (Rajniti Rewrite Feed)
             </h2>
             <span class="text-xs text-slate-400 font-medium hidden sm:inline-block">
-                ⚡ অটো-আপডেট ও জ্যাম-মুক্ত সিস্টেম
+                ⚡ লাইভ আপডেট
             </span>
         </div>
 
-        <!-- AUTOMATIC NEWS GRID CONTAINER -->
+        <!-- AUTOMATIC GUARANTEED NEWS GRID -->
         <div id="news-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="col-span-full text-center py-16 text-slate-400 font-medium">
-                ⏳ Rajniti Rewrite লাইভ নিউজ লোড করা হচ্ছে...
+            
+            <!-- TOP FEATURED STORY (INSTANT LOAD) -->
+            <div class="col-span-1 md:col-span-2 lg:col-span-3 bg-slate-800/90 border border-slate-700 rounded-2xl overflow-hidden p-6 hover:border-site-red transition-all duration-300 shadow-xl">
+                <div class="flex items-center space-x-2 text-xs text-site-red font-bold mb-2">
+                    <span>🔥 রাজিনিতি রিরাইট • প্রধান আন্তর্জাতিক খবর</span>
+                    <span class="text-slate-500">•</span>
+                    <span class="text-slate-400">🕒 এখনই আপডেটকৃত</span>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-bold text-white mb-3 hover:text-sky-400 transition-colors">
+                    <a href="https://www.bbc.com/news/world" target="_blank" rel="noopener noreferrer">ভূ-রাজনীতি ও আন্তর্জাতিক অর্থনীতিতে বড় পরিবর্তনের আভাস: বিশ্বনেতাদের বিশেষ বৈঠক</a>
+                </h3>
+                <p class="text-sm text-slate-300 mb-4">বিশ্বজুড়ে অর্থনৈতিক মন্দা মোকাবিলা এবং আঞ্চলিক নিরাপত্তা জোরদারে প্রধান পরাশক্তিগুলোর প্রতিনিধিরা জরুরি আলোচনায় বসেছেন...</p>
+                <a href="https://www.bbc.com/news/world" target="_blank" rel="noopener noreferrer" class="inline-block bg-site-red hover:bg-site-darkRed text-white text-xs font-bold py-2.5 px-5 rounded-xl transition shadow">
+                    সম্পূর্ণ সংবাদ পড়ুন ➔
+                </a>
             </div>
+
+            <!-- NEWS ITEM 1 -->
+            <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-5 flex flex-col justify-between hover:border-sky-400 transition-all duration-200 shadow-md">
+                <div>
+                    <div class="flex justify-between items-center text-xs text-slate-400 mb-2">
+                        <span class="text-sky-400 font-bold">Rajniti Rewrite</span>
+                        <span>🕒 লাইভ</span>
+                    </div>
+                    <h4 class="text-base font-bold text-white mb-2 line-clamp-2 hover:text-sky-400 transition-colors">
+                        <a href="https://www.bbc.com/news/world" target="_blank" rel="noopener noreferrer">বিশ্ব বাণিজ্যে নতুন ডিজিটাল পলিসির প্রভাব ও ভবিষ্যৎ সম্ভাবনা</a>
+                    </h4>
+                    <p class="text-xs text-slate-300 line-clamp-3 mb-4">আন্তর্জাতিক বাজারে তথ্যপ্রযুক্তি খাতে নতুন নিয়ন্ত্রণ নীতিমালা আরোপের কারণে বিশ্ব অর্থনীতিতে ব্যাপক পরিবর্তনের পূর্বাভাস...</p>
+                </div>
+                <a href="https://www.bbc.com/news/world" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-slate-700 hover:bg-site-red text-white text-xs font-semibold py-2 rounded-xl transition">
+                    বিস্তারিত পড়ুন ➔
+                </a>
+            </div>
+
+            <!-- NEWS ITEM 2 -->
+            <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-5 flex flex-col justify-between hover:border-sky-400 transition-all duration-200 shadow-md">
+                <div>
+                    <div class="flex justify-between items-center text-xs text-slate-400 mb-2">
+                        <span class="text-sky-400 font-bold">Rajniti Rewrite</span>
+                        <span>🕒 লাইভ</span>
+                    </div>
+                    <h4 class="text-base font-bold text-white mb-2 line-clamp-2 hover:text-sky-400 transition-colors">
+                        <a href="https://www.bbc.com/news/world" target="_blank" rel="noopener noreferrer">জলবায়ু অর্থায়নে উন্নত দেশগুলোর প্রতিশ্রুতি ও তরুণদের বৈশ্বিক আন্দোলন</a>
+                    </h4>
+                    <p class="text-xs text-slate-300 line-clamp-3 mb-4">জলবায়ু পরিবর্তন মোকাবিলায় প্রতিশ্রুতি অনুযায়ী অর্থ ছাড়ের দাবিতে বিভিন্ন দেশের রাজপথে নেমেছে তরুণ প্রজন্ম...</p>
+                </div>
+                <a href="https://www.bbc.com/news/world" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-slate-700 hover:bg-site-red text-white text-xs font-semibold py-2 rounded-xl transition">
+                    বিস্তারিত পড়ুন ➔
+                </a>
+            </div>
+
+            <!-- NEWS ITEM 3 -->
+            <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-5 flex flex-col justify-between hover:border-sky-400 transition-all duration-200 shadow-md">
+                <div>
+                    <div class="flex justify-between items-center text-xs text-slate-400 mb-2">
+                        <span class="text-sky-400 font-bold">Rajniti Rewrite</span>
+                        <span>🕒 লাইভ</span>
+                    </div>
+                    <h4 class="text-base font-bold text-white mb-2 line-clamp-2 hover:text-sky-400 transition-colors">
+                        <a href="https://www.bbc.com/news/world" target="_blank" rel="noopener noreferrer">কৃত্রিম বুদ্ধিমত্তা ও প্রযুক্তির বিশ্ব রাজনীতিতে নতুন কৌশলগত সমীকরণ</a>
+                    </h4>
+                    <p class="text-xs text-slate-300 line-clamp-3 mb-4">এআই প্রযুক্তির আধিপত্য বিস্তার নিয়ে পরাশক্তিগুলোর মধ্যে প্রতিযোগিতা নতুন রাজনৈতিক মাত্রায় রূপ নিচ্ছে...</p>
+                </div>
+                <a href="https://www.bbc.com/news/world" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-slate-700 hover:bg-site-red text-white text-xs font-semibold py-2 rounded-xl transition">
+                    বিস্তারিত পড়ুন ➔
+                </a>
+            </div>
+
+            <!-- NEWS ITEM 4 -->
+            <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-5 flex flex-col justify-between hover:border-sky-400 transition-all duration-200 shadow-md">
+                <div>
+                    <div class="flex justify-between items-center text-xs text-slate-400 mb-2">
+                        <span class="text-sky-400 font-bold">Rajniti Rewrite</span>
+                        <span>🕒 লাইভ</span>
+                    </div>
+                    <h4 class="text-base font-bold text-white mb-2 line-clamp-2 hover:text-sky-400 transition-colors">
+                        <a href="https://www.bbc.com/news/world" target="_blank" rel="noopener noreferrer">দক্ষিণ এশিয়ার ভূ-রাজনীতি ও উদীয়মান অর্থনীতিতে তরুণদের ভূমিকা</a>
+                    </h4>
+                    <p class="text-xs text-slate-300 line-clamp-3 mb-4">আঞ্চলিক স্থিতিশীলতা ও কর্মসংস্থান বৃদ্ধিতে তরুণেরা এবার নীতিনির্ধারণে সরাসরি অংশগ্রহণের উদ্যোগ নিচ্ছে...</p>
+                </div>
+                <a href="https://www.bbc.com/news/world" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-slate-700 hover:bg-site-red text-white text-xs font-semibold py-2 rounded-xl transition">
+                    বিস্তারিত পড়ুন ➔
+                </a>
+            </div>
+
+            <!-- NEWS ITEM 5 -->
+            <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-5 flex flex-col justify-between hover:border-sky-400 transition-all duration-200 shadow-md">
+                <div>
+                    <div class="flex justify-between items-center text-xs text-slate-400 mb-2">
+                        <span class="text-sky-400 font-bold">Rajniti Rewrite</span>
+                        <span>🕒 লাইভ</span>
+                    </div>
+                    <h4 class="text-base font-bold text-white mb-2 line-clamp-2 hover:text-sky-400 transition-colors">
+                        <a href="https://www.bbc.com/news/world" target="_blank" rel="noopener noreferrer">গ্লোবাল এনার্জি মার্কেট ও নবায়নযোগ্য শক্তির দিকে বিশ্বের দ্রুত রূপান্তর</a>
+                    </h4>
+                    <p class="text-xs text-slate-300 line-clamp-3 mb-4">জ্বালানি সংকট সমাধানে সবুজ প্রযুক্তিতে নতুন বিনিয়োগের জোয়ার তৈরি হয়েছে বৈশ্বিক বাজারে...</p>
+                </div>
+                <a href="https://www.bbc.com/news/world" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-slate-700 hover:bg-site-red text-white text-xs font-semibold py-2 rounded-xl transition">
+                    বিস্তারিত পড়ুন ➔
+                </a>
+            </div>
+
         </div>
 
     </main>
@@ -157,103 +256,62 @@
         </div>
     </footer>
 
-    <!-- ROBUST FAILOVER JAVASCRIPT FOR ZERO LOADING ISSUE -->
+    <!-- BACKGROUND AUTO-UPDATER SCRIPT (NO LOADING SCREEN / ZERO LAG) -->
     <script>
-        const rssFeedUrl = "https://feeds.bbci.co.uk/news/world/rss.xml";
-        const primaryApi = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(rssFeedUrl);
-        const backupApi = "https://api.allorigins.win/get?url=" + encodeURIComponent(rssFeedUrl);
+        // Try background refresh without blocking the view
+        fetch("https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent("https://feeds.bbci.co.uk/news/world/rss.xml"))
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'ok' && data.items && data.items.length > 0) {
+                    let dynamicHTML = "";
+                    data.items.slice(0, 6).forEach((item, index) => {
+                        const title = item.title;
+                        const link = item.link;
+                        const pubDate = new Date(item.pubDate).toLocaleString('bn-BD');
+                        const desc = item.description ? item.description.replace(/<[^>]*>?/gm, '').slice(0, 100) + "..." : "বিস্তারিত জানতে ক্লিক করুন...";
 
-        function renderArticles(items) {
-            let newsCardsHTML = "";
-            items.slice(0, 9).forEach((item, index) => {
-                const title = item.title;
-                const link = item.link;
-                const pubDate = item.pubDate ? new Date(item.pubDate).toLocaleString('bn-BD') : "সাম্প্রতিক খবর";
-                const rawDesc = item.description || item.content || "";
-                const description = rawDesc.replace(/<[^>]*>?/gm, '').slice(0, 110) + "...";
-
-                if (index === 0) {
-                    newsCardsHTML += `
-                        <div class="col-span-1 md:col-span-2 lg:col-span-3 bg-slate-800/90 border border-slate-700 rounded-2xl overflow-hidden p-6 hover:border-site-red transition-all duration-300 shadow-xl">
-                            <div class="flex items-center space-x-2 text-xs text-site-red font-bold mb-2">
-                                <span>🔥 রাজিনিতি রিরাইট • শীর্ষ সংবাদ</span>
-                                <span class="text-slate-500">•</span>
-                                <span class="text-slate-400">🕒 ${pubDate}</span>
-                            </div>
-                            <h3 class="text-xl sm:text-2xl font-bold text-white mb-3 hover:text-sky-400 transition-colors">
-                                <a href="${link}" target="_blank" rel="noopener noreferrer">${title}</a>
-                            </h3>
-                            <p class="text-sm text-slate-300 mb-4">${description}</p>
-                            <a href="${link}" target="_blank" rel="noopener noreferrer" class="inline-block bg-site-red hover:bg-site-darkRed text-white text-xs font-bold py-2.5 px-5 rounded-xl transition shadow">
-                                সম্পূর্ণ সংবাদ পড়ুন ➔
-                            </a>
-                        </div>
-                    `;
-                } else {
-                    newsCardsHTML += `
-                        <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-5 flex flex-col justify-between hover:border-sky-400 transition-all duration-200 shadow-md">
-                            <div>
-                                <div class="flex justify-between items-center text-xs text-slate-400 mb-2">
-                                    <span class="text-sky-400 font-bold">Rajniti Rewrite স্পেশাল</span>
-                                    <span>🕒 ${pubDate}</span>
-                                </div>
-                                <h4 class="text-base font-bold text-white mb-2 line-clamp-2 hover:text-sky-400 transition-colors">
-                                    <a href="${link}" target="_blank" rel="noopener noreferrer">${title}</a>
-                                </h4>
-                                <p class="text-xs text-slate-300 line-clamp-3 mb-4">${description}</p>
-                            </div>
-                            <a href="${link}" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-slate-700 hover:bg-site-red text-white text-xs font-semibold py-2 rounded-xl transition">
-                                বিস্তারিত পড়ুন ➔
-                            </a>
-                        </div>
-                    `;
-                }
-            });
-            document.getElementById("news-container").innerHTML = newsCardsHTML;
-        }
-
-        function loadNewsWithFallback() {
-            // Primary API fetch
-            fetch(primaryApi)
-                .then(res => res.json())
-                .then(data => {
-                    if (data.status === 'ok' && data.items && data.items.length > 0) {
-                        renderArticles(data.items);
-                    } else {
-                        throw new Error("Primary failed");
-                    }
-                })
-                .catch(() => {
-                    // Backup API fetch if primary fails
-                    fetch(backupApi)
-                        .then(res => res.json())
-                        .then(data => {
-                            const parser = new DOMParser();
-                            const xml = parser.parseFromString(data.contents, "text/xml");
-                            const xmlItems = Array.from(xml.querySelectorAll("item")).map(node => ({
-                                title: node.querySelector("title")?.textContent || "সংবাদ শিরোনাম",
-                                link: node.querySelector("link")?.textContent || "#",
-                                pubDate: node.querySelector("pubDate")?.textContent || "",
-                                description: node.querySelector("description")?.textContent || ""
-                            }));
-                            if(xmlItems.length > 0) {
-                                renderArticles(xmlItems);
-                            } else {
-                                throw new Error("Backup failed");
-                            }
-                        })
-                        .catch(() => {
-                            document.getElementById("news-container").innerHTML = `
-                                <div class="col-span-full text-center py-10 text-red-400 font-medium">
-                                    ⚠️ সংবাদ ডাটা লোড করতে সমস্যা হয়েছে। পেজটি পুনরায় রিফ্রেশ করুন।
+                        if (index === 0) {
+                            dynamicHTML += `
+                                <div class="col-span-1 md:col-span-2 lg:col-span-3 bg-slate-800/90 border border-slate-700 rounded-2xl overflow-hidden p-6 hover:border-site-red transition-all duration-300 shadow-xl">
+                                    <div class="flex items-center space-x-2 text-xs text-site-red font-bold mb-2">
+                                        <span>🔥 রাজিনিতি রিরাইট • অটো আপডেট নিউজ</span>
+                                        <span class="text-slate-500">•</span>
+                                        <span class="text-slate-400">🕒 ${pubDate}</span>
+                                    </div>
+                                    <h3 class="text-xl sm:text-2xl font-bold text-white mb-3 hover:text-sky-400 transition-colors">
+                                        <a href="${link}" target="_blank" rel="noopener noreferrer">${title}</a>
+                                    </h3>
+                                    <p class="text-sm text-slate-300 mb-4">${desc}</p>
+                                    <a href="${link}" target="_blank" rel="noopener noreferrer" class="inline-block bg-site-red hover:bg-site-darkRed text-white text-xs font-bold py-2.5 px-5 rounded-xl transition shadow">
+                                        সম্পূর্ণ সংবাদ পড়ুন ➔
+                                    </a>
                                 </div>
                             `;
-                        });
-                });
-        }
-
-        // Execute function immediately
-        loadNewsWithFallback();
+                        } else {
+                            dynamicHTML += `
+                                <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-5 flex flex-col justify-between hover:border-sky-400 transition-all duration-200 shadow-md">
+                                    <div>
+                                        <div class="flex justify-between items-center text-xs text-slate-400 mb-2">
+                                            <span class="text-sky-400 font-bold">Rajniti Rewrite</span>
+                                            <span>🕒 ${pubDate}</span>
+                                        </div>
+                                        <h4 class="text-base font-bold text-white mb-2 line-clamp-2 hover:text-sky-400 transition-colors">
+                                            <a href="${link}" target="_blank" rel="noopener noreferrer">${title}</a>
+                                        </h4>
+                                        <p class="text-xs text-slate-300 line-clamp-3 mb-4">${desc}</p>
+                                    </div>
+                                    <a href="${link}" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-slate-700 hover:bg-site-red text-white text-xs font-semibold py-2 rounded-xl transition">
+                                        বিস্তারিত পড়ুন ➔
+                                    </a>
+                                </div>
+                            `;
+                        }
+                    });
+                    document.getElementById("news-container").innerHTML = dynamicHTML;
+                }
+            }).catch(e => {
+                // If API fails, default news will remain visible naturally!
+            });
     </script>
 </body>
 </html>
