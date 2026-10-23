@@ -64,7 +64,370 @@ h2.sec{font-size:21px;border-left:5px solid var(--brand);padding-left:10px;margi
 .art .body p{font-size:18px;line-height:1.8;margin:0 0 16px;color:var(--text)}
 .bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
 
-/* অ্যাডমিন প্যানেলের স্টাইল */
+/* অ্যাডমিন প্যানেলের পপ-আপ স্টাইল */
 #adm{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;overflow:auto;z-index:100;padding:20px 12px}
 #adm.on{display:flex}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;width:100%;max-width:650px;padding:24px;box
+.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;width:100%;max-width:650px;padding:24px;box-shadow:0 10px 25px rgba(0,0,0,0.3)}
+.panel h2{margin:0 0 16px;font-size:22px}
+.panel label{display:block;font-weight:600;font-size:14px;margin:12px 0 4px}
+.panel input,.panel select,.panel textarea{width:100%;background:var(--inp);color:var(--text);border:1px solid var(--line);border-radius:6px;padding:10px;font:inherit}
+.panel textarea{min-height:160px;resize:vertical}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.prev-img{max-width:150px;max-height:100px;border-radius:6px;margin-top:8px;object-fit:cover;display:block}
+
+footer{background:var(--navy);color:#b9c5d6;padding:26px 0;text-align:center;font-size:13px}
+.flinks{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin-bottom:12px}
+.flinks a{color:#dfe6f0;font-weight:600}.flinks a:hover{color:#fff;text-decoration:underline}
+@media(max-width:760px){.lead{grid-template-columns:1fr}.big h2{font-size:22px}.art h1{font-size:24px}.wm{font-size:20px}.topline .wrap span:last-child{display:none}.side .card{grid-template-columns:100px 1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="topline"><div class="wrap"><span id="date"></span><span>সত্য • নিরপেক্ষ • সময়োপযোগী</span></div></div>
+  <div class="wrap top">
+    <div class="brand" id="home" title="প্রচ্ছদ">
+      <svg width="52" height="52" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="10" fill="#0b1f3a"/><polygon points="0,40 48,28 48,34 0,46" fill="#c8102e"/><text x="24" y="28" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="27" fill="#fff">R</text></svg>
+      <div><div class="wm">RAJNITI <b>REWRITE</b></div><span class="tg">রাজনীতি রিরাইট • প্রগতির নতুন বয়ান</span></div>
+    </div>
+    <div>
+      <button class="btn" id="btn-new">＋ নতুন খবর লিখুন</button>
+    </div>
+  </div>
+  <nav><div class="wrap" id="tabs"></div></nav>
+</header>
+
+<div class="ticker"><div class="wrap"><b>সর্বশেষ</b><span id="tick">খবর লোড হচ্ছে...</span></div></div>
+<main class="wrap" id="app"></main>
+
+<footer>
+  <div class="wrap">
+    <div class="flinks"><a href="#about">আমাদের সম্পর্কে</a><a href="#contact">যোগাযোগ</a><a href="#advertise">বিজ্ঞাপন দিন</a><a href="#policy">সম্পাদকীয় নীতি</a><a href="#privacy">গোপনীয়তা নীতি</a></div>
+    <strong>Rajniti Rewrite</strong> — প্রগতির নতুন বয়ান<br>© ২০২৬ Rajniti Rewrite. সর্বস্বত্ব সংরক্ষিত।
+  </div>
+</footer>
+
+<!-- খবর পোস্ট করার পপ-আপ ফর্ম -->
+<div id="adm">
+  <div class="panel">
+    <h2 id="form-title">নতুন খবর যুক্ত করুন</h2>
+    <label>শিরোনাম *</label>
+    <input id="f-title" placeholder="খবরের শিরোনাম লিখুন">
+    
+    <label>বিভাগ</label>
+    <select id="f-cat"></select>
+    
+    <label>সংক্ষিপ্ত বিবরণ (১-২ বাক্য)</label>
+    <input id="f-sum" placeholder="সংক্ষিপ্ত সারসংক্ষেপ">
+    
+    <label>বিস্তারিত খবর * (নতুন অনুচ্ছেদের জন্য Enter চাপুন)</label>
+    <textarea id="f-body" placeholder="বিস্তারিত খবর এখানে লিখুন..."></textarea>
+    
+    <label>ছবি (Upload Image)</label>
+    <input type="file" id="f-img" accept="image/*">
+    <div id="img-pv"></div>
+
+    <div class="row">
+      <button class="btn" id="btn-save">প্রকাশ করুন</button>
+      <button class="btn alt" id="btn-cancel">বাতিল</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var CATS=['বাংলাদেশ','বিশ্ব','রাজনীতি','অর্থনীতি','খেলা','প্রযুক্তি','বিনোদন','মতামত'];
+
+// সকল ক্যাটেগরির জন্য খবর প্রিলোড করা হলো
+var defaultPosts = [
+  {
+    id: "p1",
+    title: "রাজনীতি রিরাইট-এর আনুষ্ঠানিক যাত্রা শুরু হলো",
+    cat: "রাজনীতি",
+    img: "https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?w=800&auto=format&fit=crop",
+    sum: "প্রগতির নতুন বয়ান নিয়ে আনুষ্ঠানিকভাবে আত্মপ্রকাশ করল সংবাদ ও বিশ্লেষণমূলক পোর্টাল রাজনীতি রিরাইট।",
+    body: "আজ থেকে আনুষ্ঠানিকভাবে পথচলা শুরু করল রাজনীতি রিরাইট। দেশের সমসাময়িক রাজনীতি, অর্থনীতি এবং আন্তর্জাতিক নানা বিশ্লেষণ পাঠকদের সামনে নিরপেক্ষভাবে তুলে ধরতে আমরা প্রতিশ্রুতিবদ্ধ।\n\nআমাদের মূল লক্ষ্য সত্য ও বস্তুনিষ্ঠ সংবাদ পরিবেশন করা। কোনো রাজনৈতিক দল বা গোষ্ঠীর পক্ষপাতিত্ব ছাড়াই সঠিক তথ্য ও নিরপেক্ষ বিশ্লেষণ জনগণের দোরগোড়ায় পৌঁছে দিতে আমাদের এই প্রচেষ্টা অব্যাহত থাকবে।",
+    by: "Rajniti Rewrite ডেস্ক",
+    ts: Date.now()
+  },
+  {
+    id: "p2",
+    title: "দেশের অর্থনীতিতে নতুন গতি আনতে নেওয়া হচ্ছে নানা পদক্ষেপ",
+    cat: "অর্থনীতি",
+    img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&auto=format&fit=crop",
+    sum: "মূল্যস্ফীতি নিয়ন্ত্রণ এবং বৈদেশিক মুদ্রার রিজার্ভ স্থিতিশীল রাখতে নতুন কৌশল অবলম্বন করছে অর্থ মন্ত্রণালয়।",
+    body: "দেশের চলমান অর্থনৈতিক পরিস্থিতি মোকাবেলায় বাণিজ্য ও ব্যাংক খাতের প্রতিনিধিদের সাথে একাধিক বৈঠক করেছেন নীতিনির্ধারকরা।\n\nবৈদেশিক বিনিয়োগ বৃদ্ধির পাশাপাশি রপ্তানি খাতকে আরও গতিশীল করার ওপর গুরুত্ব দেওয়া হচ্ছে। অর্থনৈতিক বিশ্লেষকরা বলছেন, সমন্বিত উদ্যোগ নিলে আগামী কয়েক মাসের মধ্যেই মুদ্রাস্ফীতি নিয়ন্ত্রণে আনা সম্ভব হবে।",
+    by: "অর্থনীতি ডেস্ক",
+    ts: Date.now() - 3600000
+  },
+  {
+    id: "p3",
+    title: "প্রযুক্তির উৎকর্ষে এআই এখন মানুষের প্রাত্যহিক জীবনের অংশ",
+    cat: "প্রযুক্তি",
+    img: "https://images.unsplash.com/photo-1677442136019-21780efad99a?w=800&auto=format&fit=crop",
+    sum: "দৈনন্দিন কাজকর্মে কৃত্রিম বুদ্ধিমত্তা বা আর্টিফিশিয়াল ইন্টেলিজেন্সের ব্যবহার বিশ্বজুড়ে দ্রুত বাড়ছে।",
+    body: "বিশ্বজুড়ে প্রযুক্তি খাতে এআই প্রযুক্তির অভূতপূর্ব বিপ্লব সাধিত হয়েছে। কোডিং থেকে শুরু করে সাহিত্য চর্চা, ডিজাইন ও চিকিৎসার ক্ষেত্রেও এর ব্যাপক ব্যবহার হচ্ছে।\n\nবিশেষজ্ঞরা বলছেন, কৃত্রিম বুদ্ধিমত্তার যথাযথ ব্যবহার কর্মদক্ষতা বহুলাংশে বাড়িয়ে দেয়। তবে এর সঠিক নিয়মনীতি মেনে চলাও সমানভাবে জরুরী।",
+    by: "প্রযুক্তি ডেস্ক",
+    ts: Date.now() - 7200000
+  },
+  {
+    id: "p4",
+    title: "ক্রিকেট মাঠে নতুন রোমাঞ্চকর লড়াইয়ের প্রস্তুতি",
+    cat: "খেলা",
+    img: "https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=800&auto=format&fit=crop",
+    sum: "আসন্ন দ্বিপাক্ষিক সিরিজকে সামনে রেখে মিরপুর শেরে বাংলা স্টেডিয়ামে কঠোর অনুশীলন করছে জাতীয় দল।",
+    body: "ঘরের মাঠে পরবর্তী সিরিজ জয়কে লক্ষ্য রেখে পুরোদমে অনুশীলন শুরু করেছে টাইগাররা। অনুশীলনে ফিটনেস ও ফিল্ডিংয়ের ওপর বাড়তি জোর দেওয়া হচ্ছে।\n\nদলের প্রধান কোচ জানান, খেলোয়াড়রা মানসিকভাবে বেশ চাঙ্গা রয়েছে। ঘরের মাঠের কন্ডিশন কাজে লাগিয়ে জয় ছিনিয়ে আনাই প্রধান লক্ষ্য।",
+    by: "খেলাধুলা ডেস্ক",
+    ts: Date.now() - 10800000
+  },
+  {
+    id: "p5",
+    title: "বিশ্ব রাজনীতিতে নতুন মেরুকরণ ও কূটনৈতিক তৎপরতা",
+    cat: "বিশ্ব",
+    img: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800&auto=format&fit=crop",
+    sum: "আন্তর্জাতিক বিভিন্ন সংকট নিরসনে বিশ্বনেতারা নতুন কূটনৈতিক আলোচনার পথ খুঁজছেন।",
+    body: "বিশ্বজুড়ে অর্থনৈতিক ও ভৌগোলিক প্রভাব বিস্তারে পরাশক্তিগুলোর মধ্যে প্রতিযোগিতা নতুন রূপ নিয়েছে। আন্তর্জাতিক সংঘাত এড়াতে শান্তি আলোচনার আহ্বান জানিয়েছে জাতিসংঘ।\n\nবিভিন্ন দেশের রাষ্ট্রপ্রধানদের উপস্থিতিতে উচ্চপর্যায়ের বৈঠক অনুষ্ঠিত হতে যাচ্ছে বলে কূটনৈতিক সূত্রে জানা গেছে।",
+    by: "আন্তর্জাতিক ডেস্ক",
+    ts: Date.now() - 14400000
+  },
+  {
+    id: "p6",
+    title: "সংস্কৃতি ও বিনোদন অঙ্গনে নতুন কাজের জোয়ার",
+    cat: "বিনোদন",
+    img: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&auto=format&fit=crop",
+    sum: "সিনেমা হল এবং ডিজিটাল প্ল্যাটফর্মে মুক্তি পেতে যাচ্ছে বেশ কিছু নতুন চলচ্চিত্র ও নাটক।",
+    body: "দেশের বিনোদন অঙ্গনে এখন উৎসব মুখর পরিবেশ। মানসম্মত চিত্রনাট্য ও নির্মাণশৈলীর কারণে তরুণ দর্শকরা আবারো হলমুখী হচ্ছেন।\n\nএকই সাথে ওটিটি প্ল্যাটফর্মগুলোতেও দেশীয় নির্মাতাদের নতুন নতুন কাজ প্রশংসা কুড়াচ্ছে।",
+    by: "বিনোদন ডেস্ক",
+    ts: Date.now() - 18000000
+  },
+  {
+    id: "p7",
+    title: "বাংলাদেশ ও ঢাকার সমসাময়িক উন্নয়ন চিত্র",
+    cat: "বাংলাদেশ",
+    img: "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=800&auto=format&fit=crop",
+    sum: "রাজধানীর সড়ক ব্যবস্থাপনা ও নগর সুবিধা উন্নত করতে বেশ কিছু নতুন প্রকল্প চালু করা হচ্ছে।",
+    body: "যানজট নিরসন ও নাগরিক সেবা সহজ করতে সমন্বিত পরিকল্পনা বাস্তবায়নের উদ্যোগ নেওয়া হয়েছে। পথচারীদের চলাচলের সুবিধার্থে নতুন ফুটওভার ব্রিজ ও ট্রাফিক সিগন্যাল ব্যবস্থার আধুনিকায়ন করা হচ্ছে।\n\nসংক্রান্ত তদারকি কমিটি আশা প্রকাশ করছে খুব শীঘ্রই ঢাকাবাসী এর সুফল পাবেন।",
+    by: "বাংলাদেশ ডেস্ক",
+    ts: Date.now() - 21600000
+  },
+  {
+    id: "p8",
+    title: "বিশ্লেষণ: আগামী দিনের রাজনৈতিক ভাবনা ও তরুণ সমাজ",
+    cat: "মতামত",
+    img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&auto=format&fit=crop",
+    sum: "দেশের রাজনীতিতে তরুণ প্রজন্মের সক্রিয়তা ও তাদের ভাবনার জায়গা নিয়ে বিশেষ কলাম।",
+    body: "বর্তমান সময়ে তরুণরা শুধু রাজনীতির নিষ্ক্রিয় দর্শক নয়, বরং তারা সংস্কার ও পরিবর্তনের পক্ষে সোচ্চার। স্বচ্ছতা, জবাবদিহিতা এবং মেধার মূল্যায়নই তাদের মূল দাবি।\n\nভবিষ্যতের সমৃদ্ধ বাংলাদেশ গঠনে তরুণদের গঠনমূলক দৃষ্টিভঙ্গি অত্যন্ত গুরুত্বপূর্ণ ভূমিকা পালন করবে।",
+    by: "বিশেষ কলামিস্ট",
+    ts: Date.now() - 25000000
+  }
+];
+
+var posts = [];
+try {
+  var saved = localStorage.getItem('rr_posts_v2');
+  if(saved){
+    posts = JSON.parse(saved);
+  } else {
+    posts = defaultPosts;
+  }
+} catch(e) {
+  posts = defaultPosts;
+}
+
+if(!posts || !posts.length) {
+  posts = defaultPosts;
+}
+
+var cur = '';
+var editingId = null;
+var tempImg = '';
+var $=function(i){return document.getElementById(i)};
+
+function esc(s){var d=document.createElement('div');d.textContent=s==null?'':String(s);return d.innerHTML}
+function fmt(ts){try{return new Date(ts).toLocaleString('bn-BD',{dateStyle:'medium',timeStyle:'short'})}catch(e){return ''}}
+
+$('date').textContent = new Date().toLocaleDateString('bn-BD',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+// ড্রপডাউন ক্যাটেগরি নির্বাচন
+$('f-cat').innerHTML = CATS.map(function(c){ return '<option value="'+c+'">'+c+'</option>'; }).join('');
+
+function tabs(){
+  var html = '<button data-c="" class="'+(cur===''?'on':'')+'">প্রচ্ছদ</button>';
+  html += CATS.map(function(c){
+    return '<button data-c="'+esc(c)+'" class="'+(c===cur?'on':'')+'">'+esc(c)+'</button>';
+  }).join('');
+  $('tabs').innerHTML = html;
+}
+
+$('tabs').onclick = function(e){
+  var b = e.target.closest('button');
+  if(!b) return;
+  cur = b.dataset.c;
+  location.hash = '';
+  tabs();
+  render();
+};
+
+$('home').onclick = function(){
+  cur = '';
+  location.hash = '';
+  tabs();
+  render();
+};
+
+function pic(p){
+  if(p.img){
+    return '<div class="pic"><img src="'+esc(p.img)+'" alt="'+esc(p.title)+'" loading="lazy"></div>';
+  }
+  return '<div class="pic">R</div>';
+}
+
+function card(p, k){
+  var lk = 'href="#'+p.id+'"';
+  if(k === 'side'){
+    return '<a class="card" '+lk+'>'+pic(p)+'<div class="pad"><span class="tag">'+esc(p.cat)+'</span><h3>'+esc(p.title)+'</h3><span class="meta">'+fmt(p.ts)+'</span></div></a>';
+  }
+  return '<a class="card" '+lk+'>'+pic(p)+'<div class="pad"><span class="tag">'+esc(p.cat)+'</span><h3>'+esc(p.title)+'</h3><p>'+esc((p.sum||'').slice(0,90))+'...</p><span class="meta">'+fmt(p.ts)+'</span></div></a>';
+}
+
+function render(){
+  var id = location.hash.slice(1);
+  var p = id && posts.find(function(x){return x.id === id});
+
+  window.scrollTo(0,0);
+  $('tick').textContent = posts.length ? posts.map(function(x){return x.title}).join('   •   ') : 'কোনো খবর নেই';
+
+  // সিঙ্গেল পোস্ট দেখার অংশ
+  if(p){
+    document.title = p.title + ' | Rajniti Rewrite';
+    $('app').innerHTML = '<article class="art">' +
+      '<div class="bar">' +
+        '<button class="btn alt sm" id="back">← প্রচ্ছদ</button>' +
+        '<button class="btn sm" id="btn-edit" style="margin-left:8px;">সম্পাদনা করুন</button>' +
+        '<button class="btn alt sm" id="btn-delete" style="margin-left:8px;color:red;border-color:red;">মুছে ফেলুন</button>' +
+      '</div>' +
+      '<span class="tag">'+esc(p.cat)+'</span>' +
+      '<h1>'+esc(p.title)+'</h1>' +
+      '<div class="meta">'+esc(p.by||'Rajniti Rewrite ডেস্ক')+' • '+fmt(p.ts)+'</div>' +
+      (p.img ? '<img class="main-img" src="'+esc(p.img)+'" alt="'+esc(p.title)+'">' : '') +
+      (p.sum ? '<div class="sum">'+esc(p.sum)+'</div>' : '') +
+      '<div class="body">'+String(p.body||'').split(/\n+/).map(function(t){return '<p>'+esc(t)+'</p>'}).join('')+'</div>' +
+      '</article>';
+    
+    $('back').onclick = function(){ location.hash = ''; };
+    $('btn-edit').onclick = function(){ openForm(p); };
+    $('btn-delete').onclick = function(){
+      if(confirm('আপনি কি এই খবরটি মুছে ফেলতে চান?')){
+        posts = posts.filter(function(x){return x.id !== p.id});
+        savePosts();
+        location.hash = '';
+        render();
+      }
+    };
+    return;
+  }
+
+  // প্রচ্ছদ ও ক্যাটেগরি অনুযায়ী খবর দেখানো
+  var list = cur ? posts.filter(function(x){return x.cat === cur}) : posts;
+
+  if(!list.length){
+    $('app').innerHTML = '<div class="empty"><h2>"'+esc(cur||'প্রচ্ছদ')+'" বিভাগে কোনো খবর পাওয়া যায়নি</h2><p>নতুন খবর লিখতে ওপরে "＋ নতুন খবর লিখুন" বাটনে চাপ দিন।</p></div>';
+    return;
+  }
+
+  var l = list[0], s = list.slice(1,4), g = list.slice(4);
+  var html = '<section class="lead"><a class="card big" href="#'+l.id+'">'+pic(l)+'<div class="pad"><span class="tag">'+esc(l.cat)+'</span><h2>'+esc(l.title)+'</h2><p>'+esc(l.sum)+'</p><span class="meta">'+fmt(l.ts)+'</span></div></a>';
+  
+  if(s.length > 0){
+    html += '<div class="side">'+s.map(function(x){return card(x,'side')}).join('')+'</div>';
+  }
+  html += '</section>';
+
+  if(g.length > 0){
+    html += '<h2 class="sec">আরও খবর</h2><section class="grid">'+g.map(function(x){return card(x)}).join('')+'</section>';
+  }
+
+  $('app').innerHTML = html;
+}
+
+// লোকাল স্টোরেজে পোস্ট সংরক্ষণ করা
+function savePosts(){
+  posts.sort(function(a,b){ return b.ts - a.ts; });
+  try {
+    localStorage.setItem('rr_posts_v2', JSON.stringify(posts));
+  } catch(e) {}
+}
+
+// ফরম ওপেন করার ফাংশন
+function openForm(p){
+  editingId = p ? p.id : null;
+  $('form-title').textContent = p ? 'খবর সম্পাদনা করুন' : 'নতুন খবর যুক্ত করুন';
+  $('f-title').value = p ? p.title : '';
+  $('f-cat').value = p ? p.cat : 'বাংলাদেশ';
+  $('f-sum').value = p ? p.sum : '';
+  $('f-body').value = p ? p.body : '';
+  tempImg = p ? (p.img || '') : '';
+  $('img-pv').innerHTML = tempImg ? '<img src="'+tempImg+'" class="prev-img">' : '';
+  $('f-img').value = '';
+  $('adm').className = 'on';
+}
+
+// ইমেজ আপলোড প্রিভিউ
+$('f-img').onchange = function(e){
+  var file = e.target.files[0];
+  if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(evt){
+    tempImg = evt.target.result;
+    $('img-pv').innerHTML = '<img src="'+tempImg+'" class="prev-img">';
+  };
+  reader.readAsDataURL(file);
+};
+
+// সেভ বাটন লজিক
+$('btn-save').onclick = function(){
+  var title = $('f-title').value.trim();
+  var body = $('f-body').value.trim();
+  
+  if(!title || !body){
+    alert('অনুগ্রহ করে শিরোনাম এবং বিস্তারিত খবর লিখুন!');
+    return;
+  }
+
+  if(editingId){
+    var item = posts.find(function(x){return x.id === editingId});
+    if(item){
+      item.title = title;
+      item.cat = $('f-cat').value;
+      item.sum = $('f-sum').value.trim();
+      item.body = body;
+      item.img = tempImg;
+    }
+  } else {
+    var newPost = {
+      id: "n" + Date.now(),
+      title: title,
+      cat: $('f-cat').value,
+      sum: $('f-sum').value.trim(),
+      body: body,
+      img: tempImg,
+      by: "Rajniti Rewrite ডেস্ক",
+      ts: Date.now()
+    };
+    posts.unshift(newPost);
+  }
+
+  savePosts();
+  $('adm').className = '';
+  render();
+};
+
+$('btn-new').onclick = function(){ openForm(null); };
+$('btn-cancel').onclick = function(){ $('adm').className = ''; };
+
+window.onhashchange = render;
+
+// পেজ ইনিশিয়ালাইজ করা
+tabs();
+render();
+</script>
+</body>
+</html>
