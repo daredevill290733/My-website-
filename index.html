@@ -104,14 +104,28 @@ footer strong{color:#fff}
 <footer><div class="wrap"><div class="flinks"><a href="#about">আমাদের সম্পর্কে</a><a href="#contact">যোগাযোগ</a><a href="#advertise">বিজ্ঞাপন দিন</a><a href="#policy">সম্পাদকীয় নীতি</a><a href="#privacy">গোপনীয়তা নীতি</a></div><strong>Rajniti Rewrite</strong> — প্রগতির নতুন বয়ান<br>© ২০২৬ Rajniti Rewrite. সর্বস্বত্ব সংরক্ষিত। design by Ibrahim Ali</div></footer>
 <div id="adm"></div>
 
-<script type="application/json" id="posts-data">[]</script>
+<!-- পোস্টের ডিফল্ট ডেটা যোগ করা হলো -->
+<script type="application/json" id="posts-data">
+[
+  {
+    "id": "p1",
+    "title": "রাজনীতি রিরাইট ডটকমের আনুষ্ঠানিক যাত্রা শুরু",
+    "cat": "রাজনীতি",
+    "sum": "সত্য, নিরপেক্ষ ও বস্তুনিষ্ঠ সাংবাদিকতার নতুন অঙ্গীকার নিয়ে পথচলা শুরু করল রাজনীতি রিরাইট।",
+    "body": "আজ থেকে আনুষ্ঠানিকভাবে পথচলা শুরু করল রাজনীতি রিরাইট। আমাদের লক্ষ্য দেশ ও বিশ্বের সর্বশেষ সংবাদ বস্তুনিষ্ঠভাবে পাঠকদের কাছে পৌঁছে দেওয়া।\nআমরা কোনো নির্দিষ্ট রাজনৈতিক দল বা গোষ্ঠীর মতাদর্শের প্রতিনিধিত্ব করি না। নিরপেক্ষ বিশ্লেষণই আমাদের মূল শক্তি।",
+    "by": "Rajniti Rewrite ডেস্ক",
+    "ts": 1776940000000
+  }
+]
+</script>
+
 <script>
-var CATS=['বাংলাদেশ','বিশ্ব','রাজনীতি','অর্থনীতি','খেলা','প্রযুক্তিমাত','বিনোদন','মতামত'];
+// ১. ক্যাটেগরির বানান ঠিক করা হয়েছে ('প্রযুক্তিমাত' থেকে 'প্রযুক্তি')
+var CATS=['বাংলাদেশ','বিশ্ব','রাজনীতি','অর্থনীতি','খেলা','প্রযুক্তি','বিনোদন','মতামত'];
 var posts=[];try{posts=JSON.parse(document.getElementById('posts-data').textContent)||[]}catch(e){}
 posts.sort(function(a,b){return b.ts-a.ts});
 var cur='',U=null,editing=null,img='',busy=false;
 
-var FEEDS=[{n:'BBC বাংলা',u:'https://feeds.bbci.co.uk/bengali/rss.xml',c:''},{n:'BBC News',u:'https://feeds.bbci.co.uk/news/world/rss.xml',c:'বিশ্ব'},{n:'প্রথম আলো',u:'https://www.prothomalo.com/feed',c:'বাংলাদেশ'}];
 var KW={'বাংলাদেশ':/বাংলাদেশ|ঢাকা|Bangladesh|Dhaka/i,'রাজনীতি':/রাজনীতি|নির্বাচন|সরকার|Politic|election/i,'অর্থনীতি':/অর্থনীতি|ব্যাংক|বাণিজ্য|Econom|market|bank/i,'খেলা':/খেলা|ক্রিকেট|ফুটবল|Sport|cricket|football/i,'প্রযুক্তি':/প্রযুক্তি|এআই|Tech/i,'বিনোদন':/বিনোদন|সিনেমা|চলচ্চিত্র|Film|music/i};
 var auto=[];try{auto=JSON.parse(localStorage.getItem('rr-auto')||'[]')}catch(e){}
 
@@ -145,11 +159,11 @@ var SITE={email:'',phone:'',fb:'https://www.facebook.com/share/19vxXVParB/'};
 function contactHtml(){return '<ul>'+(SITE.email?'<li>ইমেইল: <a href="mailto:'+esc(SITE.email)+'">'+esc(SITE.email)+'</a></li>':'')+(SITE.phone?'<li>ফোন: '+esc(SITE.phone)+'</li>':'')+'<li>ফেসবুক পেজ: <a href="'+esc(SITE.fb)+'" target="_blank" rel="noopener noreferrer">Rajniti Rewrite</a></li></ul>'}
 
 var PAGES={
- about:['আমাদের সম্পর্কে','<p>Rajniti Rewrite একটি বাংলা অনলাইন সংবাদ ও বিশ্লেষণ প্ল্যাটফর্ম। আমাদের স্লোগান — প্রগতির নতুন বয়ান।</p><p>আমরা বাংলাদেশ ও বিশ্বের রাজনীতি, অর্থনীতি, খেলা, প্রযুক্তি ও বিনোদনের খবর এক জায়গায় পাঠকের কাছে পৌঁছে দিতে চাই।</p><h2>আমাদের অঙ্গীকার</h2><p>তথ্যের নির্ভুলতা, নিরপেক্ষতা ও পাঠকের প্রতি দায়বদ্ধতা।</p>'],
- contact:['যোগাযোগ','<p>খবর পাঠাতে, মতামত জানাতে বা ভুল সংশোধনের অনুরোধ করতে আমাদের সঙ্গে যোগাযোগ করুন।</p>'+contactHtml()],
- advertise:['বিজ্ঞাপন দিন','<p>Rajniti Rewrite-এ আপনার ব্যবসার বিজ্ঞাপন দিয়ে বাংলা পাঠকদের কাছে পৌঁছান।</p><h2>আমরা যা দিতে পারি</h2><ul><li>ব্যানার বিজ্ঞাপন</li><li>স্পনসর্ড পোস্ট</li><li>ফেসবুক পেজে প্রচার</li></ul><p>রেট ও বিস্তারিত জানতে যোগাযোগ করুন:</p>'+contactHtml()],
- policy:['সম্পাদকীয় নীতি','<p>আমরা তথ্য যাচাই করে খবর প্রকাশ করতে চেষ্টা করি। ভুল ধরা পড়লে দ্রুত সংশোধন করা হয়।</p>'],
- privacy:['গোপনীয়তা নীতি','<p>এই ওয়েবসাইট পাঠকের নাম, ফোন বা ইমেইলের মতো ব্যক্তিগত তথ্য নিজে থেকে সংগ্রহ করে না।</p>']
+ about:['আমাদের সম্পর্কে','<p>Rajniti Rewrite একটি বাংলা অনলাইন সংবাদ ও বিশ্লেষণ প্ল্যাটফর্ম। আমাদের স্লোগান — প্রগতির নতুন বয়ান।</p>'],
+ contact:['যোগাযোগ','<p>খবর পাঠাতে আমাদের সঙ্গে যোগাযোগ করুন।</p>'+contactHtml()],
+ advertise:['বিজ্ঞাপন দিন','<p>বিজ্ঞাপনের জন্য যোগাযোগ করুন:</p>'+contactHtml()],
+ policy:['সম্পাদকীয় নীতি','<p>আমরা তথ্য যাচাই করে খবর প্রকাশ করি।</p>'],
+ privacy:['গোপনীয়তা নীতি','<p>এই ওয়েবসাইট ব্যক্তিগত তথ্য সংগ্রহ করে না।</p>']
 };
 
 function adBox(){return '<a class="ad" href="#advertise">বিজ্ঞাপন — আপনার ব্যবসার বিজ্ঞাপন এখানে দিন</a>'}
@@ -209,7 +223,7 @@ function openEd(p){
   '<label>সংক্ষিপ্ত বিবরণ (ঐচ্ছিক)</label><input id="f-s" value="'+esc(p?p.sum:'')+'">'+
   '<label>বিস্তারিত খবর (প্রতিটি অনুচ্ছেদ নতুন লাইনে)</label><textarea id="f-b">'+esc(p?p.body:'')+'</textarea>'+
   '<label>ছবি (ঐচ্ছিক)</label><input type="file" id="f-i" accept="image/*"><div id="pv">'+(img?'<img class="prev" alt="" src="/_blob/'+esc(img)+'">':'')+'</div>'+
-  '<div class="row"><button class="btn" id="sv">প্রকাশ করুন</button><button class="btn alt" id="ai">তথ্য দিয়ে Claude-কে দিয়ে সাজান</button>'+(p?'<button class="btn alt" id="dl">মুছুন</button>':'')+'<button class="btn alt" id="cl">বাতিল</button></div><div class="msg" id="mg">নিজের সংগ্রহ করা তথ্য বিস্তারিত ঘরে লিখে “Claude-কে দিয়ে সাজান” চাপলে মৌলিক ভাষায় সংবাদ আকারে সাজিয়ে দেবে।</div></div>';
+  '<div class="row"><button class="btn" id="sv">প্রকাশ করুন</button><button class="btn alt" id="ai">তথ্য দিয়ে Claude-কে দিয়ে সাজান</button>'+(p?'<button class="btn alt" id="dl">মুছুন</button>':'')+'<button class="btn alt" id="cl">বাতিল</button></div><div class="msg" id="mg">নিজের সংগ্রহ করা তথ্য বিস্তারিত ঘরে লিখে “Claude-কে দিয়ে সাজান” চাপলে সংবাদ আকারে সাজিয়ে দেবে।</div></div>';
   $('adm').className='on';
   $('cl').onclick=function(){$('adm').className=''};
   $('sv').onclick=save;
@@ -241,8 +255,8 @@ async function aiDraft(){
   var S=await cap('sample');if(!S){msg('এই সুবিধাটি এম্বিডেড পরিবেশে কাজ করে।');return}
   msg('সাজানো হচ্ছে…');
   try{
-    var r=await S.json('তুমি একজন বাংলা সংবাদ সম্পাদক। নিচের তথ্য থেকে মৌলিক ভাষায় একটি সংবাদ লেখো। শুধু দেওয়া তথ্য ব্যবহার করো, নিজে থেকে কোনো তথ্য, উক্তি বা সংখ্যা যোগ করবে না। শুধু JSON ফেরত দাও: {"title":"...","summary":"১-২ বাক্য","body":"কয়েকটি অনুচ্ছেদ, প্রতিটি নতুন লাইনে"}। তথ্য:\n'+raw);
-    if(r&&r.body){$('f-t').value=r.title||$('f-t').value;$('f-s').value=r.summary||'';$('f-b').value=r.body;msg('সাজানো হয়েছে। প্রকাশের আগে ভালোভাবে পড়ে ঠিক করে নিন।')}else msg('সাজানো যায়নি, আবার চেষ্টা করুন।')
+    var r=await S.json('তুমি একজন বাংলা সংবাদ সম্পাদক। নিচের তথ্য থেকে মৌলিক ভাষায় একটি সংবাদ লেখো। JSON ফেরত দাও: {"title":"...","summary":"১-২ বাক্য","body":"কয়েকটি অনুচ্ছেদ"}। তথ্য:\n'+raw);
+    if(r&&r.body){$('f-t').value=r.title||$('f-t').value;$('f-s').value=r.summary||'';$('f-b').value=r.body;msg('সাজানো হয়েছে।')}else msg('সাজানো যায়নি, আবার চেষ্টা করুন।')
   }catch(e){msg('সাজানো যায়নি।')}
 }
 
