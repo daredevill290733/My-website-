@@ -1,317 +1,236 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rajniti Rewrite | প্রগতির নতুন বয়ান</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        site: {
-                            red: '#e63946',
-                            darkRed: '#b71c1c',
-                            darkBg: '#0f172a',
-                            cardBg: '#1e293b',
-                            accent: '#38bdf8'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Hind Siliguri', 'Inter', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        body {
-            font-family: 'Hind Siliguri', 'Inter', sans-serif;
-            background-color: #0f172a;
-            color: #f8fafc;
-        }
-        @keyframes ticker {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-100%, 0, 0); }
-        }
-        .animate-ticker {
-            display: inline-block;
-            white-space: nowrap;
-            animation: ticker 35s linear infinite;
-        }
-        .animate-ticker:hover {
-            animation-play-state: paused;
-        }
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0f172a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #e63946;
-            border-radius: 3px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rajniti Rewrite | রাজনীতি রিরাইট</title>
+<meta name="description" content="Rajniti Rewrite — বাংলাদেশ ও বিশ্বের রাজনীতি, অর্থনীতি, খেলা ও প্রযুক্তির সর্বশেষ খবর ও বিশ্লেষণ। প্রগতির নতুন বয়ান।">
+<meta name="theme-color" content="#0b1f3a">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rajniti Rewrite | রাজনীতি রিরাইট">
+<meta property="og:description" content="বাংলাদেশ ও বিশ্বের সর্বশেষ খবর ও বিশ্লেষণ — প্রগতির নতুন বয়ান।">
+<style>
+:root{--bg:#f2f3f5;--card:#fff;--text:#14171c;--muted:#656d79;--line:#e1e4e8;--brand:#c8102e;--navy:#0b1f3a;--head:#fff;--inp:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d0f13;--card:#171a20;--text:#eef0f3;--muted:#9aa3b0;--line:#2a2f38;--head:#12151a;--inp:#0d0f13;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0d0f13;--card:#171a20;--text:#eef0f3;--muted:#9aa3b0;--line:#2a2f38;--head:#12151a;--inp:#0d0f13;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Noto Sans Bengali","Nirmala UI","Kalpurush","Siyam Rupali","Segoe UI",system-ui,sans-serif;line-height:1.6}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding:0 16px}
+header{background:var(--head);border-bottom:1px solid var(--line)}
+.topline{background:var(--navy);color:#cfd8e6;font-size:12px}
+.topline .wrap{display:flex;justify-content:space-between;padding:6px 16px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
+.brand{display:flex;align-items:center;gap:12px;cursor:pointer}
+.brand svg{flex:none}
+.wm{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:28px;letter-spacing:1.5px;line-height:1}
+.wm b{color:var(--brand)}
+.tg{display:block;color:var(--muted);font-size:12px;letter-spacing:.3px;margin-top:4px;font-family:inherit;font-weight:400}
+.btn{background:var(--brand);color:#fff;border:0;border-radius:6px;padding:9px 16px;font-weight:600;font-size:14px;cursor:pointer}
+.btn.alt{background:transparent;color:var(--text);border:1px solid var(--line)}
+.btn.sm{padding:6px 12px;font-size:13px}
+nav{background:var(--navy)}
+nav .wrap{display:flex;overflow-x:auto}
+nav button{background:none;border:0;color:#dfe6f0;font-weight:600;font-size:15px;padding:12px 15px;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent}
+nav button.on,nav button:hover{color:#fff;border-bottom-color:var(--brand)}
+.ticker{background:var(--card);border-bottom:1px solid var(--line);font-size:14px}
+.ticker .wrap{display:flex;gap:12px;align-items:center;padding:8px 16px}
+.ticker b{background:var(--brand);color:#fff;padding:1px 10px;border-radius:3px;font-size:12px;white-space:nowrap}
+.ticker span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+main{padding:22px 0 44px;min-height:60vh}
+.lead{display:grid;grid-template-columns:2fr 1fr;gap:18px;margin-bottom:28px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;display:block}
+.pic{aspect-ratio:16/9;background:linear-gradient(135deg,var(--navy),#1b3a66);display:grid;place-items:center;color:#ffffff55;font:700 54px Georgia,serif}
+.pic img{width:100%;height:100%;object-fit:cover;display:block}
+.pad{padding:14px 16px 16px}
+.tag{color:var(--brand);font-weight:700;font-size:13px}
+.meta{color:var(--muted);font-size:12px}
+.big h2{font-size:30px;line-height:1.35;margin:6px 0 8px}
+.big p{color:var(--muted);margin:0 0 10px}
+.side{display:flex;flex-direction:column;gap:14px}
+.side .card{display:grid;grid-template-columns:120px 1fr}
+.side .pic{aspect-ratio:auto;height:100%;font-size:30px}
+.side h3{font-size:16px;line-height:1.4;margin:3px 0}
+h2.sec{font-size:21px;border-left:5px solid var(--brand);padding-left:10px;margin:0 0 16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.grid h3{font-size:18px;line-height:1.45;margin:4px 0 6px}
+.grid p{font-size:14px;color:var(--muted);margin:0 0 8px}
+.card:hover h2,.card:hover h3{color:var(--brand)}
+.empty{text-align:center;padding:60px 16px;color:var(--muted)}
+.art{max-width:800px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:22px}
+.art h1{font-size:32px;line-height:1.35;margin:6px 0 10px}
+.art .pic{border-radius:6px;overflow:hidden;margin:14px 0}
+.art .sum{font-size:18px;color:var(--muted);border-left:4px solid var(--brand);padding-left:12px;margin:12px 0}
+.art .body p{font-size:18px;line-height:1.9;margin:0 0 14px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+#adm{position:fixed;inset:0;background:#000a;display:none;align-items:flex-start;justify-content:center;overflow:auto;z-index:50;padding:20px 12px}
+#adm.on{display:flex}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;width:100%;max-width:720px;padding:20px}
+.panel h2{margin:0 0 14px}
+.panel label{display:block;font-weight:600;font-size:14px;margin:12px 0 4px}
+.panel input,.panel select,.panel textarea{width:100%;background:var(--inp);color:var(--text);border:1px solid var(--line);border-radius:6px;padding:10px;font:inherit}
+.panel textarea{min-height:200px;resize:vertical}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.msg{font-size:13px;color:var(--muted);margin-top:10px;min-height:18px}
+.prev{max-width:200px;border-radius:6px;margin-top:8px;display:block}
+footer{background:var(--navy);color:#b9c5d6;padding:26px 0;text-align:center;font-size:13px}
+footer strong{color:#fff}
+.flinks{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin-bottom:12px}
+.flinks a{color:#dfe6f0;font-weight:600}.flinks a:hover{color:#fff;text-decoration:underline}
+.page p,.page li{font-size:17px;line-height:1.9}.page h2{font-size:21px;margin:22px 0 6px}
+.ad{display:block;border:1px dashed var(--line);background:var(--card);color:var(--muted);text-align:center;padding:22px 12px;border-radius:8px;margin:0 0 28px;font-size:14px}
+.ad:hover{color:var(--brand);border-color:var(--brand)}
+.share{display:flex;gap:8px;flex-wrap:wrap;align-items:center;border-top:1px solid var(--line);margin-top:18px;padding-top:14px;font-size:14px;color:var(--muted)}
+@media(max-width:760px){.lead{grid-template-columns:1fr}.big h2{font-size:23px}.art h1{font-size:25px}.wm{font-size:22px}.topline .wrap span:last-child{display:none}.side .card{grid-template-columns:100px 1fr}}
+</style>
 </head>
-<body class="min-h-screen flex flex-col justify-between">
-
-    <!-- HEADER & BRANDING (Rajniti Rewrite) -->
-    <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-site-red to-blue-600 flex items-center justify-center text-white font-black text-xl shadow-lg">
-                    R
-                </div>
-                <div>
-                    <h1 class="text-xl sm:text-2xl font-black tracking-tight text-white font-['Inter']">
-                        RAJNITI <span class="text-sky-400">REWRITE</span>
-                    </h1>
-                    <p class="text-[10px] text-site-red font-bold tracking-wider">রাজনীতি রিরাইট • প্রগতির নতুন বয়ান</p>
-                </div>
-            </div>
-            
-            <div class="flex items-center space-x-4">
-                <a href="https://www.facebook.com/share/19vxXVParB/" target="_blank" class="text-xs bg-site-red hover:bg-site-darkRed text-white px-3.5 py-2 rounded-lg font-semibold transition flex items-center gap-1.5 shadow">
-                    <i class="fa-brands fa-facebook-f"></i> ফেসবুক পেজ
-                </a>
-            </div>
-        </div>
-
-        <!-- Navigation Bar -->
-        <nav class="bg-slate-950 border-t border-slate-800 text-sm font-semibold overflow-x-auto no-scrollbar">
-            <div class="max-w-7xl mx-auto px-4 flex space-x-6 py-2.5 whitespace-nowrap text-slate-300">
-                <a href="#" class="text-sky-400 border-b-2 border-sky-400 pb-1">প্রচ্ছদ</a>
-                <a href="#" class="hover:text-white transition">বিশ্ব সংবাদ</a>
-                <a href="#" class="hover:text-white transition">রাজনীতি</a>
-                <a href="#" class="hover:text-white transition">বাণিজ্য</a>
-                <a href="#" class="hover:text-white transition">প্রযুক্তি</a>
-            </div>
-        </nav>
-    </header>
-
-    <!-- BREAKING NEWS TICKER -->
-    <div class="bg-site-red text-white text-xs sm:text-sm font-bold py-2 px-4 flex items-center shadow-md">
-        <span class="bg-black text-white px-2 py-0.5 text-xs uppercase tracking-wider shrink-0 mr-3 animate-pulse rounded">
-            🔴 ব্রেকিং
-        </span>
-        <div class="overflow-hidden w-full relative">
-            <div class="animate-ticker flex items-center space-x-8">
-                <span>🔥 'Rajniti Rewrite' পোর্টালে আপনাকে স্বাগতম! বিশ্বজুড়ে সর্বশেষ আপডেট সংবাদ।</span>
-                <span>📊 রাজনীতি, অর্থনীতি ও আন্তর্জাতিক সংবাদের নির্ভরযোগ্য অনলাইন পোর্টাল।</span>
-            </div>
-        </div>
+<body>
+<header>
+  <div class="topline"><div class="wrap"><span id="date"></span><span>সত্য • নিরপেক্ষ • সময়োপযোগী</span></div></div>
+  <div class="wrap top">
+    <div class="brand" id="home" title="প্রচ্ছদ">
+      <svg width="52" height="52" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="10" fill="#0b1f3a"/><polygon points="0,40 48,28 48,34 0,46" fill="#c8102e"/><path d="M0 40 L0 38 Q0 36 2 36 L48 24 V28Z" fill="none"/><text x="24" y="28" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="27" fill="#fff">R</text><rect x="9" y="33" width="30" height="1.6" fill="#ffffff55"/></svg>
+      <div><div class="wm">RAJNITI <b>REWRITE</b></div><span class="tg">রাজনীতি রিরাইট • প্রগতির নতুন বয়ান</span></div>
     </div>
+    <div id="own"></div>
+  </div>
+  <nav><div class="wrap" id="tabs"></div></nav>
+</header>
+<div class="ticker"><div class="wrap"><b>সর্বশেষ</b><span id="tick">স্বাগতম</span></div></div>
+<main class="wrap" id="app"></main>
+<footer><div class="wrap"><div class="flinks"><a href="#about">আমাদের সম্পর্কে</a><a href="#contact">যোগাযোগ</a><a href="#advertise">বিজ্ঞাপন দিন</a><a href="#policy">সম্পাদকীয় নীতি</a><a href="#privacy">গোপনীয়তা নীতি</a></div><strong>Rajniti Rewrite</strong> — প্রগতির নতুন বয়ান<br>© ২০২৬ Rajniti Rewrite. সর্বস্বত্ব সংরক্ষিত। design by Ibrahim Ali</div></footer>
+<div id="adm"></div>
+<script type="application/json" id="posts-data">[]</script>
+<script>
+var CATS=['বাংলাদেশ','বিশ্ব','রাজনীতি','অর্থনীতি','খেলা','প্রযুক্তি','বিনোদন','মতামত'];
+var posts=[];try{posts=JSON.parse(document.getElementById('posts-data').textContent)||[]}catch(e){}
+posts.sort(function(a,b){return b.ts-a.ts});
+var cur='',U=null,editing=null,img='',busy=false;
+// ===== অটো খবরের ফিড: এখানে নতুন ফিড যোগ করুন =====
+var FEEDS=[{n:'BBC বাংলা',u:'https://feeds.bbci.co.uk/bengali/rss.xml',c:''},{n:'BBC News',u:'https://feeds.bbci.co.uk/news/world/rss.xml',c:'বিশ্ব'},{n:'প্রথম আলো',u:'https://www.prothomalo.com/feed',c:'বাংলাদেশ'}];
+var KW={'বাংলাদেশ':/বাংলাদেশ|ঢাকা|Bangladesh|Dhaka/i,'রাজনীতি':/রাজনীতি|নির্বাচন|সরকার|Politic|election/i,'অর্থনীতি':/অর্থনীতি|ব্যাংক|বাণিজ্য|Econom|market|bank/i,'খেলা':/খেলা|ক্রিকেট|ফুটবল|Sport|cricket|football/i,'প্রযুক্তি':/প্রযুক্তি|এআই|Tech/i,'বিনোদন':/বিনোদন|সিনেমা|চলচ্চিত্র|Film|music/i};
+var auto=[];try{auto=JSON.parse(localStorage.getItem('rr-auto')||'[]')}catch(e){}
+function catOf(t,d){for(var k in KW)if(KW[k].test(t))return k;return d||'বিশ্ব'}
+function strip(h){return String(h||'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim()}
+function lk(p){return p.url&&/^https?:\/\//.test(p.url)?'href="'+esc(p.url).replace(/"/g,'%22')+'" target="_blank" rel="noopener noreferrer"':'href="#'+p.id+'"'}
+function mt(p){return '<span class="meta">'+(p.src?'সূত্র: '+esc(p.src)+' • ':'')+fmt(p.ts)+'</span>'}
+var $=function(i){return document.getElementById(i)};
+function esc(s){var d=document.createElement('div');d.textContent=s==null?'':String(s);return d.innerHTML}
+function cap(n){try{if(window.claude&&claude.use)return claude.use(n).catch(function(){return null})}catch(e){}return Promise.resolve(null)}
+function fmt(ts){try{return new Date(ts).toLocaleString('bn-BD',{dateStyle:'medium',timeStyle:'short'})}catch(e){return ''}}
+function owner(){return !!(U&&U.canEdit&&U.canEdit())}
+$('date').textContent=(function(){try{return new Date().toLocaleDateString('bn-BD',{weekday:'long',year:'numeric',month:'long',day:'numeric'})}catch(e){return ''}})();
 
-    <!-- MAIN BODY CONTENT -->
-    <main class="max-w-7xl mx-auto px-4 py-8 w-full flex-1">
-        
-        <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-8">
-            <h2 class="text-2xl font-bold text-white flex items-center gap-2">
-                <span class="w-3 h-7 bg-site-red rounded-full inline-block"></span>
-                আন্তর্জাতিক ও বিশ্ব সংবাদ (Rajniti Rewrite Feed)
-            </h2>
-            <span class="text-xs text-slate-400 font-medium hidden sm:inline-block">
-                ⚡ লাইভ আপডেট
-            </span>
-        </div>
+function tabs(){$('tabs').innerHTML=['প্রচ্ছদ'].concat(CATS).map(function(c,i){var v=i?c:'';return '<button data-c="'+esc(v)+'" class="'+(v===cur?'on':'')+'">'+esc(c)+'</button>'}).join('')}
+$('tabs').onclick=function(e){var b=e.target.closest('button');if(!b)return;cur=b.dataset.c;location.hash='';tabs();render()};
+$('home').onclick=function(){cur='';location.hash='';tabs();render()};
+function pic(p){return '<div class="pic">'+(p.img?'<img loading="lazy" alt="" src="/_blob/'+esc(p.img)+'">':'র')+'</div>'}
+function card(p,k){
+  if(k==='side')return '<a class="card" '+lk(p)+'>'+pic(p)+'<div class="pad"><span class="tag">'+esc(p.cat)+'</span><h3>'+esc(p.title)+'</h3>'+mt(p)+'</div></a>';
+  return '<a class="card" '+lk(p)+'>'+pic(p)+'<div class="pad"><span class="tag">'+esc(p.cat)+'</span><h3>'+esc(p.title)+'</h3><p>'+esc((p.sum||'').slice(0,120))+'</p>'+mt(p)+'</div></a>'}
+// ===== সাইটের তথ্য: এখানে নিজের ইমেইল/ফোন বসান =====
+var SITE={email:'',phone:'',fb:'https://www.facebook.com/share/19vxXVParB/'};
+function contactHtml(){return '<ul>'+(SITE.email?'<li>ইমেইল: <a href="mailto:'+esc(SITE.email)+'">'+esc(SITE.email)+'</a></li>':'')+(SITE.phone?'<li>ফোন: '+esc(SITE.phone)+'</li>':'')+'<li>ফেসবুক পেজ: <a href="'+esc(SITE.fb)+'" target="_blank" rel="noopener noreferrer">Rajniti Rewrite</a></li></ul>'}
+var PAGES={
+ about:['আমাদের সম্পর্কে','<p>Rajniti Rewrite একটি বাংলা অনলাইন সংবাদ ও বিশ্লেষণ প্ল্যাটফর্ম। আমাদের স্লোগান — প্রগতির নতুন বয়ান।</p><p>আমরা বাংলাদেশ ও বিশ্বের রাজনীতি, অর্থনীতি, খেলা, প্রযুক্তি ও বিনোদনের খবর এক জায়গায় পাঠকের কাছে পৌঁছে দিতে চাই। আমাদের নিজস্ব প্রতিবেদন ও বিশ্লেষণের পাশাপাশি অন্যান্য সংবাদমাধ্যমের শিরোনাম সূত্রসহ সংকলন করা হয়।</p><h2>আমাদের অঙ্গীকার</h2><p>তথ্যের নির্ভুলতা, নিরপেক্ষতা ও পাঠকের প্রতি দায়বদ্ধতা।</p>'],
+ contact:['যোগাযোগ','<p>খবর পাঠাতে, মতামত জানাতে বা ভুল সংশোধনের অনুরোধ করতে আমাদের সঙ্গে যোগাযোগ করুন।</p>'+contactHtml()],
+ advertise:['বিজ্ঞাপন দিন','<p>Rajniti Rewrite-এ আপনার ব্যবসার বিজ্ঞাপন দিয়ে বাংলা পাঠকদের কাছে পৌঁছান।</p><h2>আমরা যা দিতে পারি</h2><ul><li>ব্যানার বিজ্ঞাপন (প্রচ্ছদ ও খবরের পাতায়)</li><li>স্পনসর্ড পোস্ট — স্পষ্টভাবে “স্পনসর্ড” চিহ্নিত</li><li>ফেসবুক পেজে প্রচার</li></ul><p>রেট ও বিস্তারিত জানতে যোগাযোগ করুন:</p>'+contactHtml()],
+ policy:['সম্পাদকীয় নীতি','<p>আমরা তথ্য যাচাই করে খবর প্রকাশ করতে চেষ্টা করি। ভুল ধরা পড়লে দ্রুত সংশোধন করা হয়।</p><h2>নিজস্ব ও সংকলিত খবর</h2><p>“Rajniti Rewrite ডেস্ক” লেখা খবর আমাদের নিজস্ব। যেসব কার্ডে “সূত্র” লেখা আছে, সেগুলো অন্য সংবাদমাধ্যমের শিরোনাম ও ছোট অংশ, ক্লিক করলে মূল খবরের পাতায় যায়। স্বত্ব মূল প্রকাশকের।</p><h2>স্পনসর্ড কনটেন্ট</h2><p>অর্থের বিনিময়ে প্রকাশিত যেকোনো কনটেন্ট “স্পনসর্ড” হিসেবে চিহ্নিত থাকবে।</p><h2>সংশোধন ও আপত্তি</h2><p>কোনো লেখা নিয়ে আপত্তি বা সংশোধনের অনুরোধ থাকলে যোগাযোগ পাতার মাধ্যমে জানান।</p>'],
+ privacy:['গোপনীয়তা নীতি','<p>এই ওয়েবসাইট পাঠকের নাম, ফোন বা ইমেইলের মতো ব্যক্তিগত তথ্য নিজে থেকে সংগ্রহ করে না।</p><h2>ব্রাউজারে সংরক্ষণ</h2><p>দ্রুত লোড করার জন্য সর্বশেষ খবরের তালিকা আপনার ব্রাউজারে সাময়িকভাবে জমা রাখা হয়।</p><h2>তৃতীয় পক্ষ</h2><p>খবরের লিংকে ক্লিক করলে আপনি অন্য ওয়েবসাইটে যাবেন, সেগুলোর নিজস্ব গোপনীয়তা নীতি প্রযোজ্য। ভবিষ্যতে বিজ্ঞাপন বা অ্যানালিটিক্স যোগ হলে এখানে হালনাগাদ করা হবে।</p>']};
+function adBox(){return '<a class="ad" href="#advertise">বিজ্ঞাপন — আপনার ব্যবসার বিজ্ঞাপন এখানে দিন</a>'}
+function shareBox(p){var u=encodeURIComponent(location.href.split('#')[0]+'#'+p.id),t=encodeURIComponent(p.title);return '<div class="share"><span>শেয়ার করুন:</span><a class="btn alt sm" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u='+u+'">ফেসবুক</a><a class="btn alt sm" target="_blank" rel="noopener noreferrer" href="https://wa.me/?text='+t+'%20'+u+'">হোয়াটসঅ্যাপ</a></div>'}
+function render(keep){
+  var id=location.hash.slice(1),p=id&&posts.filter(function(x){return x.id===id})[0];
+  if(keep!==true)window.scrollTo(0,0);
+  $('tick').textContent=(posts.length||auto.length)?posts.concat(auto).slice(0,4).map(function(x){return x.title}).join('   •   '):'স্বাগতম — শীঘ্রই নতুন খবর আসছে';
+  if(PAGES[id]){document.title=PAGES[id][0]+' | Rajniti Rewrite';$('app').innerHTML='<article class="art page"><div class="bar"><button class="btn alt sm" id="back">← প্রচ্ছদ</button></div><h1>'+esc(PAGES[id][0])+'</h1>'+PAGES[id][1]+'</article>';$('back').onclick=function(){location.hash=''};return}
+  if(p){
+    document.title=p.title+' | Rajniti Rewrite';
+    $('app').innerHTML='<article class="art"><div class="bar"><button class="btn alt sm" id="back">← সব খবর</button>'+(owner()?'<button class="btn sm" id="ed">সম্পাদনা</button>':'')+'</div><span class="tag">'+esc(p.cat)+'</span><h1>'+esc(p.title)+'</h1><div class="meta">'+esc(p.by||'Rajniti Rewrite ডেস্ক')+' • '+fmt(p.ts)+'</div>'+(p.img?pic(p):'')+(p.sum?'<div class="sum">'+esc(p.sum)+'</div>':'')+'<div class="body">'+String(p.body||'').split(/\n+/).filter(Boolean).map(function(t){return '<p>'+esc(t)+'</p>'}).join('')+'</div>'+shareBox(p)+'</article>';
+    $('back').onclick=function(){location.hash=''};
+    if($('ed'))$('ed').onclick=function(){openEd(p)};
+    return}
+  document.title='Rajniti Rewrite | রাজনীতি রিরাইট';
+  var base=posts.concat(auto),list=cur?base.filter(function(x){return x.cat===cur}):base;
+  if(!list.length){$('app').innerHTML='<div class="empty"><h2>'+(cur?esc(cur)+' বিভাগে এখনও কোনো খবর নেই':'শীঘ্রই নতুন খবর আসছে')+'</h2>'+(owner()?'<p>উপরের “নতুন খবর লিখুন” বাটনে ক্লিক করে প্রথম খবরটি প্রকাশ করুন।</p>':'')+'</div>';return}
+  var l=list[0],s=list.slice(1,4),g=list.slice(4);
+  $('app').innerHTML='<section class="lead"><a class="card big" '+lk(l)+'>'+pic(l)+'<div class="pad"><span class="tag">'+esc(l.cat)+'</span><h2>'+esc(l.title)+'</h2><p>'+esc((l.sum||'').slice(0,200))+'</p>'+mt(l)+'</div></a><div class="side">'+s.map(function(x){return card(x,'side')}).join('')+'</div></section>'+adBox()+(g.length?'<h2 class="sec">আরও খবর</h2><section class="grid">'+g.map(function(x){return card(x)}).join('')+'</section>':'');
+}
+window.onhashchange=function(){render()};
 
-        <!-- AUTOMATIC GUARANTEED NEWS GRID -->
-        <div id="news-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
-            <!-- TOP FEATURED STORY (INSTANT LOAD) -->
-            <div class="col-span-1 md:col-span-2 lg:col-span-3 bg-slate-800/90 border border-slate-700 rounded-2xl overflow-hidden p-6 hover:border-site-red transition-all duration-300 shadow-xl">
-                <div class="flex items-center space-x-2 text-xs text-site-red font-bold mb-2">
-                    <span>🔥 রাজিনিতি রিরাইট • প্রধান আন্তর্জাতিক খবর</span>
-                    <span class="text-slate-500">•</span>
-                    <span class="text-slate-400">🕒 এখনই আপডেটকৃত</span>
-                </div>
-                <h3 class="text-xl sm:text-2xl font-bold text-white mb-3 hover:text-sky-400 transition-colors">
-                    <a href="https://www.bbc.com/news/world" target="_blank" rel="noopener noreferrer">ভূ-রাজনীতি ও আন্তর্জাতিক অর্থনীতিতে বড় পরিবর্তনের আভাস: বিশ্বনেতাদের বিশেষ বৈঠক</a>
-                </h3>
-                <p class="text-sm text-slate-300 mb-4">বিশ্বজুড়ে অর্থনৈতিক মন্দা মোকাবিলা এবং আঞ্চলিক নিরাপত্তা জোরদারে প্রধান পরাশক্তিগুলোর প্রতিনিধিরা জরুরি আলোচনায় বসেছেন...</p>
-                <a href="https://www.bbc.com/news/world" target="_blank" rel="noopener noreferrer" class="inline-block bg-site-red hover:bg-site-darkRed text-white text-xs font-bold py-2.5 px-5 rounded-xl transition shadow">
-                    সম্পূর্ণ সংবাদ পড়ুন ➔
-                </a>
-            </div>
+function ownBtn(){$('own').innerHTML=owner()?'<button class="btn" id="nw">＋ নতুন খবর লিখুন</button> <button class="btn alt" id="dlf">হোস্টিংয়ের ফাইল ডাউনলোড</button>':'';
+  if($('nw'))$('nw').onclick=function(){openEd(null)};
+  if($('dlf'))$('dlf').onclick=async function(){var b=this,t=b.textContent,D=await cap('downloads');if(!D){b.textContent='এখানে ডাউনলোড চালু নেই';return}try{await D.save({filename:'index.html',data:buildDoc()})}catch(e){}b.textContent=t}}
+function openEd(p){
+  editing=p;img=p?p.img||'':'';
+  $('adm').innerHTML='<div class="panel"><h2>'+(p?'খবর সম্পাদনা':'নতুন খবর')+'</h2>'+
+  '<label>শিরোনাম</label><input id="f-t" value="'+esc(p?p.title:'')+'">'+
+  '<label>বিভাগ</label><select id="f-c">'+CATS.map(function(c){return '<option'+(p&&p.cat===c?' selected':'')+'>'+esc(c)+'</option>'}).join('')+'</select>'+
+  '<label>সংক্ষিপ্ত বিবরণ (ঐচ্ছিক)</label><input id="f-s" value="'+esc(p?p.sum:'')+'">'+
+  '<label>বিস্তারিত খবর (প্রতিটি অনুচ্ছেদ নতুন লাইনে)</label><textarea id="f-b">'+esc(p?p.body:'')+'</textarea>'+
+  '<label>ছবি (ঐচ্ছিক)</label><input type="file" id="f-i" accept="image/*"><div id="pv">'+(img?'<img class="prev" alt="" src="/_blob/'+esc(img)+'">':'')+'</div>'+
+  '<div class="row"><button class="btn" id="sv">প্রকাশ করুন</button><button class="btn alt" id="ai">তথ্য দিয়ে Claude-কে দিয়ে সাজান</button>'+(p?'<button class="btn alt" id="dl">মুছুন</button>':'')+'<button class="btn alt" id="cl">বাতিল</button></div><div class="msg" id="mg">নিজের সংগ্রহ করা তথ্য বিস্তারিত ঘরে লিখে “Claude-কে দিয়ে সাজান” চাপলে মৌলিক ভাষায় সংবাদ আকারে সাজিয়ে দেবে।</div></div>';
+  $('adm').className='on';
+  $('cl').onclick=function(){$('adm').className=''};
+  $('sv').onclick=save;$('ai').onclick=aiDraft;
+  if($('dl'))$('dl').onclick=function(){if(this.dataset.s){posts=posts.filter(function(x){return x.id!==p.id});location.hash='';publish()}else{this.dataset.s=1;this.textContent='নিশ্চিত? আবার চাপুন'}};
+  $('f-i').onchange=upload}
+function msg(t){$('mg').textContent=t}
+async function upload(){var f=this.files[0];if(!f)return;msg('ছবি আপলোড হচ্ছে…');
+  var A=await cap('assets');if(!A){msg('ছবি আপলোড এখানে চালু নেই।');return}
+  try{var r=await A.upload(f);img=r.id;$('pv').innerHTML='<img class="prev" alt="" src="/_blob/'+esc(img)+'">';msg('ছবি যোগ হয়েছে।')}catch(e){msg('ছবি আপলোড ব্যর্থ হয়েছে।')}}
+async function aiDraft(){var raw=$('f-b').value.trim();if(raw.length<30){msg('আগে বিস্তারিত ঘরে খবরের তথ্য লিখুন।');return}
+  var S=await cap('sample');if(!S){msg('এই সুবিধা এখানে চালু নেই।');return}
+  msg('সাজানো হচ্ছে…');
+  try{var r=await S.json('তুমি একজন বাংলা সংবাদ সম্পাদক। নিচের তথ্য থেকে মৌলিক ভাষায় একটি সংবাদ লেখো। শুধু দেওয়া তথ্য ব্যবহার করো, নিজে থেকে কোনো তথ্য, উক্তি বা সংখ্যা যোগ করবে না। শুধু JSON ফেরত দাও: {"title":"...","summary":"১-২ বাক্য","body":"কয়েকটি অনুচ্ছেদ, প্রতিটি নতুন লাইনে"}। তথ্য:\n'+raw);
+    if(r&&r.body){$('f-t').value=r.title||$('f-t').value;$('f-s').value=r.summary||'';$('f-b').value=r.body;msg('সাজানো হয়েছে। প্রকাশের আগে ভালোভাবে পড়ে ঠিক করে নিন।')}else msg('সাজানো যায়নি, আবার চেষ্টা করুন।')}catch(e){msg('সাজানো যায়নি।')}}
+function save(){var t=$('f-t').value.trim(),b=$('f-b').value.trim();if(!t||!b){msg('শিরোনাম ও বিস্তারিত খবর লিখতে হবে।');return}
+  var o={id:editing?editing.id:'n'+Date.now().toString(36),title:t,cat:$('f-c').value,sum:$('f-s').value.trim(),body:b,img:img,ts:editing?editing.ts:Date.now(),by:'Rajniti Rewrite ডেস্ক'};
+  posts=posts.filter(function(x){return x.id!==o.id});posts.push(o);posts.sort(function(a,b){return b.ts-a.ts});
+  location.hash=o.id;publish()}
+async function publish(){
+  if(busy)return;busy=true;
+  var A=await cap('artifact');if(!A){busy=false;msg('প্রকাশ করা যায়নি: শুধু মালিক এই পেজ থেকে প্রকাশ করতে পারেন।');return}
+  try{var c=document.documentElement.cloneNode(true);
+    c.querySelector('#posts-data').textContent=JSON.stringify(posts).replace(/</g,'\\u003c');
+    ['app','adm','own','tabs'].forEach(function(i){var e=c.querySelector('#'+i);if(e){e.innerHTML='';if(i==='adm')e.className=''}});
+    c.querySelector('#tick').textContent='';
+    await A.publish('<!DOCTYPE html>\n'+c.outerHTML)}catch(e){busy=false;if($('mg'))msg('প্রকাশ ব্যর্থ হয়েছে, আবার চেষ্টা করুন।')}}
 
-            <!-- NEWS ITEM 1 -->
-            <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-5 flex flex-col justify-between hover:border-sky-400 transition-all duration-200 shadow-md">
-                <div>
-                    <div class="flex justify-between items-center text-xs text-slate-400 mb-2">
-                        <span class="text-sky-400 font-bold">Rajniti Rewrite</span>
-                        <span>🕒 লাইভ</span>
-                    </div>
-                    <h4 class="text-base font-bold text-white mb-2 line-clamp-2 hover:text-sky-400 transition-colors">
-                        <a href="https://www.bbc.com/news/world" target="_blank" rel="noopener noreferrer">বিশ্ব বাণিজ্যে নতুন ডিজিটাল পলিসির প্রভাব ও ভবিষ্যৎ সম্ভাবনা</a>
-                    </h4>
-                    <p class="text-xs text-slate-300 line-clamp-3 mb-4">আন্তর্জাতিক বাজারে তথ্যপ্রযুক্তি খাতে নতুন নিয়ন্ত্রণ নীতিমালা আরোপের কারণে বিশ্ব অর্থনীতিতে ব্যাপক পরিবর্তনের পূর্বাভাস...</p>
-                </div>
-                <a href="https://www.bbc.com/news/world" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-slate-700 hover:bg-site-red text-white text-xs font-semibold py-2 rounded-xl transition">
-                    বিস্তারিত পড়ুন ➔
-                </a>
-            </div>
-
-            <!-- NEWS ITEM 2 -->
-            <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-5 flex flex-col justify-between hover:border-sky-400 transition-all duration-200 shadow-md">
-                <div>
-                    <div class="flex justify-between items-center text-xs text-slate-400 mb-2">
-                        <span class="text-sky-400 font-bold">Rajniti Rewrite</span>
-                        <span>🕒 লাইভ</span>
-                    </div>
-                    <h4 class="text-base font-bold text-white mb-2 line-clamp-2 hover:text-sky-400 transition-colors">
-                        <a href="https://www.bbc.com/news/world" target="_blank" rel="noopener noreferrer">জলবায়ু অর্থায়নে উন্নত দেশগুলোর প্রতিশ্রুতি ও তরুণদের বৈশ্বিক আন্দোলন</a>
-                    </h4>
-                    <p class="text-xs text-slate-300 line-clamp-3 mb-4">জলবায়ু পরিবর্তন মোকাবিলায় প্রতিশ্রুতি অনুযায়ী অর্থ ছাড়ের দাবিতে বিভিন্ন দেশের রাজপথে নেমেছে তরুণ প্রজন্ম...</p>
-                </div>
-                <a href="https://www.bbc.com/news/world" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-slate-700 hover:bg-site-red text-white text-xs font-semibold py-2 rounded-xl transition">
-                    বিস্তারিত পড়ুন ➔
-                </a>
-            </div>
-
-            <!-- NEWS ITEM 3 -->
-            <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-5 flex flex-col justify-between hover:border-sky-400 transition-all duration-200 shadow-md">
-                <div>
-                    <div class="flex justify-between items-center text-xs text-slate-400 mb-2">
-                        <span class="text-sky-400 font-bold">Rajniti Rewrite</span>
-                        <span>🕒 লাইভ</span>
-                    </div>
-                    <h4 class="text-base font-bold text-white mb-2 line-clamp-2 hover:text-sky-400 transition-colors">
-                        <a href="https://www.bbc.com/news/world" target="_blank" rel="noopener noreferrer">কৃত্রিম বুদ্ধিমত্তা ও প্রযুক্তির বিশ্ব রাজনীতিতে নতুন কৌশলগত সমীকরণ</a>
-                    </h4>
-                    <p class="text-xs text-slate-300 line-clamp-3 mb-4">এআই প্রযুক্তির আধিপত্য বিস্তার নিয়ে পরাশক্তিগুলোর মধ্যে প্রতিযোগিতা নতুন রাজনৈতিক মাত্রায় রূপ নিচ্ছে...</p>
-                </div>
-                <a href="https://www.bbc.com/news/world" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-slate-700 hover:bg-site-red text-white text-xs font-semibold py-2 rounded-xl transition">
-                    বিস্তারিত পড়ুন ➔
-                </a>
-            </div>
-
-            <!-- NEWS ITEM 4 -->
-            <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-5 flex flex-col justify-between hover:border-sky-400 transition-all duration-200 shadow-md">
-                <div>
-                    <div class="flex justify-between items-center text-xs text-slate-400 mb-2">
-                        <span class="text-sky-400 font-bold">Rajniti Rewrite</span>
-                        <span>🕒 লাইভ</span>
-                    </div>
-                    <h4 class="text-base font-bold text-white mb-2 line-clamp-2 hover:text-sky-400 transition-colors">
-                        <a href="https://www.bbc.com/news/world" target="_blank" rel="noopener noreferrer">দক্ষিণ এশিয়ার ভূ-রাজনীতি ও উদীয়মান অর্থনীতিতে তরুণদের ভূমিকা</a>
-                    </h4>
-                    <p class="text-xs text-slate-300 line-clamp-3 mb-4">আঞ্চলিক স্থিতিশীলতা ও কর্মসংস্থান বৃদ্ধিতে তরুণেরা এবার নীতিনির্ধারণে সরাসরি অংশগ্রহণের উদ্যোগ নিচ্ছে...</p>
-                </div>
-                <a href="https://www.bbc.com/news/world" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-slate-700 hover:bg-site-red text-white text-xs font-semibold py-2 rounded-xl transition">
-                    বিস্তারিত পড়ুন ➔
-                </a>
-            </div>
-
-            <!-- NEWS ITEM 5 -->
-            <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-5 flex flex-col justify-between hover:border-sky-400 transition-all duration-200 shadow-md">
-                <div>
-                    <div class="flex justify-between items-center text-xs text-slate-400 mb-2">
-                        <span class="text-sky-400 font-bold">Rajniti Rewrite</span>
-                        <span>🕒 লাইভ</span>
-                    </div>
-                    <h4 class="text-base font-bold text-white mb-2 line-clamp-2 hover:text-sky-400 transition-colors">
-                        <a href="https://www.bbc.com/news/world" target="_blank" rel="noopener noreferrer">গ্লোবাল এনার্জি মার্কেট ও নবায়নযোগ্য শক্তির দিকে বিশ্বের দ্রুত রূপান্তর</a>
-                    </h4>
-                    <p class="text-xs text-slate-300 line-clamp-3 mb-4">জ্বালানি সংকট সমাধানে সবুজ প্রযুক্তিতে নতুন বিনিয়োগের জোয়ার তৈরি হয়েছে বৈশ্বিক বাজারে...</p>
-                </div>
-                <a href="https://www.bbc.com/news/world" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-slate-700 hover:bg-site-red text-white text-xs font-semibold py-2 rounded-xl transition">
-                    বিস্তারিত পড়ুন ➔
-                </a>
-            </div>
-
-        </div>
-
-    </main>
-
-    <!-- FOOTER SECTION -->
-    <footer class="bg-slate-900 border-t border-slate-800 mt-12 py-10">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6 border-b border-slate-800 pb-8">
-                <div>
-                    <h3 class="text-lg font-bold text-white">Rajniti Rewrite</h3>
-                    <p class="text-xs text-slate-400 mt-1">প্রগতির নতুন বয়ান—একটি বস্তুনিষ্ঠ অনলাইন সংবাদ মাধ্যম।</p>
-                </div>
-                
-                <div class="flex items-center space-x-4">
-                    <span class="text-xs text-slate-400">অফিশিয়াল পেজ:</span>
-                    <a href="https://www.facebook.com/share/19vxXVParB/" target="_blank" class="w-9 h-9 bg-slate-800 hover:bg-site-red text-white rounded-full flex items-center justify-center transition shadow">
-                        <i class="fa-brands fa-facebook-f text-sm"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="pt-6 text-center text-xs text-slate-500">
-                © ২০২৬ Rajniti Rewrite. সর্বস্বত্ব সংরক্ষিত। design by Ibrahim Ali
-            </div>
-        </div>
-    </footer>
-
-    <!-- BACKGROUND AUTO-UPDATER SCRIPT (NO LOADING SCREEN / ZERO LAG) -->
-    <script>
-        // Try background refresh without blocking the view
-        fetch("https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent("https://feeds.bbci.co.uk/news/world/rss.xml"))
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === 'ok' && data.items && data.items.length > 0) {
-                    let dynamicHTML = "";
-                    data.items.slice(0, 6).forEach((item, index) => {
-                        const title = item.title;
-                        const link = item.link;
-                        const pubDate = new Date(item.pubDate).toLocaleString('bn-BD');
-                        const desc = item.description ? item.description.replace(/<[^>]*>?/gm, '').slice(0, 100) + "..." : "বিস্তারিত জানতে ক্লিক করুন...";
-
-                        if (index === 0) {
-                            dynamicHTML += `
-                                <div class="col-span-1 md:col-span-2 lg:col-span-3 bg-slate-800/90 border border-slate-700 rounded-2xl overflow-hidden p-6 hover:border-site-red transition-all duration-300 shadow-xl">
-                                    <div class="flex items-center space-x-2 text-xs text-site-red font-bold mb-2">
-                                        <span>🔥 রাজিনিতি রিরাইট • অটো আপডেট নিউজ</span>
-                                        <span class="text-slate-500">•</span>
-                                        <span class="text-slate-400">🕒 ${pubDate}</span>
-                                    </div>
-                                    <h3 class="text-xl sm:text-2xl font-bold text-white mb-3 hover:text-sky-400 transition-colors">
-                                        <a href="${link}" target="_blank" rel="noopener noreferrer">${title}</a>
-                                    </h3>
-                                    <p class="text-sm text-slate-300 mb-4">${desc}</p>
-                                    <a href="${link}" target="_blank" rel="noopener noreferrer" class="inline-block bg-site-red hover:bg-site-darkRed text-white text-xs font-bold py-2.5 px-5 rounded-xl transition shadow">
-                                        সম্পূর্ণ সংবাদ পড়ুন ➔
-                                    </a>
-                                </div>
-                            `;
-                        } else {
-                            dynamicHTML += `
-                                <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-5 flex flex-col justify-between hover:border-sky-400 transition-all duration-200 shadow-md">
-                                    <div>
-                                        <div class="flex justify-between items-center text-xs text-slate-400 mb-2">
-                                            <span class="text-sky-400 font-bold">Rajniti Rewrite</span>
-                                            <span>🕒 ${pubDate}</span>
-                                        </div>
-                                        <h4 class="text-base font-bold text-white mb-2 line-clamp-2 hover:text-sky-400 transition-colors">
-                                            <a href="${link}" target="_blank" rel="noopener noreferrer">${title}</a>
-                                        </h4>
-                                        <p class="text-xs text-slate-300 line-clamp-3 mb-4">${desc}</p>
-                                    </div>
-                                    <a href="${link}" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-slate-700 hover:bg-site-red text-white text-xs font-semibold py-2 rounded-xl transition">
-                                        বিস্তারিত পড়ুন ➔
-                                    </a>
-                                </div>
-                            `;
-                        }
-                    });
-                    document.getElementById("news-container").innerHTML = dynamicHTML;
-                }
-            }).catch(e => {
-                // If API fails, default news will remain visible naturally!
-            });
-    </script>
+function loadAuto(){var got=[],n=0;
+  FEEDS.forEach(function(f){var ctl=window.AbortController?new AbortController():null,tm=setTimeout(function(){if(ctl)ctl.abort()},8000);
+    fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(f.u),ctl?{signal:ctl.signal}:{}).then(function(r){return r.json()}).then(function(j){
+      if(j&&j.status==='ok')(j.items||[]).slice(0,15).forEach(function(x){var t=strip(x.title),d=strip(x.description).slice(0,160);
+        if(t)got.push({id:'a'+got.length,title:t,sum:d,url:x.link,src:f.n,cat:catOf(t+' '+d,f.c),ts:Date.parse(String(x.pubDate).replace(' ','T')+'Z')||Date.now()})})
+    }).catch(function(){}).then(function(){clearTimeout(tm);if(++n<FEEDS.length)return;
+      if(got.length){got.sort(function(a,b){return b.ts-a.ts});auto=got.slice(0,60);try{localStorage.setItem('rr-auto',JSON.stringify(auto))}catch(e){}if(!location.hash.slice(1))render(true)}})})}
+function buildDoc(){var c=document.documentElement.cloneNode(true);
+  c.querySelector('#posts-data').textContent=JSON.stringify(posts).replace(/</g,String.fromCharCode(92)+'u003c');
+  ['app','adm','own','tabs'].forEach(function(i){var e=c.querySelector('#'+i);if(e){e.innerHTML='';if(i==='adm')e.className=''}});
+  c.querySelector('#tick').textContent='';
+  return '<!DOCTYPE html>'+String.fromCharCode(10)+c.outerHTML}
+function tmo(p,ms){return Promise.race([p,new Promise(function(_,rej){setTimeout(rej,ms)})])}
+function tsOf(s){var t=Date.parse(s);if(isNaN(t))t=Date.parse(String(s).replace(' ','T')+'Z');return isNaN(t)?Date.now():t}
+function grab(f){
+  var a=fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(f.u)).then(function(r){return r.json()}).then(function(j){if(j&&j.status==='ok'&&j.items&&j.items.length)return j.items;throw 0});
+  return tmo(a,9000).catch(function(){
+    var b=fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(f.u)).then(function(r){return r.text()}).then(function(t){var d=new DOMParser().parseFromString(t,'text/xml');
+      return Array.prototype.map.call(d.querySelectorAll('item'),function(i){var g=function(n){var e=i.querySelector(n);return e?e.textContent:''};return {title:g('title'),description:g('description'),link:g('link'),pubDate:g('pubDate')}})});
+    return tmo(b,9000)}).catch(function(){return []})}
+function loadAuto2(){
+  Promise.all(FEEDS.map(function(f){return grab(f).then(function(a){return a.slice(0,15).map(function(x){var t=strip(x.title),d=strip(x.description).slice(0,160);return t?{title:t,sum:d,url:x.link,src:f.n,cat:catOf(t+' '+d,f.c),ts:tsOf(x.pubDate)}:null}).filter(Boolean)})})).then(function(r){
+    var got=[].concat.apply([],r);if(!got.length)return;
+    got.sort(function(a,b){return b.ts-a.ts});var seen={};
+    got=got.filter(function(x){if(seen[x.title])return false;seen[x.title]=1;return true});
+    got.forEach(function(x,i){x.id='a'+i});auto=got.slice(0,60);
+    try{localStorage.setItem('rr-auto',JSON.stringify(auto))}catch(e){}
+    if(!location.hash.slice(1))render(true)})}
+tabs();render();
+loadAuto2();setInterval(loadAuto2,600000);
+cap('user').then(function(u){U=u;ownBtn();render()});
+</script>
 </body>
 </html>
