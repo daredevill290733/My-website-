@@ -66,7 +66,7 @@ h2.sec{font-size:21px;border-left:5px solid var(--brand);padding-left:10px;margi
 .art .sum{font-size:18px;color:var(--muted);border-left:4px solid var(--brand);padding-left:12px;margin:12px 0}
 .art .body p{font-size:18px;line-height:1.9;margin:0 0 14px}
 .bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-#adm{position:fixed;inset:0;background:#000a;display:none;align-items:flex-start;justify-content:center;overflow:auto;z-index:50;padding:20px 12px}
+#adm{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:flex-start;justify-content:center;overflow:auto;z-index:50;padding:20px 12px}
 #adm.on{display:flex}
 .panel{background:var(--card);border:1px solid var(--line);border-radius:10px;width:100%;max-width:720px;padding:20px}
 .panel h2{margin:0 0 14px}
@@ -103,16 +103,18 @@ footer strong{color:#fff}
 <main class="wrap" id="app"></main>
 <footer><div class="wrap"><div class="flinks"><a href="#about">আমাদের সম্পর্কে</a><a href="#contact">যোগাযোগ</a><a href="#advertise">বিজ্ঞাপন দিন</a><a href="#policy">সম্পাদকীয় নীতি</a><a href="#privacy">গোপনীয়তা নীতি</a></div><strong>Rajniti Rewrite</strong> — প্রগতির নতুন বয়ান<br>© ২০২৬ Rajniti Rewrite. সর্বস্বত্ব সংরক্ষিত। design by Ibrahim Ali</div></footer>
 <div id="adm"></div>
+
 <script type="application/json" id="posts-data">[]</script>
 <script>
-var CATS=['বাংলাদেশ','বিশ্ব','রাজনীতি','অর্থনীতি','খেলা','প্রযুক্তি','বিনোদন','মতামত'];
+var CATS=['বাংলাদেশ','বিশ্ব','রাজনীতি','অর্থনীতি','খেলা','প্রযুক্তিমাত','বিনোদন','মতামত'];
 var posts=[];try{posts=JSON.parse(document.getElementById('posts-data').textContent)||[]}catch(e){}
 posts.sort(function(a,b){return b.ts-a.ts});
 var cur='',U=null,editing=null,img='',busy=false;
-// ===== অটো খবরের ফিড: এখানে নতুন ফিড যোগ করুন =====
+
 var FEEDS=[{n:'BBC বাংলা',u:'https://feeds.bbci.co.uk/bengali/rss.xml',c:''},{n:'BBC News',u:'https://feeds.bbci.co.uk/news/world/rss.xml',c:'বিশ্ব'},{n:'প্রথম আলো',u:'https://www.prothomalo.com/feed',c:'বাংলাদেশ'}];
 var KW={'বাংলাদেশ':/বাংলাদেশ|ঢাকা|Bangladesh|Dhaka/i,'রাজনীতি':/রাজনীতি|নির্বাচন|সরকার|Politic|election/i,'অর্থনীতি':/অর্থনীতি|ব্যাংক|বাণিজ্য|Econom|market|bank/i,'খেলা':/খেলা|ক্রিকেট|ফুটবল|Sport|cricket|football/i,'প্রযুক্তি':/প্রযুক্তি|এআই|Tech/i,'বিনোদন':/বিনোদন|সিনেমা|চলচ্চিত্র|Film|music/i};
 var auto=[];try{auto=JSON.parse(localStorage.getItem('rr-auto')||'[]')}catch(e){}
+
 function catOf(t,d){for(var k in KW)if(KW[k].test(t))return k;return d||'বিশ্ব'}
 function strip(h){return String(h||'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim()}
 function lk(p){return p.url&&/^https?:\/\//.test(p.url)?'href="'+esc(p.url).replace(/"/g,'%22')+'" target="_blank" rel="noopener noreferrer"':'href="#'+p.id+'"'}
@@ -122,48 +124,83 @@ function esc(s){var d=document.createElement('div');d.textContent=s==null?'':Str
 function cap(n){try{if(window.claude&&claude.use)return claude.use(n).catch(function(){return null})}catch(e){}return Promise.resolve(null)}
 function fmt(ts){try{return new Date(ts).toLocaleString('bn-BD',{dateStyle:'medium',timeStyle:'short'})}catch(e){return ''}}
 function owner(){return !!(U&&U.canEdit&&U.canEdit())}
+
 $('date').textContent=(function(){try{return new Date().toLocaleDateString('bn-BD',{weekday:'long',year:'numeric',month:'long',day:'numeric'})}catch(e){return ''}})();
 
 function tabs(){$('tabs').innerHTML=['প্রচ্ছদ'].concat(CATS).map(function(c,i){var v=i?c:'';return '<button data-c="'+esc(v)+'" class="'+(v===cur?'on':'')+'">'+esc(c)+'</button>'}).join('')}
 $('tabs').onclick=function(e){var b=e.target.closest('button');if(!b)return;cur=b.dataset.c;location.hash='';tabs();render()};
 $('home').onclick=function(){cur='';location.hash='';tabs();render()};
-function pic(p){return '<div class="pic">'+(p.img?'<img loading="lazy" alt="" src="/_blob/'+esc(p.img)+'">':'র')+'</div>'}
+
+function pic(p){
+  var imgSrc = p.img ? (p.img.indexOf('/') === -1 ? '/_blob/' + esc(p.img) : esc(p.img)) : '';
+  return '<div class="pic">'+(imgSrc?'<img loading="lazy" alt="" src="'+imgSrc+'">':'র')+'</div>';
+}
+
 function card(p,k){
   if(k==='side')return '<a class="card" '+lk(p)+'>'+pic(p)+'<div class="pad"><span class="tag">'+esc(p.cat)+'</span><h3>'+esc(p.title)+'</h3>'+mt(p)+'</div></a>';
-  return '<a class="card" '+lk(p)+'>'+pic(p)+'<div class="pad"><span class="tag">'+esc(p.cat)+'</span><h3>'+esc(p.title)+'</h3><p>'+esc((p.sum||'').slice(0,120))+'</p>'+mt(p)+'</div></a>'}
-// ===== সাইটের তথ্য: এখানে নিজের ইমেইল/ফোন বসান =====
+  return '<a class="card" '+lk(p)+'>'+pic(p)+'<div class="pad"><span class="tag">'+esc(p.cat)+'</span><h3>'+esc(p.title)+'</h3><p>'+esc((p.sum||'').slice(0,120))+'</p>'+mt(p)+'</div></a>';
+}
+
 var SITE={email:'',phone:'',fb:'https://www.facebook.com/share/19vxXVParB/'};
 function contactHtml(){return '<ul>'+(SITE.email?'<li>ইমেইল: <a href="mailto:'+esc(SITE.email)+'">'+esc(SITE.email)+'</a></li>':'')+(SITE.phone?'<li>ফোন: '+esc(SITE.phone)+'</li>':'')+'<li>ফেসবুক পেজ: <a href="'+esc(SITE.fb)+'" target="_blank" rel="noopener noreferrer">Rajniti Rewrite</a></li></ul>'}
+
 var PAGES={
- about:['আমাদের সম্পর্কে','<p>Rajniti Rewrite একটি বাংলা অনলাইন সংবাদ ও বিশ্লেষণ প্ল্যাটফর্ম। আমাদের স্লোগান — প্রগতির নতুন বয়ান।</p><p>আমরা বাংলাদেশ ও বিশ্বের রাজনীতি, অর্থনীতি, খেলা, প্রযুক্তি ও বিনোদনের খবর এক জায়গায় পাঠকের কাছে পৌঁছে দিতে চাই। আমাদের নিজস্ব প্রতিবেদন ও বিশ্লেষণের পাশাপাশি অন্যান্য সংবাদমাধ্যমের শিরোনাম সূত্রসহ সংকলন করা হয়।</p><h2>আমাদের অঙ্গীকার</h2><p>তথ্যের নির্ভুলতা, নিরপেক্ষতা ও পাঠকের প্রতি দায়বদ্ধতা।</p>'],
+ about:['আমাদের সম্পর্কে','<p>Rajniti Rewrite একটি বাংলা অনলাইন সংবাদ ও বিশ্লেষণ প্ল্যাটফর্ম। আমাদের স্লোগান — প্রগতির নতুন বয়ান।</p><p>আমরা বাংলাদেশ ও বিশ্বের রাজনীতি, অর্থনীতি, খেলা, প্রযুক্তি ও বিনোদনের খবর এক জায়গায় পাঠকের কাছে পৌঁছে দিতে চাই।</p><h2>আমাদের অঙ্গীকার</h2><p>তথ্যের নির্ভুলতা, নিরপেক্ষতা ও পাঠকের প্রতি দায়বদ্ধতা।</p>'],
  contact:['যোগাযোগ','<p>খবর পাঠাতে, মতামত জানাতে বা ভুল সংশোধনের অনুরোধ করতে আমাদের সঙ্গে যোগাযোগ করুন।</p>'+contactHtml()],
- advertise:['বিজ্ঞাপন দিন','<p>Rajniti Rewrite-এ আপনার ব্যবসার বিজ্ঞাপন দিয়ে বাংলা পাঠকদের কাছে পৌঁছান।</p><h2>আমরা যা দিতে পারি</h2><ul><li>ব্যানার বিজ্ঞাপন (প্রচ্ছদ ও খবরের পাতায়)</li><li>স্পনসর্ড পোস্ট — স্পষ্টভাবে “স্পনসর্ড” চিহ্নিত</li><li>ফেসবুক পেজে প্রচার</li></ul><p>রেট ও বিস্তারিত জানতে যোগাযোগ করুন:</p>'+contactHtml()],
- policy:['সম্পাদকীয় নীতি','<p>আমরা তথ্য যাচাই করে খবর প্রকাশ করতে চেষ্টা করি। ভুল ধরা পড়লে দ্রুত সংশোধন করা হয়।</p><h2>নিজস্ব ও সংকলিত খবর</h2><p>“Rajniti Rewrite ডেস্ক” লেখা খবর আমাদের নিজস্ব। যেসব কার্ডে “সূত্র” লেখা আছে, সেগুলো অন্য সংবাদমাধ্যমের শিরোনাম ও ছোট অংশ, ক্লিক করলে মূল খবরের পাতায় যায়। স্বত্ব মূল প্রকাশকের।</p><h2>স্পনসর্ড কনটেন্ট</h2><p>অর্থের বিনিময়ে প্রকাশিত যেকোনো কনটেন্ট “স্পনসর্ড” হিসেবে চিহ্নিত থাকবে।</p><h2>সংশোধন ও আপত্তি</h2><p>কোনো লেখা নিয়ে আপত্তি বা সংশোধনের অনুরোধ থাকলে যোগাযোগ পাতার মাধ্যমে জানান।</p>'],
- privacy:['গোপনীয়তা নীতি','<p>এই ওয়েবসাইট পাঠকের নাম, ফোন বা ইমেইলের মতো ব্যক্তিগত তথ্য নিজে থেকে সংগ্রহ করে না।</p><h2>ব্রাউজারে সংরক্ষণ</h2><p>দ্রুত লোড করার জন্য সর্বশেষ খবরের তালিকা আপনার ব্রাউজারে সাময়িকভাবে জমা রাখা হয়।</p><h2>তৃতীয় পক্ষ</h2><p>খবরের লিংকে ক্লিক করলে আপনি অন্য ওয়েবসাইটে যাবেন, সেগুলোর নিজস্ব গোপনীয়তা নীতি প্রযোজ্য। ভবিষ্যতে বিজ্ঞাপন বা অ্যানালিটিক্স যোগ হলে এখানে হালনাগাদ করা হবে।</p>']};
+ advertise:['বিজ্ঞাপন দিন','<p>Rajniti Rewrite-এ আপনার ব্যবসার বিজ্ঞাপন দিয়ে বাংলা পাঠকদের কাছে পৌঁছান।</p><h2>আমরা যা দিতে পারি</h2><ul><li>ব্যানার বিজ্ঞাপন</li><li>স্পনসর্ড পোস্ট</li><li>ফেসবুক পেজে প্রচার</li></ul><p>রেট ও বিস্তারিত জানতে যোগাযোগ করুন:</p>'+contactHtml()],
+ policy:['সম্পাদকীয় নীতি','<p>আমরা তথ্য যাচাই করে খবর প্রকাশ করতে চেষ্টা করি। ভুল ধরা পড়লে দ্রুত সংশোধন করা হয়।</p>'],
+ privacy:['গোপনীয়তা নীতি','<p>এই ওয়েবসাইট পাঠকের নাম, ফোন বা ইমেইলের মতো ব্যক্তিগত তথ্য নিজে থেকে সংগ্রহ করে না।</p>']
+};
+
 function adBox(){return '<a class="ad" href="#advertise">বিজ্ঞাপন — আপনার ব্যবসার বিজ্ঞাপন এখানে দিন</a>'}
 function shareBox(p){var u=encodeURIComponent(location.href.split('#')[0]+'#'+p.id),t=encodeURIComponent(p.title);return '<div class="share"><span>শেয়ার করুন:</span><a class="btn alt sm" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/sharer/sharer.php?u='+u+'">ফেসবুক</a><a class="btn alt sm" target="_blank" rel="noopener noreferrer" href="https://wa.me/?text='+t+'%20'+u+'">হোয়াটসঅ্যাপ</a></div>'}
+
 function render(keep){
   var id=location.hash.slice(1),p=id&&posts.filter(function(x){return x.id===id})[0];
   if(keep!==true)window.scrollTo(0,0);
-  $('tick').textContent=(posts.length||auto.length)?posts.concat(auto).slice(0,4).map(function(x){return x.title}).join('   •   '):'স্বাগতম — শীঘ্রই নতুন খবর আসছে';
-  if(PAGES[id]){document.title=PAGES[id][0]+' | Rajniti Rewrite';$('app').innerHTML='<article class="art page"><div class="bar"><button class="btn alt sm" id="back">← প্রচ্ছদ</button></div><h1>'+esc(PAGES[id][0])+'</h1>'+PAGES[id][1]+'</article>';$('back').onclick=function(){location.hash=''};return}
+  
+  var tickList = posts.concat(auto);
+  $('tick').textContent=tickList.length?tickList.slice(0,4).map(function(x){return x.title}).join('   •   '):'স্বাগতম — শীঘ্রই নতুন খবর আসছে';
+
+  if(PAGES[id]){
+    document.title=PAGES[id][0]+' | Rajniti Rewrite';
+    $('app').innerHTML='<article class="art page"><div class="bar"><button class="btn alt sm" id="back">← প্রচ্ছদ</button></div><h1>'+esc(PAGES[id][0])+'</h1>'+PAGES[id][1]+'</article>';
+    $('back').onclick=function(){location.hash=''};
+    return;
+  }
+
   if(p){
     document.title=p.title+' | Rajniti Rewrite';
     $('app').innerHTML='<article class="art"><div class="bar"><button class="btn alt sm" id="back">← সব খবর</button>'+(owner()?'<button class="btn sm" id="ed">সম্পাদনা</button>':'')+'</div><span class="tag">'+esc(p.cat)+'</span><h1>'+esc(p.title)+'</h1><div class="meta">'+esc(p.by||'Rajniti Rewrite ডেস্ক')+' • '+fmt(p.ts)+'</div>'+(p.img?pic(p):'')+(p.sum?'<div class="sum">'+esc(p.sum)+'</div>':'')+'<div class="body">'+String(p.body||'').split(/\n+/).filter(Boolean).map(function(t){return '<p>'+esc(t)+'</p>'}).join('')+'</div>'+shareBox(p)+'</article>';
     $('back').onclick=function(){location.hash=''};
     if($('ed'))$('ed').onclick=function(){openEd(p)};
-    return}
+    return;
+  }
+
   document.title='Rajniti Rewrite | রাজনীতি রিরাইট';
   var base=posts.concat(auto),list=cur?base.filter(function(x){return x.cat===cur}):base;
-  if(!list.length){$('app').innerHTML='<div class="empty"><h2>'+(cur?esc(cur)+' বিভাগে এখনও কোনো খবর নেই':'শীঘ্রই নতুন খবর আসছে')+'</h2>'+(owner()?'<p>উপরের “নতুন খবর লিখুন” বাটনে ক্লিক করে প্রথম খবরটি প্রকাশ করুন।</p>':'')+'</div>';return}
+  if(!list.length){
+    $('app').innerHTML='<div class="empty"><h2>'+(cur?esc(cur)+' বিভাগে এখনও কোনো খবর নেই':'শীঘ্রই নতুন খবর আসছে')+'</h2>'+(owner()?'<p>উপরের “নতুন খবর লিখুন” বাটনে ক্লিক করে প্রথম খবরটি প্রকাশ করুন।</p>':'')+'</div>';
+    return;
+  }
+
   var l=list[0],s=list.slice(1,4),g=list.slice(4);
   $('app').innerHTML='<section class="lead"><a class="card big" '+lk(l)+'>'+pic(l)+'<div class="pad"><span class="tag">'+esc(l.cat)+'</span><h2>'+esc(l.title)+'</h2><p>'+esc((l.sum||'').slice(0,200))+'</p>'+mt(l)+'</div></a><div class="side">'+s.map(function(x){return card(x,'side')}).join('')+'</div></section>'+adBox()+(g.length?'<h2 class="sec">আরও খবর</h2><section class="grid">'+g.map(function(x){return card(x)}).join('')+'</section>':'');
 }
+
 window.onhashchange=function(){render()};
 
-function ownBtn(){$('own').innerHTML=owner()?'<button class="btn" id="nw">＋ নতুন খবর লিখুন</button> <button class="btn alt" id="dlf">হোস্টিংয়ের ফাইল ডাউনলোড</button>':'';
+function ownBtn(){
+  $('own').innerHTML=owner()?'<button class="btn" id="nw">＋ নতুন খবর লিখুন</button> <button class="btn alt" id="dlf">হোস্টিংয়ের ফাইল ডাউনলোড</button>':'';
   if($('nw'))$('nw').onclick=function(){openEd(null)};
-  if($('dlf'))$('dlf').onclick=async function(){var b=this,t=b.textContent,D=await cap('downloads');if(!D){b.textContent='এখানে ডাউনলোড চালু নেই';return}try{await D.save({filename:'index.html',data:buildDoc()})}catch(e){}b.textContent=t}}
+  if($('dlf'))$('dlf').onclick=async function(){
+    var b=this,t=b.textContent,D=await cap('downloads');
+    if(!D){b.textContent='এখানে ডাউনলোড চালু নেই';return}
+    try{await D.save({filename:'index.html',data:buildDoc()})}catch(e){}
+    b.textContent=t;
+  };
+}
+
 function openEd(p){
   editing=p;img=p?p.img||'':'';
   $('adm').innerHTML='<div class="panel"><h2>'+(p?'খবর সম্পাদনা':'নতুন খবর')+'</h2>'+
@@ -175,45 +212,89 @@ function openEd(p){
   '<div class="row"><button class="btn" id="sv">প্রকাশ করুন</button><button class="btn alt" id="ai">তথ্য দিয়ে Claude-কে দিয়ে সাজান</button>'+(p?'<button class="btn alt" id="dl">মুছুন</button>':'')+'<button class="btn alt" id="cl">বাতিল</button></div><div class="msg" id="mg">নিজের সংগ্রহ করা তথ্য বিস্তারিত ঘরে লিখে “Claude-কে দিয়ে সাজান” চাপলে মৌলিক ভাষায় সংবাদ আকারে সাজিয়ে দেবে।</div></div>';
   $('adm').className='on';
   $('cl').onclick=function(){$('adm').className=''};
-  $('sv').onclick=save;$('ai').onclick=aiDraft;
+  $('sv').onclick=save;
+  $('ai').onclick=aiDraft;
   if($('dl'))$('dl').onclick=function(){if(this.dataset.s){posts=posts.filter(function(x){return x.id!==p.id});location.hash='';publish()}else{this.dataset.s=1;this.textContent='নিশ্চিত? আবার চাপুন'}};
-  $('f-i').onchange=upload}
-function msg(t){$('mg').textContent=t}
-async function upload(){var f=this.files[0];if(!f)return;msg('ছবি আপলোড হচ্ছে…');
-  var A=await cap('assets');if(!A){msg('ছবি আপলোড এখানে চালু নেই।');return}
-  try{var r=await A.upload(f);img=r.id;$('pv').innerHTML='<img class="prev" alt="" src="/_blob/'+esc(img)+'">';msg('ছবি যোগ হয়েছে।')}catch(e){msg('ছবি আপলোড ব্যর্থ হয়েছে।')}}
-async function aiDraft(){var raw=$('f-b').value.trim();if(raw.length<30){msg('আগে বিস্তারিত ঘরে খবরের তথ্য লিখুন।');return}
-  var S=await cap('sample');if(!S){msg('এই সুবিধা এখানে চালু নেই।');return}
+  $('f-i').onchange=upload;
+}
+
+function msg(t){if($('mg'))$('mg').textContent=t}
+
+async function upload(){
+  var f=this.files[0];if(!f)return;msg('ছবি আপলোড হচ্ছে…');
+  var A=await cap('assets');
+  if(!A){
+    var reader = new FileReader();
+    reader.onload = function(e){
+      img = e.target.result;
+      $('pv').innerHTML='<img class="prev" alt="" src="'+esc(img)+'">';
+      msg('ছবি সফলভাবে যোগ হয়েছে।');
+    };
+    reader.readAsDataURL(f);
+    return;
+  }
+  try{var r=await A.upload(f);img=r.id;$('pv').innerHTML='<img class="prev" alt="" src="/_blob/'+esc(img)+'">';msg('ছবি যোগ হয়েছে।')}catch(e){msg('ছবি আপলোড ব্যর্থ হয়েছে।')}
+}
+
+async function aiDraft(){
+  var raw=$('f-b').value.trim();if(raw.length<30){msg('আগে বিস্তারিত ঘরে খবরের তথ্য লিখুন।');return}
+  var S=await cap('sample');if(!S){msg('এই সুবিধাটি এম্বিডেড পরিবেশে কাজ করে।');return}
   msg('সাজানো হচ্ছে…');
-  try{var r=await S.json('তুমি একজন বাংলা সংবাদ সম্পাদক। নিচের তথ্য থেকে মৌলিক ভাষায় একটি সংবাদ লেখো। শুধু দেওয়া তথ্য ব্যবহার করো, নিজে থেকে কোনো তথ্য, উক্তি বা সংখ্যা যোগ করবে না। শুধু JSON ফেরত দাও: {"title":"...","summary":"১-২ বাক্য","body":"কয়েকটি অনুচ্ছেদ, প্রতিটি নতুন লাইনে"}। তথ্য:\n'+raw);
-    if(r&&r.body){$('f-t').value=r.title||$('f-t').value;$('f-s').value=r.summary||'';$('f-b').value=r.body;msg('সাজানো হয়েছে। প্রকাশের আগে ভালোভাবে পড়ে ঠিক করে নিন।')}else msg('সাজানো যায়নি, আবার চেষ্টা করুন।')}catch(e){msg('সাজানো যায়নি।')}}
-function save(){var t=$('f-t').value.trim(),b=$('f-b').value.trim();if(!t||!b){msg('শিরোনাম ও বিস্তারিত খবর লিখতে হবে।');return}
+  try{
+    var r=await S.json('তুমি একজন বাংলা সংবাদ সম্পাদক। নিচের তথ্য থেকে মৌলিক ভাষায় একটি সংবাদ লেখো। শুধু দেওয়া তথ্য ব্যবহার করো, নিজে থেকে কোনো তথ্য, উক্তি বা সংখ্যা যোগ করবে না। শুধু JSON ফেরত দাও: {"title":"...","summary":"১-২ বাক্য","body":"কয়েকটি অনুচ্ছেদ, প্রতিটি নতুন লাইনে"}। তথ্য:\n'+raw);
+    if(r&&r.body){$('f-t').value=r.title||$('f-t').value;$('f-s').value=r.summary||'';$('f-b').value=r.body;msg('সাজানো হয়েছে। প্রকাশের আগে ভালোভাবে পড়ে ঠিক করে নিন।')}else msg('সাজানো যায়নি, আবার চেষ্টা করুন।')
+  }catch(e){msg('সাজানো যায়নি।')}
+}
+
+function save(){
+  var t=$('f-t').value.trim(),b=$('f-b').value.trim();if(!t||!b){msg('শিরোনাম ও বিস্তারিত খবর লিখতে হবে।');return}
   var o={id:editing?editing.id:'n'+Date.now().toString(36),title:t,cat:$('f-c').value,sum:$('f-s').value.trim(),body:b,img:img,ts:editing?editing.ts:Date.now(),by:'Rajniti Rewrite ডেস্ক'};
   posts=posts.filter(function(x){return x.id!==o.id});posts.push(o);posts.sort(function(a,b){return b.ts-a.ts});
-  location.hash=o.id;publish()}
+  location.hash=o.id;
+  $('adm').className='';
+  publish();
+}
+
 async function publish(){
   if(busy)return;busy=true;
-  var A=await cap('artifact');if(!A){busy=false;msg('প্রকাশ করা যায়নি: শুধু মালিক এই পেজ থেকে প্রকাশ করতে পারেন।');return}
-  try{var c=document.documentElement.cloneNode(true);
-    c.querySelector('#posts-data').textContent=JSON.stringify(posts).replace(/</g,'\\u003c');
-    ['app','adm','own','tabs'].forEach(function(i){var e=c.querySelector('#'+i);if(e){e.innerHTML='';if(i==='adm')e.className=''}});
-    c.querySelector('#tick').textContent='';
-    await A.publish('<!DOCTYPE html>\n'+c.outerHTML)}catch(e){busy=false;if($('mg'))msg('প্রকাশ ব্যর্থ হয়েছে, আবার চেষ্টা করুন।')}}
+  var A=await cap('artifact');
+  if(!A){
+    busy=false;
+    render();
+    return;
+  }
+  try{
+    var docStr = buildDoc();
+    await A.publish(docStr);
+  }catch(e){
+    if($('mg'))msg('প্রকাশ ব্যর্থ হয়েছে, আবার চেষ্টা করুন।');
+  }finally{
+    busy=false;
+  }
+}
 
-function buildDoc(){var c=document.documentElement.cloneNode(true);
-  c.querySelector('#posts-data').textContent=JSON.stringify(posts).replace(/</g,String.fromCharCode(92)+'u003c');
+function buildDoc(){
+  var c=document.documentElement.cloneNode(true);
+  c.querySelector('#posts-data').textContent=JSON.stringify(posts).replace(/</g,'\\u003c');
   ['app','adm','own','tabs'].forEach(function(i){var e=c.querySelector('#'+i);if(e){e.innerHTML='';if(i==='adm')e.className=''}});
   c.querySelector('#tick').textContent='';
-  return '<!DOCTYPE html>'+String.fromCharCode(10)+c.outerHTML}
+  return '<!DOCTYPE html>\n'+c.outerHTML;
+}
+
 function loadAuto3(){
   fetch('news.json?t='+Date.now()).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(a){
     var got=(a||[]).map(function(x){var t=strip(x.title),d=strip(x.description);return t?{title:t,sum:d.slice(0,160),url:x.link,src:x.src,cat:catOf(t+' '+d,x.cat),ts:+x.ts||Date.now()}:null}).filter(Boolean);
     if(!got.length)return;
     got.sort(function(a,b){return b.ts-a.ts});got.forEach(function(x,i){x.id='a'+i});auto=got.slice(0,60);
     try{localStorage.setItem('rr-auto',JSON.stringify(auto))}catch(e){}
-    if(!location.hash.slice(1))render(true)}).catch(function(){})}
-tabs();render();
-loadAuto3();setInterval(loadAuto3,600000);
+    if(!location.hash.slice(1))render(true);
+  }).catch(function(){});
+}
+
+tabs();
+render();
+loadAuto3();
+setInterval(loadAuto3,600000);
 cap('user').then(function(u){U=u;ownBtn();render()});
 </script>
 </body>
