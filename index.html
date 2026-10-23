@@ -200,36 +200,20 @@ async function publish(){
     c.querySelector('#tick').textContent='';
     await A.publish('<!DOCTYPE html>\n'+c.outerHTML)}catch(e){busy=false;if($('mg'))msg('প্রকাশ ব্যর্থ হয়েছে, আবার চেষ্টা করুন।')}}
 
-function loadAuto(){var got=[],n=0;
-  FEEDS.forEach(function(f){var ctl=window.AbortController?new AbortController():null,tm=setTimeout(function(){if(ctl)ctl.abort()},8000);
-    fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(f.u),ctl?{signal:ctl.signal}:{}).then(function(r){return r.json()}).then(function(j){
-      if(j&&j.status==='ok')(j.items||[]).slice(0,15).forEach(function(x){var t=strip(x.title),d=strip(x.description).slice(0,160);
-        if(t)got.push({id:'a'+got.length,title:t,sum:d,url:x.link,src:f.n,cat:catOf(t+' '+d,f.c),ts:Date.parse(String(x.pubDate).replace(' ','T')+'Z')||Date.now()})})
-    }).catch(function(){}).then(function(){clearTimeout(tm);if(++n<FEEDS.length)return;
-      if(got.length){got.sort(function(a,b){return b.ts-a.ts});auto=got.slice(0,60);try{localStorage.setItem('rr-auto',JSON.stringify(auto))}catch(e){}if(!location.hash.slice(1))render(true)}})})}
 function buildDoc(){var c=document.documentElement.cloneNode(true);
   c.querySelector('#posts-data').textContent=JSON.stringify(posts).replace(/</g,String.fromCharCode(92)+'u003c');
   ['app','adm','own','tabs'].forEach(function(i){var e=c.querySelector('#'+i);if(e){e.innerHTML='';if(i==='adm')e.className=''}});
   c.querySelector('#tick').textContent='';
   return '<!DOCTYPE html>'+String.fromCharCode(10)+c.outerHTML}
-function tmo(p,ms){return Promise.race([p,new Promise(function(_,rej){setTimeout(rej,ms)})])}
-function tsOf(s){var t=Date.parse(s);if(isNaN(t))t=Date.parse(String(s).replace(' ','T')+'Z');return isNaN(t)?Date.now():t}
-function grab(f){
-  var a=fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(f.u)).then(function(r){return r.json()}).then(function(j){if(j&&j.status==='ok'&&j.items&&j.items.length)return j.items;throw 0});
-  return tmo(a,9000).catch(function(){
-    var b=fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(f.u)).then(function(r){return r.text()}).then(function(t){var d=new DOMParser().parseFromString(t,'text/xml');
-      return Array.prototype.map.call(d.querySelectorAll('item'),function(i){var g=function(n){var e=i.querySelector(n);return e?e.textContent:''};return {title:g('title'),description:g('description'),link:g('link'),pubDate:g('pubDate')}})});
-    return tmo(b,9000)}).catch(function(){return []})}
-function loadAuto2(){
-  Promise.all(FEEDS.map(function(f){return grab(f).then(function(a){return a.slice(0,15).map(function(x){var t=strip(x.title),d=strip(x.description).slice(0,160);return t?{title:t,sum:d,url:x.link,src:f.n,cat:catOf(t+' '+d,f.c),ts:tsOf(x.pubDate)}:null}).filter(Boolean)})})).then(function(r){
-    var got=[].concat.apply([],r);if(!got.length)return;
-    got.sort(function(a,b){return b.ts-a.ts});var seen={};
-    got=got.filter(function(x){if(seen[x.title])return false;seen[x.title]=1;return true});
-    got.forEach(function(x,i){x.id='a'+i});auto=got.slice(0,60);
+function loadAuto3(){
+  fetch('news.json?t='+Date.now()).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(a){
+    var got=(a||[]).map(function(x){var t=strip(x.title),d=strip(x.description);return t?{title:t,sum:d.slice(0,160),url:x.link,src:x.src,cat:catOf(t+' '+d,x.cat),ts:+x.ts||Date.now()}:null}).filter(Boolean);
+    if(!got.length)return;
+    got.sort(function(a,b){return b.ts-a.ts});got.forEach(function(x,i){x.id='a'+i});auto=got.slice(0,60);
     try{localStorage.setItem('rr-auto',JSON.stringify(auto))}catch(e){}
-    if(!location.hash.slice(1))render(true)})}
+    if(!location.hash.slice(1))render(true)}).catch(function(){})}
 tabs();render();
-loadAuto2();setInterval(loadAuto2,600000);
+loadAuto3();setInterval(loadAuto3,600000);
 cap('user').then(function(u){U=u;ownBtn();render()});
 </script>
 </body>
