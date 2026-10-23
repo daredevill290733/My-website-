@@ -64,9 +64,9 @@ h2.sec{font-size:21px;border-left:5px solid var(--brand);padding-left:10px;margi
 .art .body p{font-size:18px;line-height:1.8;margin:0 0 16px;color:var(--text)}
 .bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
 
-/* অ্যাডমিন প্যানেলের পপ-আপ স্টাইল */
-#adm{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;overflow:auto;z-index:100;padding:20px 12px}
-#adm.on{display:flex}
+/* অ্যাডমিন ও পপ-আপ ফর্ম স্টাইল */
+#adm, #login-modal{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;overflow:auto;z-index:100;padding:20px 12px}
+#adm.on, #login-modal.on{display:flex}
 .panel{background:var(--card);border:1px solid var(--line);border-radius:10px;width:100%;max-width:650px;padding:24px;box-shadow:0 10px 25px rgba(0,0,0,0.3)}
 .panel h2{margin:0 0 16px;font-size:22px}
 .panel label{display:block;font-weight:600;font-size:14px;margin:12px 0 4px}
@@ -89,8 +89,9 @@ footer{background:var(--navy);color:#b9c5d6;padding:26px 0;text-align:center;fon
       <svg width="52" height="52" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="10" fill="#0b1f3a"/><polygon points="0,40 48,28 48,34 0,46" fill="#c8102e"/><text x="24" y="28" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="27" fill="#fff">R</text></svg>
       <div><div class="wm">RAJNITI <b>REWRITE</b></div><span class="tg">রাজনীতি রিরাইট • প্রগতির নতুন বয়ান</span></div>
     </div>
-    <div>
-      <button class="btn" id="btn-new">＋ নতুন খবর লিখুন</button>
+    <!-- অ্যাডমিন কন্ট্রোল এলাকা -->
+    <div id="admin-controls">
+      <button class="btn alt sm" id="btn-login">অ্যাডমিন লগইন</button>
     </div>
   </div>
   <nav><div class="wrap" id="tabs"></div></nav>
@@ -106,7 +107,20 @@ footer{background:var(--navy);color:#b9c5d6;padding:26px 0;text-align:center;fon
   </div>
 </footer>
 
-<!-- খবর পোস্ট করার পপ-আপ ফর্ম -->
+<!-- লগইন মোডাল -->
+<div id="login-modal">
+  <div class="panel" style="max-width:380px;">
+    <h2>অ্যাডমিন লগইন</h2>
+    <label>পাসওয়ার্ড দিন</label>
+    <input type="password" id="pass-input" placeholder="পাসওয়ার্ড লিখুন">
+    <div class="row">
+      <button class="btn" id="btn-login-submit">লগইন</button>
+      <button class="btn alt" id="btn-login-cancel">বাতিল</button>
+    </div>
+  </div>
+</div>
+
+<!-- খবর লেখার পপ-আপ ফর্ম -->
 <div id="adm">
   <div class="panel">
     <h2 id="form-title">নতুন খবর যুক্ত করুন</h2>
@@ -134,9 +148,13 @@ footer{background:var(--navy);color:#b9c5d6;padding:26px 0;text-align:center;fon
 </div>
 
 <script>
+// ================= অ্যাডমিন পাসওয়ার্ড সেটআপ =================
+var ADMIN_PASSWORD = "123456"; // আপনার গোপন পাসওয়ার্ড এখানে সেট করুন
+var isAdminLoggedIn = false;
+
 var CATS=['বাংলাদেশ','বিশ্ব','রাজনীতি','অর্থনীতি','খেলা','প্রযুক্তি','বিনোদন','মতামত'];
 
-// সকল ক্যাটেগরির জন্য খবর প্রিলোড করা হলো
+// প্রিলোড খবরসমূহ
 var defaultPosts = [
   {
     id: "p1",
@@ -154,7 +172,7 @@ var defaultPosts = [
     cat: "অর্থনীতি",
     img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&auto=format&fit=crop",
     sum: "মূল্যস্ফীতি নিয়ন্ত্রণ এবং বৈদেশিক মুদ্রার রিজার্ভ স্থিতিশীল রাখতে নতুন কৌশল অবলম্বন করছে অর্থ মন্ত্রণালয়।",
-    body: "দেশের চলমান অর্থনৈতিক পরিস্থিতি মোকাবেলায় বাণিজ্য ও ব্যাংক খাতের প্রতিনিধিদের সাথে একাধিক বৈঠক করেছেন নীতিনির্ধারকরা।\n\nবৈদেশিক বিনিয়োগ বৃদ্ধির পাশাপাশি রপ্তানি খাতকে আরও গতিশীল করার ওপর গুরুত্ব দেওয়া হচ্ছে। অর্থনৈতিক বিশ্লেষকরা বলছেন, সমন্বিত উদ্যোগ নিলে আগামী কয়েক মাসের মধ্যেই মুদ্রাস্ফীতি নিয়ন্ত্রণে আনা সম্ভব হবে।",
+    body: "দেশের চলমান অর্থনৈতিক পরিস্থিতি মোকাবেলায় বাণিজ্য ও ব্যাংক খাতের प्रतिनिधियों সাথে একাধিক বৈঠক করেছেন নীতিনির্ধারকরা।\n\nবৈদেশিক বিনিয়োগ বৃদ্ধির পাশাপাশি রপ্তানি খাতকে আরও গতিশীল করার ওপর গুরুত্ব দেওয়া হচ্ছে। অর্থনৈতিক বিশ্লেষকরা বলছেন, সমন্বিত উদ্যোগ নিলে আগামী কয়েক মাসের মধ্যেই মুদ্রাস্ফীতি নিয়ন্ত্রণে আনা সম্ভব হবে।",
     by: "অর্থনীতি ডেস্ক",
     ts: Date.now() - 3600000
   },
@@ -223,17 +241,15 @@ var defaultPosts = [
 var posts = [];
 try {
   var saved = localStorage.getItem('rr_posts_v2');
-  if(saved){
-    posts = JSON.parse(saved);
-  } else {
-    posts = defaultPosts;
-  }
+  posts = saved ? JSON.parse(saved) : defaultPosts;
 } catch(e) {
   posts = defaultPosts;
 }
+if(!posts || !posts.length) posts = defaultPosts;
 
-if(!posts || !posts.length) {
-  posts = defaultPosts;
+// লগইন স্টেট চেক
+if(sessionStorage.getItem('rr_admin_auth') === 'true'){
+  isAdminLoggedIn = true;
 }
 
 var cur = '';
@@ -246,8 +262,29 @@ function fmt(ts){try{return new Date(ts).toLocaleString('bn-BD',{dateStyle:'medi
 
 $('date').textContent = new Date().toLocaleDateString('bn-BD',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
 
-// ড্রপডাউন ক্যাটেগরি নির্বাচন
+// ড্রপডাউন ক্যাটেগরি সেট
 $('f-cat').innerHTML = CATS.map(function(c){ return '<option value="'+c+'">'+c+'</option>'; }).join('');
+
+function renderAdminUI(){
+  var container = $('admin-controls');
+  if(isAdminLoggedIn){
+    container.innerHTML = '<button class="btn sm" id="btn-new">＋ নতুন খবর লিখুন</button> <button class="btn alt sm" id="btn-logout" style="margin-left:5px;">লগআউট</button>';
+    $('btn-new').onclick = function(){ openForm(null); };
+    $('btn-logout').onclick = function(){
+      sessionStorage.removeItem('rr_admin_auth');
+      isAdminLoggedIn = false;
+      renderAdminUI();
+      render();
+    };
+  } else {
+    container.innerHTML = '<button class="btn alt sm" id="btn-login">অ্যাডমিন লগইন</button>';
+    $('btn-login').onclick = function(){
+      $('login-modal').className = 'on';
+      $('pass-input').value = '';
+      $('pass-input').focus();
+    };
+  }
+}
 
 function tabs(){
   var html = '<button data-c="" class="'+(cur===''?'on':'')+'">প্রচ্ছদ</button>';
@@ -298,11 +335,16 @@ function render(){
   // সিঙ্গেল পোস্ট দেখার অংশ
   if(p){
     document.title = p.title + ' | Rajniti Rewrite';
+    
+    var adminBtns = '';
+    if(isAdminLoggedIn){
+      adminBtns = '<button class="btn sm" id="btn-edit" style="margin-left:8px;">সম্পাদনা করুন</button>' +
+                  '<button class="btn alt sm" id="btn-delete" style="margin-left:8px;color:red;border-color:red;">মুছে ফেলুন</button>';
+    }
+
     $('app').innerHTML = '<article class="art">' +
       '<div class="bar">' +
-        '<button class="btn alt sm" id="back">← প্রচ্ছদ</button>' +
-        '<button class="btn sm" id="btn-edit" style="margin-left:8px;">সম্পাদনা করুন</button>' +
-        '<button class="btn alt sm" id="btn-delete" style="margin-left:8px;color:red;border-color:red;">মুছে ফেলুন</button>' +
+        '<button class="btn alt sm" id="back">← প্রচ্ছদ</button>' + adminBtns +
       '</div>' +
       '<span class="tag">'+esc(p.cat)+'</span>' +
       '<h1>'+esc(p.title)+'</h1>' +
@@ -313,15 +355,18 @@ function render(){
       '</article>';
     
     $('back').onclick = function(){ location.hash = ''; };
-    $('btn-edit').onclick = function(){ openForm(p); };
-    $('btn-delete').onclick = function(){
-      if(confirm('আপনি কি এই খবরটি মুছে ফেলতে চান?')){
-        posts = posts.filter(function(x){return x.id !== p.id});
-        savePosts();
-        location.hash = '';
-        render();
-      }
-    };
+    
+    if(isAdminLoggedIn){
+      $('btn-edit').onclick = function(){ openForm(p); };
+      $('btn-delete').onclick = function(){
+        if(confirm('আপনি কি এই খবরটি মুছে ফেলতে চান?')){
+          posts = posts.filter(function(x){return x.id !== p.id});
+          savePosts();
+          location.hash = '';
+          render();
+        }
+      };
+    }
     return;
   }
 
@@ -329,7 +374,7 @@ function render(){
   var list = cur ? posts.filter(function(x){return x.cat === cur}) : posts;
 
   if(!list.length){
-    $('app').innerHTML = '<div class="empty"><h2>"'+esc(cur||'প্রচ্ছদ')+'" বিভাগে কোনো খবর পাওয়া যায়নি</h2><p>নতুন খবর লিখতে ওপরে "＋ নতুন খবর লিখুন" বাটনে চাপ দিন।</p></div>';
+    $('app').innerHTML = '<div class="empty"><h2>"'+esc(cur||'প্রচ্ছদ')+'" বিভাগে কোনো খবর পাওয়া যায়নি</h2>'+(isAdminLoggedIn?'<p>নতুন খবর লিখতে ওপরে "＋ নতুন খবর লিখুন" বাটনে চাপ দিন।</p>':'')+'</div>';
     return;
   }
 
@@ -348,7 +393,7 @@ function render(){
   $('app').innerHTML = html;
 }
 
-// লোকাল স্টোরেজে পোস্ট সংরক্ষণ করা
+// সেভ করা
 function savePosts(){
   posts.sort(function(a,b){ return b.ts - a.ts; });
   try {
@@ -356,7 +401,7 @@ function savePosts(){
   } catch(e) {}
 }
 
-// ফরম ওপেন করার ফাংশন
+// ফর্ম ওপেন
 function openForm(p){
   editingId = p ? p.id : null;
   $('form-title').textContent = p ? 'খবর সম্পাদনা করুন' : 'নতুন খবর যুক্ত করুন';
@@ -370,7 +415,7 @@ function openForm(p){
   $('adm').className = 'on';
 }
 
-// ইমেজ আপলোড প্রিভিউ
+// ইমেজ প্রিভিউ
 $('f-img').onchange = function(e){
   var file = e.target.files[0];
   if(!file) return;
@@ -382,7 +427,7 @@ $('f-img').onchange = function(e){
   reader.readAsDataURL(file);
 };
 
-// সেভ বাটন লজিক
+// পোস্ট সেভ করা
 $('btn-save').onclick = function(){
   var title = $('f-title').value.trim();
   var body = $('f-body').value.trim();
@@ -420,12 +465,28 @@ $('btn-save').onclick = function(){
   render();
 };
 
-$('btn-new').onclick = function(){ openForm(null); };
+// লগইন হ্যান্ডলার
+$('btn-login-submit').onclick = function(){
+  var pass = $('pass-input').value;
+  if(pass === ADMIN_PASSWORD){
+    isAdminLoggedIn = true;
+    sessionStorage.setItem('rr_admin_auth', 'true');
+    $('login-modal').className = '';
+    renderAdminUI();
+    render();
+    alert('সফলভাবে লগইন হয়েছে!');
+  } else {
+    alert('ভুল পাসওয়ার্ড! আবার চেষ্টা করুন।');
+  }
+};
+
+$('btn-login-cancel').onclick = function(){ $('login-modal').className = ''; };
 $('btn-cancel').onclick = function(){ $('adm').className = ''; };
 
 window.onhashchange = render;
 
-// পেজ ইনিশিয়ালাইজ করা
+// পেজ স্টার্টআপ
+renderAdminUI();
 tabs();
 render();
 </script>
